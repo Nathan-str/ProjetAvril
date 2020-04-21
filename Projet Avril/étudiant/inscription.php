@@ -11,18 +11,14 @@
 
 			if ($_POST['mail'] == $tableau[2]){
 				$sortie = false;
-				$AdresseMail = true;
 				break;
 			}else{
 				$sortie = true;
-				$AdresseMail = false;
 			}if ($_POST['numero'] == $tableau[3]) {
 				$sortie = false;
-				$numeroTelephone = true;
 				break;
 			}else{
 				$sortie = true;
-				$numeroTelephone = false;
 			}
 		}
 	}
