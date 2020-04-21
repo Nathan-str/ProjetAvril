@@ -56,36 +56,6 @@ function comptes(){
 					<div class="nav-toggle">
 						<span class="toggle-icons"></span>
 					</div>
-
-					<!--<div class="toggle-connexion">
-						<i class="fa fa-sign-in" style="font-size:36px"></i>
-						<span class="connexion-icon"></span>
-					</div>
-
-					<div class="formulaire">
-						<form action="connexion.php" method="post">
-							<input class="inputt" type="text" name="login" placeholder="Login" required="required" />
-							<input class="inputt" type="password" name="pwd" placeholder="Password" required="required" />
-							<input class="inputt" type="submit" value="confirm" />
-						</form>
-						<?php
-							if(isset($_GET['error'])){
-								if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-								?>
-								<script type="text/javascript">
-									alert("Mauvais identifiants !")
-								</script>
-								<?php
-								}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-								?>
-								<script type="text/javascript">
-									alert("Veuillez entrer des champs !")
-								</script>
-								<?php 			
-								}
-							}
-						?>
-					</div>-->
 				</div>
 			</nav>
 	</header>
@@ -93,9 +63,9 @@ function comptes(){
 	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
 
-		<input type="file" name="input-image" id="input-image">
+		<input type="file" name="input-image" id="input-image" accept=".jpg, .jpeg, .png" multiple />
 		<div class="image-pre" id="imagePre">
-			<img src="" alt="Photo de profil" class="image-preview__image">
+			<img src="" alt="Photo de profil" class="image-preview__image" />
 			<span class="image-preview__texte">Photo de profil</span>
 		</div>
 
@@ -215,10 +185,19 @@ function comptes(){
 			const fichier = this.files[0];
 
 			if (fichier){
-				const play = new FileReader();
+				const reader = new FileReader();
 				
+				preTexte.style.display = "none";
+				preImage.style.display = "block";
+
+				reader.addEventListener("load", function(){
+					console.log(this);
+					preImage.setAttribute("src", this.result);
+				});
+
+				reader.readAsDataURL(fichier);
 			}
-		})
+		});
 
 	</script>
 
