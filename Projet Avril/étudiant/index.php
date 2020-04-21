@@ -1,5 +1,6 @@
 <?php
 session_start();
+header("location:./redirection.php");
 ?>
 
 <!DOCTYPE html>
@@ -36,31 +37,6 @@ session_start();
 							<i class="fa fa-sign-in" style="font-size:36px"></i>
 							<!--<span class="connexion-icon"></span>-->
 						</div>
-
-						<!--<div class="formulaire">
-							<form action="connexion.php" method="post">
-								<input class="inputt" type="text" name="login" placeholder="Login" required="required" />
-								<input class="inputt" type="password" name="pwd" placeholder="Password" required="required" />
-								<input class="inputt" type="submit" value="confirm" />
-							</form>
-							<?php
-								if(isset($_GET['error'])){
-									if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-									?>
-									<script type="text/javascript">
-										alert("Mauvais identifiants !")
-									</script>
-									<?php
-									}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-									?>
-									<script type="text/javascript">
-										alert("Veuillez entrer des champs !")
-									</script>
-									<?php 			
-									}
-								}
-							?>
-						</div>-->
 					</div>
 				</nav>
 		</header>
