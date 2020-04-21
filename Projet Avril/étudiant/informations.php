@@ -92,6 +92,13 @@ function comptes(){
 
 	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
+
+		<input type="file" name="input-image" id="input-image">
+		<div class="image-pre" id="imagePre">
+			<img src="" alt="Photo de profil" class="image-preview__image">
+			<span class="image-preview__texte">Photo de profil</span>
+		</div>
+
 		<?php
 			comptes();
 		?>
@@ -112,6 +119,7 @@ function comptes(){
 			<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
 			<input id="chg-mdp" type="text" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
 			<p id="chg-picture"></p>
+			<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
 		</form>
 
 		
@@ -134,10 +142,15 @@ function comptes(){
 		var numero = document.getElementById("chg-numero");
 		var mdp = document.getElementById("chg-mdp");
 		var photo = document.getElementById("chg-picture");
+		var submit = document.getElementById("chg-submit");
 
 		function changeNom(){
 			if (oldnom.checked){
 				nom.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+				submit.style.display = "none";
+				nom.style.display = "none";
 			}else{
 				nom.style.display = "none";
 			}	
@@ -146,6 +159,10 @@ function comptes(){
 		function changePrenom(){
 			if (oldprenom.checked) {
 				prenom.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+				submit.style.display = "none";
+				prenom.style.display = "none";
 			}else{
 				prenom.style.display = "none";
 			}	
@@ -154,6 +171,10 @@ function comptes(){
 		function changeMail(){
 			if (oldmail.checked) {
 				mail.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+				submit.style.display = "none";
+				mail.style.display = "none";
 			}else{
 				mail.style.display = "none";
 			}	
@@ -162,6 +183,10 @@ function comptes(){
 		function changeNumero(){
 			if (oldnumero.checked) {
 				numero.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+				submit.style.display = "none";
+				numero.style.display = "none";
 			}else{
 				numero.style.display = "none";
 			}
@@ -170,10 +195,30 @@ function comptes(){
 		function changeMdp(){
 			if (oldmdp.checked) {
 				mdp.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+				submit.style.display = "none";
+				mdp.style.display = "none";
 			}else{
 				mdp.style.display = "none";
 			}
 		}
+
+		//--------------------------------------------------------------------------------------------------------------
+
+		const inputImage = document.getElementById("input-image");
+		const preContenu = document.getElementById("imagePre");
+		const preImage = preContenu.querySelector(".image-preview__image");
+		const preTexte = preContenu.querySelector(".image-preview__texte");
+
+		inputImage.addEventListener("change", function(){
+			const fichier = this.files[0];
+
+			if (fichier){
+				const play = new FileReader();
+				
+			}
+		})
 
 	</script>
 
