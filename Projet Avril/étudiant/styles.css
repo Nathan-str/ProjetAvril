@@ -149,7 +149,7 @@ span.toggle-icons:after{top: -14px;}
 }
 
 .submit-connexion{
-	
+
 }
 
 .toggle-connexion{
@@ -345,6 +345,47 @@ span.toggle-icons:after{top: -14px;}
 	width: 100%;
 	height: 20px;
 	position: relative;
+}
+
+#pp{
+	position: relative;
+	left: 5%;
+}
+
+#span-pp{
+}
+
+.p-infos{
+	font-size: 1.5em;
+}
+
+.position-info{
+	position: relative;
+	left: 2%;
+	top: 100px;
+}
+
+.checkbox-style{
+	padding: 10px;
+}
+
+.image-pre{
+	width: 180px;
+	min-height: 200px;
+	border: 2px solid #dddddddd;
+	margin-top: 15px;
+
+	/*Texte par défaut*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	color: #cccccc;
+}
+
+.image-preview__image{
+	display: none;
+	width: 100%;
 }
 
 .le_footer{
