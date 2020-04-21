@@ -5,20 +5,66 @@ function comptes(){
 	$donnes = fopen('fichiers/comptes.csv', 'r+');
 
 	for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 	$ligne = fgets($donnes);
-		$tableau = explode(";", $ligne);
+ 			$ligne = fgets($donnes);
+			$tableau = explode(";", $ligne);
 
 		if ($_SESSION['pseudo'] == $tableau[2]){
-			
-			echo("<p>Prénom: " . $tableau[1]."</p>");
-			echo("<p>Nom: " . $tableau[0]."</p>");
-			echo("<p>Adresse mail: " . $tableau[2]."</p>");
-			echo("<p>Filière: " . $tableau[5] . "</p>");
-			echo("<p>Groupe: " . $tableau[6] . "</p>");
+			$prenom = $tableau[1];
+			$nom = $tableau[0];
+			$mail = $tableau[2];
+			$filiere = $tableau[5];
+			$groupe = $tableau[6];	
 		}
 		
 	}
+	echo("<p class=\"p-infos\">Prénom: " . $prenom."</p>");
+	echo("<p class=\"p-infos\">Nom: " . $nom."</p>");
+	echo("<p class=\"p-infos\">Adresse mail: " . $mail."</p>");
+	echo("<p class=\"p-infos\">Filière: " . $filiere . "</p>");
+	echo("<p class=\"p-infos\">Groupe: " . $groupe . "</p>");
 }
+
+function upload(){
+	if(isset($_POST['upload'])){
+		$nom_image = $_FILES['image']['name'];
+		$type_image = $_FILES['image']['type'];
+		$taille_image = $_FILES['image']['size'];
+		$image_tmp_name=$_FILES['image']['tmp_name'];
+		$description = $_POST['desc'];
+
+		move_uploaded_file($image_tmp_name, "images/$nom_image");
+
+		$donnes = fopen('fichiers/images.csv', 'a+');
+		fputs($donnes, $_SESSION['pseudo'] . ";" . $nom_image . "\n");
+		fclose($donnes);
+	}
+}
+
+function Pphoto(){
+	
+	$donnes = fopen('fichiers/images.csv', 'r+');
+
+	for ($i=0;$i<sizeof(file("fichiers/images.csv"));$i++){
+ 		$ligne = fgets($donnes);
+		$tableau = explode(";", $ligne);
+
+		if ($tableau[0] == $_SESSION["pseudo"]){
+			$nom_image = $tableau[1];
+		}if ($tableau[1] != ""){
+			$erreur = false;
+		}else{
+			$erreur = true;
+		}
+	}
+
+	if ($erreur == true){
+		echo"problemo";
+	}else{
+		echo"<img src='images/$nom_image' width='200' height='200' id=\"pp\"><br>$description";
+	}
+	
+}
+
 
 ?>
 
@@ -63,37 +109,47 @@ function comptes(){
 	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
 
-		<input type="file" name="input-image" id="input-image" accept=".jpg, .jpeg, .png" multiple />
+		<!--<input type="file" name="input-image" id="input-image" accept=".jpg, .jpeg, .png"  multiple />
 		<div class="image-pre" id="imagePre">
 			<img src="" alt="Photo de profil" class="image-preview__image" />
 			<span class="image-preview__texte">Photo de profil</span>
+		</div>-->
+		<div class="position-info">
+			<?php
+				upload();
+				Pphoto();
+			?>
+
+			<form accept="test.php" method="post" enctype="multipart/form-data">
+				Selectionnez l'image: <input type="file" name="image" accept=".jpg, .jpeg, .png"  multiple><br />
+				<input type="submit" name="upload" value="Changez la photo" id="input-image">
+			</form>
+
+
+			<?php
+				comptes();
+			?>
+
+			<div class="checkbox-info">
+				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
+				<input id="oldprenom" type="checkbox" onclick="changePrenom()" name="change-prenom" class="checkbox-style" />Modification du prénom 
+				<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" class="checkbox-style" />Modification du mail 
+				<input id="oldnumero" type="checkbox" onclick="changeNumero()" name="change-numero" class="checkbox-style" />Modification du numéro 
+				<input id="oldmdp" type="checkbox" onclick="changeMdp()" name="change-mdp" class="checkbox-style" />Modification du mot de passe
+				<input id="oldphoto" type="checkbox" name="change-photo" class="checkbox-style" />Modification de la photo de profil
+			</div>
+
+			<form action="#" method="post">
+				<input id="chg-nom" type="text" name="new-nom" placeholder="Nouveau nom" style='display:none;' />
+				<input id="chg-prenom" type="text" name="new-prenom" placeholder="Nouveau prénom" style='display:none;' />
+				<input id="chg-mail" type="text" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
+				<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
+				<input id="chg-mdp" type="text" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
+				<p id="chg-picture"></p>
+				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
+			</form>
+
 		</div>
-
-		<?php
-			comptes();
-		?>
-
-		<div class="checkbox-info">
-			<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" />Modification du nom 
-			<input id="oldprenom" type="checkbox" onclick="changePrenom()" name="change-prenom" />Modification du prénom 
-			<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" />Modification du mail 
-			<input id="oldnumero" type="checkbox" onclick="changeNumero()" name="change-numero" />Modification du numéro 
-			<input id="oldmdp" type="checkbox" onclick="changeMdp()" name="change-mdp" />Modification du mot de passe
-			<input id="oldphoto" type="checkbox" name="change-photo" />Modification de la photo de profil
-		</div>
-
-		<form action="#" method="post">
-			<input id="chg-nom" type="text" name="new-nom" placeholder="Nouveau nom" style='display:none;' />
-			<input id="chg-prenom" type="text" name="new-prenom" placeholder="Nouveau prénom" style='display:none;' />
-			<input id="chg-mail" type="text" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
-			<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
-			<input id="chg-mdp" type="text" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
-			<p id="chg-picture"></p>
-			<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
-		</form>
-
-		
-
 
 	</div>
 
