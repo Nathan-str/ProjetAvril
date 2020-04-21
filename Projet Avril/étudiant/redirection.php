@@ -1,5 +1,51 @@
 <?php
 session_start();
+
+function errorInscription(){
+
+	if(isset($_GET['error'])){
+	if($_GET['error'] == 3){ //2: GET définie dans la page vérifiant les identifiants 
+	?>
+	<script type="text/javascript">
+		alert("Les mots de passes ne sont pas identiques !");
+	</script>
+	<?php
+	}elseif($_GET['error'] == 4){
+	?>
+	<script type="text/javascript">
+		alert("Les mots de passes doivent être de 6 caractères minimum!");
+	</script>
+	<?php
+	}elseif($_GET['error'] == 5){
+	?>
+	<script type="text/javascript">
+		alert("L'adresse mail ou le numéro est déjà utilisé!");
+	</script>
+	<?php
+		}
+	}
+}
+
+function errorConnexion(){
+
+	if(isset($_GET['error'])){
+		if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
+		?>
+		<script type="text/javascript">
+			alert("Mauvais identifiants !")
+		</script>
+		<?php
+		}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
+		?>
+		<script type="text/javascript">
+			alert("Veuillez entrer des champs !")
+		</script>
+		<?php 			
+		}
+	}
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -39,35 +85,6 @@ session_start();
 							<span class="toggle-icons"></span>
 						</div>
 
-						<!--<div class="toggle-connexion">
-							<i class="fa fa-sign-in" style="font-size:36px"></i>
-							<span class="connexion-icon"></span>
-						</div>
-
-						<div class="formulaire">
-							<form action="connexion.php" method="post">
-								<input class="inputt" type="text" name="login" placeholder="Login" required="required" />
-								<input class="inputt" type="password" name="pwd" placeholder="Password" required="required" />
-								<input class="inputt" type="submit" value="confirm" />
-							</form>
-							<?php
-								if(isset($_GET['error'])){
-									if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-									?>
-									<script type="text/javascript">
-										alert("Mauvais identifiants !")
-									</script>
-									<?php
-									}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-									?>
-									<script type="text/javascript">
-										alert("Veuillez entrer des champs !")
-									</script>
-									<?php 			
-									}
-								}
-							?>
-						</div>-->
 					</div>
 				</nav>
 		</header>
@@ -103,21 +120,7 @@ session_start();
 					<input type="radio" name="groupe" value="LPI-3" />LPI-3
 				</form>
 				<?php
-					if(isset($_GET['error'])){
-					if($_GET['error'] == 3){ //2: GET définie dans la page vérifiant les identifiants 
-				?>
-					<script type="text/javascript">
-						alert("Les mots de passes ne sont pas identiques !");
-					</script>
-				<?php
-					}elseif($_GET['error'] == 4){
-				?>
-					<script type="text/javascript">
-						alert("Les mots de passes doivent être de 6 caractères minimum!");
-					</script>
-				<?php
-					}
-				}
+					errorInscription();
 				?>
 			</div>
 
@@ -129,21 +132,7 @@ session_start();
 					<input class="input" type="submit" value="Valider" />
 				</form>
 				<?php
-					if(isset($_GET['error'])){
-					if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-				?>
-					<script type="text/javascript">
-						alert("Mauvais identifiants !")
-					</script>
-				<?php
-					}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-				?>
-					<script type="text/javascript">
-						alert("Veuillez entrer des champs !")
-					</script>
-				<?php 			
-						}
-					}
+					errorConnexion();
 				?>
 			</div>
 
