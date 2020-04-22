@@ -12,6 +12,7 @@ function comptes(){
 			$prenom = $tableau[2];
 			$nom = $tableau[1];
 			$mail = $tableau[3];
+			$numero = $tableau[4];
 			$filiere = $tableau[7];
 			$groupe = $tableau[8];	
 		}
@@ -20,6 +21,7 @@ function comptes(){
 	echo("<p class=\"p-info-prenom\">Prénom: " . $prenom."</p>");
 	echo("<p class=\"p-info-nom\">Nom: " . $nom."</p>");
 	echo("<p class=\"p-info-mail\">Adresse mail: " . $mail."</p>");
+	echo("<p class=\"p-info-numero\">Numéro de téléphone: " . $numero . "</p>");
 	echo("<p class=\"p-info-filiere\">Filière: " . $filiere . "</p>");
 	echo("<p class=\"p-info-groupe\">Groupe: " . $groupe . "</p>");
 }
@@ -58,14 +60,18 @@ function Pphoto(){
 
 	echo"<img src='images/$nom_image' width='170' height='170' class=\"pp\"><br>$description";
 	
+}
 
-	/*if ($_FILES['image'] == ""){
-		echo"<img src='images/profil_defaut.png' width='170' height='170' class=\"pp-begin\"><br>$description";
-	}*/
-
-
-	
-	
+function erreur(){
+	if(isset($_GET['error'])){
+		if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
+		?>
+		<script type="text/javascript">
+			alert("L'email ou le numero existe déjà' !");
+		</script>
+		<?php
+		}
+	}
 }
 
 
@@ -139,8 +145,12 @@ function Pphoto(){
 				<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" class="checkbox-style" />Modification du mail 
 				<input id="oldnumero" type="checkbox" onclick="changeNumero()" name="change-numero" class="checkbox-style" />Modification du numéro 
 				<input id="oldmdp" type="checkbox" onclick="changeMdp()" name="change-mdp" class="checkbox-style" />Modification du mot de passe
-				<input id="oldphoto" type="checkbox" name="change-photo" class="checkbox-style" />Modification de la photo de profil
+				<input id="oldfiliere" type="checkbox" onclick="changeFiliere()" name="change-filiere" class="checkbox-style" />Modification de la filière et du groupe
+
+
 			</div>
+
+			<div class="formulaire-changement">
 
 			<form action="changement.php" method="post">
 				<input id="chg-nom" type="text" name="new-nom" placeholder="Nouveau nom" style='display:none;' />
@@ -149,8 +159,32 @@ function Pphoto(){
 				<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
 				<input id="chg-mdp" type="password" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
 				<p id="chg-picture"></p>
+				
+				<select id="chg-filiere" name="new-filiere" style='display:none;'>
+					<option>L1-MIPI</option>
+					<option>L2-MI</option>
+					<option>L3-I</option>
+					<option>LP-RS</option>
+					<option>LPI-RIWS</option>
+				</select>
+
+				<select id="chg-groupe" name="new-groupe" style='display:none;'>
+					<option>A1</option>
+					<option>B2</option>
+					<option>LPI-1</option>
+					<option>LPI-2</option>
+					<option>LPI-3</option>
+				</select>
+
 				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
+
 			</form>
+
+			</div>
+
+			<?php
+			erreur();
+			?>
 
 		</div>
 
@@ -163,21 +197,23 @@ function Pphoto(){
 		var oldmail = document.getElementById("oldmail");
 		var oldnumero = document.getElementById("oldnumero");
 		var oldmdp = document.getElementById("oldmdp");
-		var oldphoto = document.getElementById("oldphoto");
+		var oldfiliere = document.getElementById("oldfiliere");
+		var oldgroupe = document.getElementById("oldgroupe");
 
 		var nom = document.getElementById("chg-nom");
 		var prenom = document.getElementById("chg-prenom");
 		var mail = document.getElementById("chg-mail");
 		var numero = document.getElementById("chg-numero");
 		var mdp = document.getElementById("chg-mdp");
-		var photo = document.getElementById("chg-picture");
+		var filiere = document.getElementById("chg-filiere");
+		var groupe = document.getElementById("chg-groupe");
 		var submit = document.getElementById("chg-submit");
 
 		function changeNom(){
 			if (oldnom.checked){
 				nom.style.display = "block";
 				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
 				submit.style.display = "none";
 				nom.style.display = "none";
 			}else{
@@ -189,7 +225,7 @@ function Pphoto(){
 			if (oldprenom.checked) {
 				prenom.style.display = "block";
 				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
 				submit.style.display = "none";
 				prenom.style.display = "none";
 			}else{
@@ -201,7 +237,7 @@ function Pphoto(){
 			if (oldmail.checked) {
 				mail.style.display = "block";
 				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
 				submit.style.display = "none";
 				mail.style.display = "none";
 			}else{
@@ -213,7 +249,7 @@ function Pphoto(){
 			if (oldnumero.checked) {
 				numero.style.display = "block";
 				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
 				submit.style.display = "none";
 				numero.style.display = "none";
 			}else{
@@ -225,13 +261,30 @@ function Pphoto(){
 			if (oldmdp.checked) {
 				mdp.style.display = "block";
 				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false) {
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
 				submit.style.display = "none";
 				mdp.style.display = "none";
 			}else{
 				mdp.style.display = "none";
 			}
 		}
+
+		function changeFiliere(){
+			if (oldfiliere.checked) {
+				filiere.style.display = "block";
+				groupe.style.display = "block";
+				submit.style.display = "block";
+			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
+				submit.style.display = "none";
+				filiere.style.display = "none";
+				groupe.style.display = "none";
+			}else{
+				filiere.style.display = "none";
+				groupe.style.display = "none";
+			}
+		}
+
+
 
 		//--------------------------------------------------------------------------------------------------------------
 
