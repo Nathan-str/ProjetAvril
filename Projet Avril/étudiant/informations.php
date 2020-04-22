@@ -8,60 +8,63 @@ function comptes(){
  			$ligne = fgets($donnes);
 			$tableau = explode(";", $ligne);
 
-		if ($_SESSION['pseudo'] == $tableau[2]){
-			$prenom = $tableau[1];
-			$nom = $tableau[0];
-			$mail = $tableau[2];
-			$filiere = $tableau[5];
-			$groupe = $tableau[6];	
+		if ($_SESSION['id'] == $tableau[0]){
+			$prenom = $tableau[2];
+			$nom = $tableau[1];
+			$mail = $tableau[3];
+			$filiere = $tableau[7];
+			$groupe = $tableau[8];	
 		}
 		
 	}
-	echo("<p class=\"p-infos\">Prénom: " . $prenom."</p>");
-	echo("<p class=\"p-infos\">Nom: " . $nom."</p>");
-	echo("<p class=\"p-infos\">Adresse mail: " . $mail."</p>");
-	echo("<p class=\"p-infos\">Filière: " . $filiere . "</p>");
-	echo("<p class=\"p-infos\">Groupe: " . $groupe . "</p>");
+	echo("<p class=\"p-info-prenom\">Prénom: " . $prenom."</p>");
+	echo("<p class=\"p-info-nom\">Nom: " . $nom."</p>");
+	echo("<p class=\"p-info-mail\">Adresse mail: " . $mail."</p>");
+	echo("<p class=\"p-info-filiere\">Filière: " . $filiere . "</p>");
+	echo("<p class=\"p-info-groupe\">Groupe: " . $groupe . "</p>");
 }
 
 function upload(){
 	if(isset($_POST['upload'])){
 		$nom_image = $_FILES['image']['name'];
+		if($_FILES['image']['error'] == 4 ){
+			$nom_image = "profil_defaut.png";
+		}
 		$type_image = $_FILES['image']['type'];
 		$taille_image = $_FILES['image']['size'];
 		$image_tmp_name=$_FILES['image']['tmp_name'];
 		$description = $_POST['desc'];
-
 		move_uploaded_file($image_tmp_name, "images/$nom_image");
 
 		$donnes = fopen('fichiers/images.csv', 'a+');
-		fputs($donnes, $_SESSION['pseudo'] . ";" . $nom_image . "\n");
+		fputs($donnes, $_SESSION['id'] . ";" . $nom_image . "\n");
 		fclose($donnes);
 	}
 }
 
 function Pphoto(){
 	
+	$erreur = $_FILES['image']['error'];
 	$donnes = fopen('fichiers/images.csv', 'r+');
 
 	for ($i=0;$i<sizeof(file("fichiers/images.csv"));$i++){
  		$ligne = fgets($donnes);
 		$tableau = explode(";", $ligne);
 
-		if ($tableau[0] == $_SESSION["pseudo"]){
+		if ($tableau[0] == $_SESSION["id"]){
 			$nom_image = $tableau[1];
-		}if ($tableau[1] != ""){
-			$erreur = false;
-		}else{
-			$erreur = true;
 		}
 	}
 
-	if ($erreur == true){
-		echo"problemo";
-	}else{
-		echo"<img src='images/$nom_image' width='200' height='200' id=\"pp\"><br>$description";
-	}
+	echo"<img src='images/$nom_image' width='170' height='170' class=\"pp\"><br>$description";
+	
+
+	/*if ($_FILES['image'] == ""){
+		echo"<img src='images/profil_defaut.png' width='170' height='170' class=\"pp-begin\"><br>$description";
+	}*/
+
+
+	
 	
 }
 
@@ -121,8 +124,8 @@ function Pphoto(){
 			?>
 
 			<form accept="test.php" method="post" enctype="multipart/form-data">
-				Selectionnez l'image: <input type="file" name="image" accept=".jpg, .jpeg, .png"  multiple><br />
-				<input type="submit" name="upload" value="Changez la photo" id="input-image">
+				<p class="modification-image">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" multiple><br />
+				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image">
 			</form>
 
 
@@ -139,12 +142,12 @@ function Pphoto(){
 				<input id="oldphoto" type="checkbox" name="change-photo" class="checkbox-style" />Modification de la photo de profil
 			</div>
 
-			<form action="#" method="post">
+			<form action="changement.php" method="post">
 				<input id="chg-nom" type="text" name="new-nom" placeholder="Nouveau nom" style='display:none;' />
 				<input id="chg-prenom" type="text" name="new-prenom" placeholder="Nouveau prénom" style='display:none;' />
-				<input id="chg-mail" type="text" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
+				<input id="chg-mail" type="email" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
 				<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
-				<input id="chg-mdp" type="text" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
+				<input id="chg-mdp" type="password" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
 				<p id="chg-picture"></p>
 				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
 			</form>
