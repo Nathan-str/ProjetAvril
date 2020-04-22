@@ -22,6 +22,12 @@ function errorInscription(){
 		alert("L'adresse mail ou le numéro est déjà utilisé!");
 	</script>
 	<?php
+		}elseif ($_GET['error'] == 0) {
+	?>
+	<script type="text/javascript">
+		alert("Inscription réussi!");
+	</script>
+	<?php
 		}
 	}
 }
@@ -128,8 +134,8 @@ function errorConnexion(){
 				<p class="p_connexions">Connexion</p>
 				<form action="connexion.php" method="post">
 					<input class="input" type="mail" name="login" minlength="6" placeholder="Adresse Mail" required="required" />
-					<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="required" />
-					<input class="input" type="submit" value="Valider" />
+					<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="required" /><br />
+					<input class="connexion-submit" type="submit" value="Valider" />
 				</form>
 				<?php
 					errorConnexion();
