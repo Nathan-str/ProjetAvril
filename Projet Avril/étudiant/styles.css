@@ -148,8 +148,12 @@ span.toggle-icons:after{top: -14px;}
 	top: 10px;
 }
 
-.submit-connexion{
-
+.connexion-submit{
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	border-radius: 7px;
+	position: relative;
+	left: 35%;
 }
 
 .toggle-connexion{
@@ -337,7 +341,7 @@ span.toggle-icons:after{top: -14px;}
 .h1-info{
 	position: relative;
 	font-size: 2.5em;
-	left: 10%;
+	left: 37%;
 	top: 20px;	
 }
 
@@ -347,9 +351,17 @@ span.toggle-icons:after{top: -14px;}
 	position: relative;
 }
 
-#pp{
+.pp{
 	position: relative;
-	left: 5%;
+	left: 1%;
+	top: 95px;
+}
+
+.pp-begin{
+	position: relative;
+	top: -79px;
+	left: 19px;
+
 }
 
 #span-pp{
@@ -357,12 +369,59 @@ span.toggle-icons:after{top: -14px;}
 
 .p-infos{
 	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+
+}
+
+.p-info-prenom{
+	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+	color: #192a56;
+}
+
+.p-info-nom{
+	font-size: 1.5em;
+	position: relative;
+	left: 12%;
+	top: -52px;
+	color: #192a56;
+}
+
+.p-info-mail{
+	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+	top: -50px;
+	color: #192a56;
+}
+
+.p-info-filiere{
+	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+	top: -50px;
+	color: #192a56;
+}
+
+.p-info-groupe{
+	font-size: 1.5em;
+	position: relative;
+	left: 12%;
+	top: -102px;
+	color: #192a56;
 }
 
 .position-info{
 	position: relative;
-	left: 2%;
-	top: 100px;
+	left: 5%;
+	top: 20px;
+}
+
+.modification-image{
+	position: relative;
+	left: 11%;
 }
 
 .checkbox-style{
