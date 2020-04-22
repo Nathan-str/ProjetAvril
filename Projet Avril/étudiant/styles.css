@@ -397,6 +397,14 @@ span.toggle-icons:after{top: -14px;}
 	color: #192a56;
 }
 
+.p-info-numero{
+	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+	top: -50px;
+	color: #192a56;
+}
+
 .p-info-filiere{
 	font-size: 1.5em;
 	position: relative;
@@ -423,6 +431,18 @@ span.toggle-icons:after{top: -14px;}
 	position: relative;
 	left: 11%;
 }
+
+.formulaire-changement{
+	position: relative;
+	left: 5%;
+	top: 10px;
+}
+
+#chg-nom{
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
 
 .checkbox-style{
 	padding: 10px;
