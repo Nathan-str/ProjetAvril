@@ -443,6 +443,16 @@ span.toggle-icons:after{top: -14px;}
 	margin-bottom: 5px;
 }
 
+#chg-prenom{
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
+#chg-mail{
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
 
 .checkbox-style{
 	padding: 10px;
@@ -465,6 +475,30 @@ span.toggle-icons:after{top: -14px;}
 .image-preview__image{
 	display: none;
 	width: 100%;
+}
+
+.h1-key{
+	position: relative;
+	left: 38%;
+	font-size: 3em;
+}
+
+.form-cle-api{
+	font-size: 1em;
+}
+
+.demande-cle-api{
+	position: relative;
+	font-size: 1.5em;
+	left: 1%;
+	top: 35px;
+}
+
+#formulaire-API{
+	font-size: 1.5em;
+	position: relative;
+	left: 1%;
+	top: 50px;
 }
 
 .le_footer{
