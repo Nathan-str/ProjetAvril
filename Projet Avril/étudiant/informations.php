@@ -95,7 +95,7 @@ function erreur(){
 					</div>
 
 					<div class="droite">
-						<a href="#" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
+						<a href="documentation.php" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
 						<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
 						<a href="#" class="lien"><i class="fa fa-address-card-o"></i> Contact</a>
 						<?php
@@ -138,6 +138,7 @@ function erreur(){
 			<?php
 				comptes();
 			?>
+
 
 			<div class="checkbox-info">
 				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
