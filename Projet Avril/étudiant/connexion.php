@@ -1,6 +1,34 @@
 <?php
 	session_start();
 
+	function stastitiques(){
+		$dossier = fopen("fichiers/stats.log", "r");
+		//Même processus mais pour chaque jour de la semaine
+		$statistiques = array();
+
+		while ($elements = fgets($dossier)) {
+			$elements = explode(';', $elements);
+
+			if ($elements[0] == strftime("%H", time())) { //%H correspond au heures de 00 à 23
+				$valeur_element = $elements[1];
+				$valeur_element +=1;
+				$put_element = $elements[0] . ";" . $valeur_element . "\n";
+			}else{
+				$put_element = $elements[0] . ";" . $elements[1];
+			}
+
+			array_push($statistiques, $put_element);
+		}
+
+		$dossier = fopen("fichiers/stats.log", "w");
+
+		for($i = 0; $i < sizeof($statistiques);$i++){
+			fputs($dossier, $statistiques[$i]);
+		}
+
+		fclose($dossier);
+	}
+
 	//Vérifie le remplissage du formulaire
 	if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
 
@@ -18,6 +46,7 @@
 				//Création des sessions "noms"
 				$_SESSION['pseudo'] = $_POST['login'];
 				$_SESSION['id'] = $tableau[0];
+				stastitiques();
 				//Redirige ensuite vers l'accueil
 				header("location:./redirection.php");
 				exit();
