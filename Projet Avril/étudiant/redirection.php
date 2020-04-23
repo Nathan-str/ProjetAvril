@@ -73,7 +73,7 @@ function errorConnexion(){
 						</div>
 
 						<div class="droite">
-							<a href="#" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
+							<a href="documentation.php" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
 							<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
 							<a href="#" class="lien"><i class="fa fa-address-card-o"></i> Contact</a>
 							<?php
