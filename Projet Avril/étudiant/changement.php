@@ -83,10 +83,10 @@ if ($fin == true){
 					$groupe = $tableau[8];
 				}
 
-			$strinformations = $tableau[0] . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $tableau[5] . ";" . $mdp . ";" . $filiere . ";" . $groupe;
+			$strinformations = $tableau[0] . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $tableau[5] . ";" . $mdp . ";" . $filiere . ";" . $groupe . ";" . $tableau[9];
 			array_push($informations, $strinformations);
 		}else{
-			$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8];
+			$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $tableau[9];
 			array_push($informations, $strinformations);
 		}
 
