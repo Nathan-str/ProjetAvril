@@ -12,6 +12,15 @@ function genererChaineAleatoire($longueur = 10){
 	 return $chaineAleatoire;
 }
 
+function CleLogReussi($evenement, $evenement1){
+	$fichier = 'fichiers/log.csv';
+	$time = date("D, d M Y H:i:s");
+	$time = "[".$time."]";
+	$evenement = $time. ";" ."clé_obtenue".";". $evenement .";" .$evenement1."\n";
+
+	file_put_contents($fichier, $evenement, FILE_APPEND);
+}
+
 function verifCle(){
 	/*$donnes = fopen('fichiers/cle.csv', 'r+');
 
@@ -94,6 +103,7 @@ function inserCle(){
 			fputs($donnes, $strinfos);
 
 			fclose($donnes);
+			CleLogReussi($mail, $cle);
 
 			header("location:./documentation.php?error=6");
 
@@ -108,6 +118,13 @@ function inserCle(){
 	}
 }
 
+if ($_GET['choose'] == "inscription"){
+	inserCle();
+}elseif ($_GET['choose'] == "connexion") {
+	verifCle();
+}else{
+	echo"error";
+}
 //inserCle();
 //verifCle();
 
