@@ -92,6 +92,12 @@ function erreur(){
 			alert("L'email ou le numero existe déjà' !");
 		</script>
 		<?php
+		}elseif ($_GET['error'] == 3) {
+		?>
+		<script type="text/javascript">
+			alert("Le numéro existe déjà' !");
+		</script>	
+		<?php
 		}
 	}
 }
@@ -180,7 +186,7 @@ function erreur(){
 				<input id="chg-prenom" type="text" name="new-prenom" placeholder="Nouveau prénom" style='display:none;' />
 				<input id="chg-mail" type="email" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
 				<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
-				<input id="chg-mdp" type="password" name="new-mdp" placeholder="Nouveau mot de passe" style='display:none;' />
+				<input id="chg-mdp" type="password" name="new-mdp" minlength="6" placeholder="Nouveau mot de passe" style='display:none;' />
 				<p id="chg-picture"></p>
 				
 				<select id="chg-filiere" name="new-filiere" style='display:none;'>
