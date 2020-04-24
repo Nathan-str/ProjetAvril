@@ -355,6 +355,7 @@ span.toggle-icons:after{top: -14px;}
 	position: relative;
 	left: 1%;
 	top: 95px;
+	border-radius: 10px;
 }
 
 .pp-begin{
