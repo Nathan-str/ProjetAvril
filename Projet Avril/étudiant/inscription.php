@@ -9,6 +9,15 @@
 	    }
     }
 
+    function inscriptionLogReussi($evenement){
+		$fichier = 'fichiers/log.csv';
+		$time = date("D, d M Y H:i:s");
+	    $time = "[".$time."]";
+	    $evenement = $time. ";" ."inscription_réussi".";".$evenement."\n";
+
+	    file_put_contents($fichier, $evenement, FILE_APPEND);
+	}
+
 	$donne = fopen('fichiers/comptes.csv', 'r+');
 
 	while(!feof($donne)){
@@ -56,6 +65,7 @@
 			fclose($monfichier);
 			fclose($donnes);
 
+			inscriptionLogReussi($_POST["mail"]);
 			header("location:./redirection.php?error=0");
 
 		}elseif($_POST["mdp"] != $_POST["mdp1"]){
