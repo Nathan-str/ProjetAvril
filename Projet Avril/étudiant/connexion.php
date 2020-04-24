@@ -29,6 +29,25 @@
 		fclose($dossier);
 	}
 
+	function connexionLogReussi($evenement){
+		$fichier = 'fichiers/log.csv';
+		$time = date("D, d M Y H:i:s");
+	    $time = "[".$time."]";
+	    $evenement = $time. ";" ."connexion_réussi".";".$evenement."\n";
+
+	    file_put_contents($fichier, $evenement, FILE_APPEND);
+	}
+
+	function connexionLogEchec($evenement){
+		$fichier = 'fichiers/log.csv';
+		$time = date("D, d M Y H:i:s");
+	    $time = "[".$time."]";
+	    $evenement = $time. ";" ."connexion_echec".";".$evenement."\n";
+
+	    file_put_contents($fichier, $evenement, FILE_APPEND);
+	}
+
+
 	//Vérifie le remplissage du formulaire
 	if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
 
@@ -48,9 +67,11 @@
 				$_SESSION['id'] = $tableau[0];
 				stastitiques();
 				//Redirige ensuite vers l'accueil
-				header("location:./redirection.php");
+				connexionLogReussi($tableau[3]);
+				header("location:./informations.php");
 				exit();
 			}elseif ($i == sizeof(file("fichiers/comptes.csv"))-1){
+				connexionLogEchec($tableau[3]);
 				header("location:./redirection.php?error=2");
 				exit();
 			}
@@ -59,6 +80,7 @@
 
 	}else{
 		//Si les éléments ne sont pas remplies: redirection avec une erreur
+		connexionLogEchec("vide");
 		header("location:./redirection.php?error=1");
 		echo "Veuillez rentrez des champs !";
 		exit();
