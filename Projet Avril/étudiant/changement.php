@@ -43,6 +43,7 @@ if ($fin == true){
 
 				if (!empty($_POST['new-mail'])) {
 					$mail = $_POST['new-mail'];
+					$_SESSION['mail'] = $_POST['new-mail'];
 				}else{
 					$mail = $tableau[3];
 				}
