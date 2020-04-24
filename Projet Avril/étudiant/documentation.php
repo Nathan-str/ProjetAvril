@@ -7,7 +7,7 @@ function errorConnexion(){
 		if($_GET['error'] == 0){ //2: GET définie dans la page vérifiant les identifiants 
 		?>
 		<script type="text/javascript">
-			alert("Clé récupéré !")
+			alert("Mauvais identifiants!")
 		</script>
 		<?php
 		}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
@@ -24,11 +24,27 @@ function errorConnexion(){
 				}
 			}
 			fclose($donnes);
+		}elseif ($_GET['error'] == 3) {
+		?>
+		<script type="text/javascript">
+			alert("Les mots de passes sont différents !");
+		</script>
+		<?php
+		}elseif ($_GET['error'] == 6) {
+		?>
+		<script type="text/javascript">
+			alert("Clé créée !");
+		</script>
+		<?php
+		}elseif ($_GET['error'] == 5) {
+		?>
+		<script type="text/javascript">
+			alert("L'adresse mail existe déjà !");
+		</script>
+		<?php
 		}
 	}
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +87,22 @@ function errorConnexion(){
 
 <h1 class="h1-key">Utilisation de l'API</h1>
 
-<div class="demande-cle-api">
-	<label>Demander une clé API</label>
+<div class="inscription-cle-api">
+	<label>Demandé sa clé API</label>
 	<form action="cle.php" method="get">
-		<input type="email" name="key" placeholder="Adresse mail" class="form-cle-api" />
-		<input type="submit" value="GET KEY" class="form-cle-api">
+		<input type="email" name="mail" placeholder="Adresse mail" class="form-cle-api" />
+		<input type="password" name="pwd" placeholder="Mot de passe" class="form-cle-api" />
+		<input type="password" name="pwd1" placeholder="Confirmation mot de passe" class="form-cle-api" />
+		<input type="submit" value="Inscription" class="form-cle-api" />
+	</form>
+</div>
+
+<div class="demande-cle-api">
+	<label>Voir sa clé API</label>
+	<form action="cle.php" method="get">
+		<input type="email" name="key-mail" placeholder="Adresse mail" class="form-cle-api" />
+		<input type="password" name="key-pwd" placeholder="Mot de passe" class="form-cle-api" />
+		<input type="submit" value="GET KEY" class="form-cle-api" />
 	</form>
 
 	<?php
@@ -91,11 +118,12 @@ function errorConnexion(){
 	<form action="apiEtu.php" method="get" class="formulaire-API1">
 
 		<input type="radio" name="choix" value="filiere" checked="" />Filière
-		<input class="filiere" type="radio" name="filiere" value="L1-MIPI" />L1-MIPI
+		<input class="filiere" type="radio" name="filiere" checked="" value="L1-MIPI" />L1-MIPI
 		<input class="filiere" type="radio" name="filiere" value="L2-MI" />L2-MI
 		<input class="filiere" type="radio" name="filiere" value="L3-I" />L3-I
 		<input class="filiere" type="radio" name="filiere" value="LP RS" />LP-RS
 		<input class="filiere" type="radio" name="filiere" value="LPI-RIWS" />LPI-RIWS
+		<input type="text" name="cle" placeholder="Clé API" />
 		<input class="form-cle-api" type="submit" value="Valider">
 
 		<!--<input type="radio" name="choix" value="groupe" />Groupe
@@ -116,6 +144,7 @@ function errorConnexion(){
 		<input class="groupe" type="radio" name="filiere" value="E3" />-->
 	</form>
 </div>
+
 
 <h2>Documentation</h2>
 
