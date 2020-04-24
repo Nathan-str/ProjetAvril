@@ -51,7 +51,7 @@
 			
 
 			//Met les éléments du formulaire dans le fichier et hache le mot de passe et définie un ID
-			fputs($donnes, $id . ";" . $_POST['nom'] . ";" . $_POST["prenom"] . ";" . $_POST["mail"] . ";" . $_POST["numero"] . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) . ";" . $_POST['filiere'] . ";" . $_POST['groupe'] ."\n");
+			fputs($donnes, $id . ";" . $_POST['nom'] . ";" . $_POST["prenom"] . ";" . $_POST["mail"] . ";" . $_POST["numero"] . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) . ";" . $_POST['filiere'] . ";" . $_POST['groupe'] . ";" . "profil_defaut.png" ."\n");
 
 			fclose($monfichier);
 			fclose($donnes);
