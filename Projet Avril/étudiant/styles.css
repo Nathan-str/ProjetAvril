@@ -488,6 +488,12 @@ span.toggle-icons:after{top: -14px;}
 	font-size: 1em;
 }
 
+.inscription-cle-api{
+	position: relative;
+	left: 5%;
+	top: 50px;
+}
+
 .demande-cle-api{
 	position: relative;
 	font-size: 1.5em;
