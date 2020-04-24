@@ -1,7 +1,18 @@
 <?php
 	session_start();
 
-	function alea() {
+	function addLogEvent($event)
+	{
+		$fp = 'fichiers/log.txt';
+	    $time = date("D, d M Y H:i:s");
+	    $time = "[".$time."] ";
+	 
+	    $event = $time.$event."\n";
+	 
+	    file_put_contents($fp, $event, FILE_APPEND);
+	}
+	addLogEvent("Bonjour");
+	/*function alea() {
 	    $chn = '';
 	    for ($i=1;$i<=6;$i++){
 	        $chn = chr(floor(rand(0, 25)+97));
@@ -31,7 +42,7 @@
 			$R = $car_alea . $mot_de_passe;
 			echo($R);
 
-		/*if(isset($_POST['upload'])){
+		if(isset($_POST['upload'])){
 			$nom_image = $_FILES['image']['name'];
 			$type_image = $_FILES['image']['type'];
 			$taille_image = $_FILES['image']['size'];
