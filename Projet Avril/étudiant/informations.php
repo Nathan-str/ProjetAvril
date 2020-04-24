@@ -28,7 +28,8 @@ function comptes(){
 
 function upload(){
 	if(isset($_POST['upload'])){
-		$nom_image = $_FILES['image']['name'];
+
+		$nom_image = $_SESSION['id'] . ".png";
 		if($_FILES['image']['error'] == 4 ){
 			$nom_image = "profil_defaut.png";
 		}
@@ -38,8 +39,29 @@ function upload(){
 		$description = $_POST['desc'];
 		move_uploaded_file($image_tmp_name, "images/$nom_image");
 
-		$donnes = fopen('fichiers/images.csv', 'a+');
-		fputs($donnes, $_SESSION['id'] . ";" . $nom_image . "\n");
+		//$donnes = fopen('fichiers/images.csv', 'a+');
+
+		$donnes = fopen('fichiers/comptes.csv', 'r+');
+		$informations = array();
+		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
+	 		$ligne = fgets($donnes);
+	 		$lignes = substr($ligne, 0,-1);
+			$tableau = explode(";", $lignes);
+			if ($tableau[0] == $_SESSION['id']){
+				$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $nom_image;
+				array_push($informations, $strinformations);
+			}else{
+				$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $tableau[9];
+				array_push($informations, $strinformations);
+			}
+		}
+		fclose($donnes);
+
+		$donnes = fopen('fichiers/comptes.csv', 'w');
+
+		for ($i=0;$i<sizeof($informations);$i++){
+			fputs($donnes, $informations[$i] . "\n");
+		}
 		fclose($donnes);
 	}
 }
@@ -47,14 +69,14 @@ function upload(){
 function Pphoto(){
 	
 	$erreur = $_FILES['image']['error'];
-	$donnes = fopen('fichiers/images.csv', 'r+');
+	$donnes = fopen('fichiers/comptes.csv', 'r+');
 
-	for ($i=0;$i<sizeof(file("fichiers/images.csv"));$i++){
+	for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
  		$ligne = fgets($donnes);
 		$tableau = explode(";", $ligne);
 
 		if ($tableau[0] == $_SESSION["id"]){
-			$nom_image = $tableau[1];
+			$nom_image = $tableau[9];
 		}
 	}
 
