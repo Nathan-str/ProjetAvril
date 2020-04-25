@@ -1,56 +1,7 @@
 <?php
 session_start();
 
-function errorInscription(){
-
-	if(isset($_GET['error'])){
-	if($_GET['error'] == 3){ //2: GET définie dans la page vérifiant les identifiants 
-	?>
-	<script type="text/javascript">
-		alert("Les mots de passes ne sont pas identiques !");
-	</script>
-	<?php
-	}elseif($_GET['error'] == 4){
-	?>
-	<script type="text/javascript">
-		alert("Les mots de passes doivent être de 6 caractères minimum!");
-	</script>
-	<?php
-	}elseif($_GET['error'] == 5){
-	?>
-	<script type="text/javascript">
-		alert("L'adresse mail ou le numéro est déjà utilisé!");
-	</script>
-	<?php
-		}elseif ($_GET['error'] == 0) {
-	?>
-	<script type="text/javascript">
-		alert("Inscription réussi!");
-	</script>
-	<?php
-		}
-	}
-}
-
-function errorConnexion(){
-
-	if(isset($_GET['error'])){
-		if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-		?>
-		<script type="text/javascript">
-			alert("Mauvais identifiants !")
-		</script>
-		<?php
-		}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-		?>
-		<script type="text/javascript">
-			alert("Veuillez entrer des champs !")
-		</script>
-		<?php 			
-		}
-	}
-
-}
+include 'fonction.php';
 
 ?>
 
@@ -73,9 +24,8 @@ function errorConnexion(){
 						</div>
 
 						<div class="droite">
-							<a href="documentation.php" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
+							<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
 							<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-							<a href="#" class="lien"><i class="fa fa-address-card-o"></i> Contact</a>
 							<?php
 								if(!empty($_SESSION['pseudo'])){
 							?>
@@ -149,8 +99,7 @@ function errorConnexion(){
 		<footer class="le_footer">
 			<div class="contenue">
 				<div class="footer-section about">
-					<h1>Projet</h1>
-					<p>Bonjour</p>
+					<p>Projet</p>
 				</div>
 				<div class="footer-section links">
 					<p>Liens</p>
