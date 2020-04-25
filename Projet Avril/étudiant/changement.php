@@ -2,8 +2,7 @@
 session_start();
 
 
-$donnes = fopen('fichiers/comptes.csv', 'r+');
-$informations = array();
+
 
 $donne = fopen('fichiers/comptes.csv', 'r+');
 
@@ -28,6 +27,9 @@ while(!feof($donne)){
 }
 	
 if ($fin == true){
+
+	$donnes = fopen('fichiers/comptes.csv', 'r+');
+	$informations = array();
 
 	for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
  		$ligne = fgets($donnes);
