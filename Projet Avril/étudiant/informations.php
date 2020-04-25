@@ -1,106 +1,7 @@
 <?php
 session_start();
 
-function comptes(){
-	$donnes = fopen('fichiers/comptes.csv', 'r+');
-
-	for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
- 			$ligne = fgets($donnes);
-			$tableau = explode(";", $ligne);
-
-		if ($_SESSION['id'] == $tableau[0]){
-			$prenom = $tableau[2];
-			$nom = $tableau[1];
-			$mail = $tableau[3];
-			$numero = $tableau[4];
-			$filiere = $tableau[7];
-			$groupe = $tableau[8];	
-		}
-		
-	}
-	echo("<p class=\"p-info-prenom\">Prénom: " . $prenom."</p>");
-	echo("<p class=\"p-info-nom\">Nom: " . $nom."</p>");
-	echo("<p class=\"p-info-mail\">Adresse mail: " . $mail."</p>");
-	echo("<p class=\"p-info-numero\">Numéro de téléphone: " . $numero . "</p>");
-	echo("<p class=\"p-info-filiere\">Filière: " . $filiere . "</p>");
-	echo("<p class=\"p-info-groupe\">Groupe: " . $groupe . "</p>");
-}
-
-function upload(){
-	if(isset($_POST['upload'])){
-
-		$nom_image = $_SESSION['id'] . ".png";
-		if($_FILES['image']['error'] == 4 ){
-			$nom_image = "profil_defaut.png";
-		}
-		$type_image = $_FILES['image']['type'];
-		$taille_image = $_FILES['image']['size'];
-		$image_tmp_name=$_FILES['image']['tmp_name'];
-		$description = $_POST['desc'];
-		move_uploaded_file($image_tmp_name, "images/$nom_image");
-
-		//$donnes = fopen('fichiers/images.csv', 'a+');
-
-		$donnes = fopen('fichiers/comptes.csv', 'r+');
-		$informations = array();
-		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 		$ligne = fgets($donnes);
-	 		$lignes = substr($ligne, 0,-1);
-			$tableau = explode(";", $lignes);
-			if ($tableau[0] == $_SESSION['id']){
-				$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $nom_image;
-				array_push($informations, $strinformations);
-			}else{
-				$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $tableau[9];
-				array_push($informations, $strinformations);
-			}
-		}
-		fclose($donnes);
-
-		$donnes = fopen('fichiers/comptes.csv', 'w');
-
-		for ($i=0;$i<sizeof($informations);$i++){
-			fputs($donnes, $informations[$i] . "\n");
-		}
-		fclose($donnes);
-	}
-}
-
-function Pphoto(){
-	
-	$erreur = $_FILES['image']['error'];
-	$donnes = fopen('fichiers/comptes.csv', 'r+');
-
-	for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
- 		$ligne = fgets($donnes);
-		$tableau = explode(";", $ligne);
-
-		if ($tableau[0] == $_SESSION["id"]){
-			$nom_image = $tableau[9];
-		}
-	}
-
-	echo"<img src='images/$nom_image' width='170' height='170' class=\"pp\"><br>$description";
-	
-}
-
-function erreur(){
-	if(isset($_GET['error'])){
-		if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-		?>
-		<script type="text/javascript">
-			alert("L'email ou le numero existe déjà' !");
-		</script>
-		<?php
-		}elseif ($_GET['error'] == 3) {
-		?>
-		<script type="text/javascript">
-			alert("Le numéro existe déjà' !");
-		</script>	
-		<?php
-		}
-	}
-}
+include 'fonction.php';
 
 
 ?>
@@ -123,9 +24,8 @@ function erreur(){
 					</div>
 
 					<div class="droite">
-						<a href="documentation.php" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
+						<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
 						<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-						<a href="#" class="lien"><i class="fa fa-address-card-o"></i> Contact</a>
 						<?php
 							if(isset($_SESSION['pseudo'])){
 						?>
@@ -189,20 +89,30 @@ function erreur(){
 				<input id="chg-mdp" type="password" name="new-mdp" minlength="6" placeholder="Nouveau mot de passe" style='display:none;' />
 				<p id="chg-picture"></p>
 				
-				<select id="chg-filiere" name="new-filiere" style='display:none;'>
-					<option>L1-MIPI</option>
-					<option>L2-MI</option>
-					<option>L3-I</option>
-					<option>LP-RS</option>
-					<option>LPI-RIWS</option>
+				<select id="chg-filiere" name="new-filiere" onchange="adaptationFilière()" style='display:none;'>
+					<option id="L1-MIPI">L1-MIPI</option>
+					<option id="L2-MI">L2-MI</option>
+					<option id="L3-I">L3-I</option>
+					<option id="LP-RS">LP-RS</option>
+					<option id="LPI-RIWS">LPI-RIWS</option>
 				</select>
 
 				<select id="chg-groupe" name="new-groupe" style='display:none;'>
-					<option>A1</option>
-					<option>B2</option>
-					<option>LPI-1</option>
-					<option>LPI-2</option>
-					<option>LPI-3</option>
+					<option id="A1">A1</option>
+					<option id="A2">A2</option>
+					<option id="A3">A3</option>
+					<option id="B1">B1</option>
+					<option id="B2">B2</option>
+					<option id="B2">B3</option>
+					<option id="B2">C1</option>
+					<option id="B2">C2</option>
+					<option id="B2">C3</option>
+					<option id="B2">D1</option>
+					<option id="B2">D2</option>
+					<option id="B2">D3</option>
+					<option id="B2">E1</option>
+					<option id="B2">E2</option>
+					<option id="B2">E3</option>
 				</select>
 
 				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
@@ -219,134 +129,13 @@ function erreur(){
 
 	</div>
 
-	<script>
+	<script src="app.js" meta="utf-8"></script>
 
-		var oldnom = document.getElementById("oldnom");
-		var oldprenom = document.getElementById("oldprenom");
-		var oldmail = document.getElementById("oldmail");
-		var oldnumero = document.getElementById("oldnumero");
-		var oldmdp = document.getElementById("oldmdp");
-		var oldfiliere = document.getElementById("oldfiliere");
-		var oldgroupe = document.getElementById("oldgroupe");
-
-		var nom = document.getElementById("chg-nom");
-		var prenom = document.getElementById("chg-prenom");
-		var mail = document.getElementById("chg-mail");
-		var numero = document.getElementById("chg-numero");
-		var mdp = document.getElementById("chg-mdp");
-		var filiere = document.getElementById("chg-filiere");
-		var groupe = document.getElementById("chg-groupe");
-		var submit = document.getElementById("chg-submit");
-
-		function changeNom(){
-			if (oldnom.checked){
-				nom.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				nom.style.display = "none";
-			}else{
-				nom.style.display = "none";
-			}	
-		}	
-
-		function changePrenom(){
-			if (oldprenom.checked) {
-				prenom.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				prenom.style.display = "none";
-			}else{
-				prenom.style.display = "none";
-			}	
-		}
-
-		function changeMail(){
-			if (oldmail.checked) {
-				mail.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				mail.style.display = "none";
-			}else{
-				mail.style.display = "none";
-			}	
-		}
-
-		function changeNumero(){
-			if (oldnumero.checked) {
-				numero.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				numero.style.display = "none";
-			}else{
-				numero.style.display = "none";
-			}
-		}	
-
-		function changeMdp(){
-			if (oldmdp.checked) {
-				mdp.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				mdp.style.display = "none";
-			}else{
-				mdp.style.display = "none";
-			}
-		}
-
-		function changeFiliere(){
-			if (oldfiliere.checked) {
-				filiere.style.display = "block";
-				groupe.style.display = "block";
-				submit.style.display = "block";
-			}else if (oldnom.checked == false && oldprenom.checked == false && oldmail.checked == false && oldnumero.checked == false && oldmdp.checked == false && oldfiliere.checked == false) {
-				submit.style.display = "none";
-				filiere.style.display = "none";
-				groupe.style.display = "none";
-			}else{
-				filiere.style.display = "none";
-				groupe.style.display = "none";
-			}
-		}
-
-
-
-		//--------------------------------------------------------------------------------------------------------------
-
-		const inputImage = document.getElementById("input-image");
-		const preContenu = document.getElementById("imagePre");
-		const preImage = preContenu.querySelector(".image-preview__image");
-		const preTexte = preContenu.querySelector(".image-preview__texte");
-
-		inputImage.addEventListener("change", function(){
-			const fichier = this.files[0];
-
-			if (fichier){
-				const reader = new FileReader();
-				
-				preTexte.style.display = "none";
-				preImage.style.display = "block";
-
-				reader.addEventListener("load", function(){
-					console.log(this);
-					preImage.setAttribute("src", this.result);
-				});
-
-				reader.readAsDataURL(fichier);
-			}
-		});
-
-	</script>
 
 	<footer class="le_footer">
 		<div class="contenue">
 			<div class="footer-section about">
-				<h1>Projet</h1>
-				<p>Bonjour</p>
+				<p>Projet</p>
 			</div>
 			<div class="footer-section links">
 				<p>Liens</p>
