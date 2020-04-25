@@ -1,24 +1,8 @@
 <?php
 
-function inscription(){
-	echo("<form action=\"inscription.php\" method=\"post\">");
-		echo("<input class=\"input\" type=\"text\" name=\"nom\" minlength=\"3\" placeholder=\"Nom\" required=\"required\" />");
-		echo("<input class=\"input\" type=\"text\" name=\"prenom\" minlength=\"3\" placeholder=\"Prénom\" required=\"required\" />") ;
-		echo("<input class=\"input\" type=\"email\" name=\"mail\" minlength=\"6\" placeholder=\"****@****.fr\" required=\"required\" />");
-		echo("<input class=\"input\" type=\"text\" name=\"numero\" minlength=\"10\" maxlength=\"10\" placeholder=\"Numéro de téléphone\" required=\"required\" />");
-		echo("<input class=\"input\" type=\"password\" name=\"mdp\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"required\" />");
-		echo("<input class=\"input\" type=\"password\" name=\"mdp1\" minlength=\"6\" placeholder=\"Confirmation mot de passe\" required=\"required\" />");
-		echo("<input class=\"submit\" type=\"submit\" value=\"Valider\" />");
-	echo("</form>");
-}
 
-function connexion(){
-	echo("<form action=\"connexion.php\" method=\"post\">");
-		echo("<input class=\"input\" type=\"mail\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"required\" />");
-		echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Password\" required=\"required\" /><br />");
-		echo("<input class=\"connexion-submit\" type=\"submit\" value=\"Valider\" />")
-	echo("</form>");
-}
+
+
 
 function errorInscription(){
 
