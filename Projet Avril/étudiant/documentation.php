@@ -1,50 +1,8 @@
 <?php
 session_start();
 
-function errorConnexion(){
+include 'fonction.php';
 
-	if(isset($_GET['error'])){
-		if($_GET['error'] == 0){ //2: GET définie dans la page vérifiant les identifiants 
-		?>
-		<script type="text/javascript">
-			alert("Mauvais identifiants!")
-		</script>
-		<?php
-		}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-			$donnes = fopen('fichiers/cle.csv', 'r+');
-
-			for ($i=0;$i<sizeof(file("fichiers/cle.csv"));$i++){
- 				$ligne = fgets($donnes);
-				$tableau = explode(";", $ligne);
-	
-
-				if ($_SESSION['mail'] == $tableau[0]){
-					echo("<p>Votre clé API: " . $tableau[1] ."</p>");
-					
-				}
-			}
-			fclose($donnes);
-		}elseif ($_GET['error'] == 3) {
-		?>
-		<script type="text/javascript">
-			alert("Les mots de passes sont différents !");
-		</script>
-		<?php
-		}elseif ($_GET['error'] == 6) {
-		?>
-		<script type="text/javascript">
-			alert("Clé créée !");
-		</script>
-		<?php
-		}elseif ($_GET['error'] == 5) {
-		?>
-		<script type="text/javascript">
-			alert("L'adresse mail existe déjà !");
-		</script>
-		<?php
-		}
-	}
-}
 ?>
 
 <!DOCTYPE html>
@@ -65,9 +23,8 @@ function errorConnexion(){
 					</div>
 
 					<div class="droite">
-						<a href="#" class="lien"><i class='fa fa-key'></i> GET A KEY</a>
+						<a href="#" class="lien"><i class='fa fa-book'></i> API service</a>
 						<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-						<a href="#" class="lien"><i class="fa fa-address-card-o"></i> Contact</a>
 						<?php
 							if(isset($_SESSION['pseudo'])){
 						?>
@@ -96,17 +53,17 @@ function errorConnexion(){
 		<input type="radio" name="choose" onclick="changement()" id="choix2" value="connexion"/>
 
 		<input type="email" name="mail" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
-		<input type="password" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" style='display:block;'/>
-		<input type="password" name="pwd1" placeholder="Confirmation mot de passe" id="Ipwd1" class="form-cle-api" style='display:block;'/>
+		<input type="password" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" minlength="6" style='display:block;'/>
+		<input type="password" name="pwd1" placeholder="Confirmation mot de passe" id="Ipwd1" minlength="6" class="form-cle-api" style='display:block;'/>
 		<input type="submit" value="Inscription" id="Isubmit" class="form-cle-api" style='display:block;'/>
 
 		<input type="email" name="key-mail" placeholder="Adresse mail" id="Cmail" class="form-cle-api" style='display:none;'/>
-		<input type="password" name="key-pwd" placeholder="Mot de passe" id="Cpwd" class="form-cle-api" style='display:none;'/>
+		<input type="password" name="key-pwd" placeholder="Mot de passe" id="Cpwd" minlength="6" class="form-cle-api" style='display:none;'/>
 		<input type="submit" value="GET KEY" id="Csubmit" class="form-cle-api" style='display:none;'/>
 	</form>
 
 	<?php
-	errorConnexion();
+	errorConnexionCle();
 	?>
 </div>
 
@@ -126,7 +83,6 @@ function errorConnexion(){
 
 		<input type="radio" name="choix" onclick="change()" id="choice1" value="groupe" />Groupe
 		<select name="groupe" id="groupe" style='display:none;'>
-			<option>Choisissez la filière puis le groupe</option>
 			<option id="A1" style='display:none;'>A1</option>
 			<option id="A2" style='display:none;'>A2</option>
 			<option id="A3" style='display:none;'>A3</option>
@@ -149,189 +105,77 @@ function errorConnexion(){
 	</form>
 </div>
 
+<script src="app.js" meta="utf-8"></script>
 
+<div class="documentation">
+	<h2 class="h2-documentation">Documentation de l'API</h2>
 
-<script>
-	$choix1 = document.getElementById("choix1");
-	$choix2 = document.getElementById("choix2");
+	<h3 class="h3-documentation">Les informations dans l'API</h3>
+
+	<p class="p-documentation">L'API possède diverses informations qui servent à être traitées, les informations sont les suivantes:</p>
+	<table>
+		<tr>
+			<td>Filière</td>
+			<td>Groupe</td>
+			<td>Nom</td>
+			<td>Prénom</td>
+			<td>Mail</td>
+			<td>Numéro</td>
+			<td>Image de profil</td>
+			<td>ID</td>
+		</tr>
+	</table>
+
+	<h3 class="h3-documentation">La requête en JSON</h3>
+	<p class="p-documentation">La requête de l'API est renvoyé un JSON afin d'avoir une meilleur utilisation</p>
+	<p class="p-documentation">Pour l'utiliser par exemple (en PHP): </p>
+	<ul>
+		<li class="p-documentation"><p>file_get_contents(URL);</p></li>
+		<li class="p-documentation"><p>json_decode();</p></li>
+	</ul>
 	
-	$Imail = document.getElementById("Imail");
-	$Ipwd = document.getElementById("Ipwd");
-	$Ipwd1 = document.getElementById("Ipwd1");
-	$Isubmit = document.getElementById("Isubmit");
+	<p class="p-documentation">Pour avoir accès à l'API, il existe différentes manière d'y accéder.</p>
 
-	$Cmail = document.getElementById("Cmail");
-	$Cpwd = document.getElementById("Cpwd");
-	$Csubmit = document.getElementById("Csubmit");
+	<h3 class="h3-documentation">Par Filière:</h3>
+	<p class="p-documentation">Pour accéder à l'API de toutes une filière, il faut suivre le chemin suivant:</p>
+	<li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&filiere=/nom_filiere/&cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&filiere=/nom_filiere/&cle=/cleAPI/</a></li>
+	<p class="p-documentation">Il faut donc indiquer, notre choix, la filière souhaité, la clé d'API fournie</p>
+	<p class="p-documentation">Exemple: </p>
+	<ul>
+		<li class="p-documentation"><p>/nom_filiere/ = LPI-RIWS</p></li>
+		<li class="p-documentation"><p>/cleAPI/ = fdsds65fsd65fsdfdsf</p></li>
+	</ul>
 
-	function changement(){
-		if (choix1.checked){
+	<h3 class="h3-documentation">Par Groupe:</h3>
+	<p class="p-documentation">Pour accéder à l'API d'un groupe spécifique, il faut suivre le chemin suivant:</p>
+	<li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&choix=groupe&groupe=/nom_groupe/&cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&choix=groupe&groupe=/nom_groupe/&cle=/cleAPI/</a></li>
+	<p class="p-documentation">Il faut donc indiquer, notre choix, la filière souhaité, le groupe correspondant à la filière et la clé d'API fournie</p>
+	<p class="p-documentation">Exemple: </p>
+	<ul>
+		<li class="p-documentation"><p>/nom_filiere/ = L1-MIPI</p></li>
+		<li class="p-documentation"><p>/nom_groupe/ = A1</p></li>
+		<li class="p-documentation"><p>/cleAPI/ = fdsds65fsd65fsdfdsf</p></li>
+	</ul>
 
-			$Imail.style.display = "block";
-			$Ipwd.style.display = "block";
-			$Ipwd1.style.display = "block";
-			$Isubmit.style.display = "block";
-			$Cmail.style.display = "none";
-			$Cpwd.style.display = "none";
-			$Csubmit.style.display = "none";
+	<h3 class="h3-documentation">Construction de l'API</h3>
 
-		}else if (choix2.checked) {
+	<ul>
+		<li class="p-documentation"><p>Filière:</p></li>
+		 <ul><li class="p-documentation"><p>Groupe:</p></li>
+		 	<ul><li class="p-documentation"><p>ID</p></li>
+		 		<ul><li class="p-documentation"><p>Nom</p></li>
+		 			<li class="p-documentation"><p>Prénom</p></li>
+		 			<li class="p-documentation"><p>Mail</p></li>
+		 			<li class="p-documentation"><p>Numéro</p></li>
+		 			<li class="p-documentation"><p>ID</p></li>
+		 			<li class="p-documentation-end"><p>Image</p></li>
+		 		</ul>
+		 	</ul>
+		 </ul>
+	</ul>
+	<p class="p-documentation">*L'API est limitée à 20 utilisations par heure pour chaque clé.</p>
+</div>
 
-			$Imail.style.display = "none";
-			$Ipwd.style.display = "none";
-			$Ipwd1.style.display = "none";
-			$Isubmit.style.display = "none";
-			$Cmail.style.display = "block";
-			$Cpwd.style.display = "block";
-			$Csubmit.style.display = "block";
-
-		}	
-	}
-
-	//-----------------------------------------------------
-
-	$Bfiliere = document.getElementById("choice");
-	$Bgroupe = document.getElementById("choice1");
-
-	$L1MIPI = document.getElementById("L1-MIPI");
-	$L2MI = document.getElementById("L2-MI");
-	$L3I = document.getElementById("L3-I");
-	$LPRS = document.getElementById("LP-RS");
-	$LPIRIWS = document.getElementById("LPI-RIWS");
-
-	$groupe = document.getElementById("groupe");
-	$A1 = document.getElementById("A1");
-	$A2 = document.getElementById("A2");
-	$A3 = document.getElementById("A3");
-	$B1 = document.getElementById("B1");
-	$B2 = document.getElementById("B2");
-	$B3 = document.getElementById("B3");
-	$C1 = document.getElementById("C1");
-	$C2 = document.getElementById("C2");
-	$C3 = document.getElementById("C3");
-	$D1 = document.getElementById("D1");
-	$D2 = document.getElementById("D2");
-	$D3 = document.getElementById("D3");
-	$E1 = document.getElementById("E1");
-	$E2 = document.getElementById("E2");
-	$E3 = document.getElementById("E3");
-
-	function change(){
-		if ($Bfiliere.checked){
-			$groupe.style.display = "none";
-		}else if ($Bgroupe.checked) {
-			$groupe.style.display = "block";
-		}
-	}
-
-	function selection(){
-		if ($L1MIPI.checked) {
-			$A1.style.display = "block";
-			$A2.style.display = "block";
-			$A3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L2MI.checked) {
-			$B1.style.display = "block";
-			$B2.style.display = "block";
-			$B3.style.display = "block";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L3I.checked) {
-			$C1.style.display = "block";
-			$C2.style.display = "block";
-			$C3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPRS.checked) {
-			$D1.style.display = "block";
-			$D2.style.display = "block";
-			$D3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPIRIWS.checked) {
-			$E1.style.display = "block";
-			$E2.style.display = "block";
-			$E3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-		}
-	}
-
-	
-
-
-</script>
 
 </body>
 </html>
