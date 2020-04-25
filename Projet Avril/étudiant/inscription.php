@@ -1,22 +1,7 @@
 <?php
 	session_start();
 
-	function alea() {
-	    $chn = '';
-	    for ($i=1;$i<=6;$i++){
-	        $chn .= chr(floor(rand(0, 25)+97));
-	        return $chn;
-	    }
-    }
-
-    function inscriptionLogReussi($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."inscription_réussi".";".$evenement."\n";
-
-	    file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
+	include 'fonction.php';
 
 	$donne = fopen('fichiers/comptes.csv', 'r+');
 

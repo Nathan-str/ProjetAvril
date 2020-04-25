@@ -1,51 +1,7 @@
 <?php
 	session_start();
 
-	function stastitiques(){
-		$dossier = fopen("fichiers/stats.log", "r");
-		//Même processus mais pour chaque jour de la semaine
-		$statistiques = array();
-
-		while ($elements = fgets($dossier)) {
-			$elements = explode(';', $elements);
-
-			if ($elements[0] == strftime("%H", time())) { //%H correspond au heures de 00 à 23
-				$valeur_element = $elements[1];
-				$valeur_element +=1;
-				$put_element = $elements[0] . ";" . $valeur_element . "\n";
-			}else{
-				$put_element = $elements[0] . ";" . $elements[1];
-			}
-
-			array_push($statistiques, $put_element);
-		}
-
-		$dossier = fopen("fichiers/stats.log", "w");
-
-		for($i = 0; $i < sizeof($statistiques);$i++){
-			fputs($dossier, $statistiques[$i]);
-		}
-
-		fclose($dossier);
-	}
-
-	function connexionLogReussi($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."connexion_réussi".";".$evenement."\n";
-
-	    file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
-
-	function connexionLogEchec($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."connexion_echec".";".$evenement."\n";
-
-	    file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
+	include 'fonction.php';
 
 
 	//Vérifie le remplissage du formulaire
