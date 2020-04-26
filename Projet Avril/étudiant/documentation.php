@@ -70,7 +70,7 @@ include 'fonction.php';
 
 
 
-<div id="formulaire-API">
+<!--<div id="formulaire-API">
 	<p>Accédez à l'API</p>
 	<form action="apiEtu.php" method="get" class="formulaire-API1">
 
@@ -103,7 +103,7 @@ include 'fonction.php';
 		<input type="text" name="cle" placeholder="Clé API" />
 		<input class="form-cle-api" type="submit" value="Valider">
 	</form>
-</div>
+</div>-->
 
 <script src="app.js" meta="utf-8"></script>
 
@@ -176,6 +176,23 @@ include 'fonction.php';
 	<p class="p-documentation">*L'API est limitée à 20 utilisations par heure pour chaque clé.</p>
 </div>
 
+<footer class="le_footer">
+		<div class="contenue">
+			<div class="footer-section about">
+				<p>Projet</p>
+			</div>
+			<div class="footer-section links">
+				<p>Liens</p>
+			</div>
+			<div class="footer-section contact-form">
+				<p><i class="fa fa-address-card-o"></i> Contacts</p>
+			</div>
+		</div>
+
+		<div class="fond">
+			<p>Site réalisé par Nathan Sestre</p>
+	</div>	
+</footer>
 
 </body>
 </html>
