@@ -1,30 +1,10 @@
 <?php
 session_start();
 
+include 'fonction.php';
 
 
-
-$donne = fopen('fichiers/comptes.csv', 'r+');
-
-while(!feof($donne)){
-	$ligne = fgets($donne);
-	if ($ligne != "") {
-		$lignes = substr($ligne, 0,-2);
-		$tableau = explode(";", $lignes);
-
-		if ($_POST['new-mail'] == $tableau[3]){
-			$fin = false;
-			break;
-		}else{
-			$fin = true;
-		}if ($_POST['new-numero'] == $tableau[4]) {
-			$fin = false;
-			break;
-		}else{
-			$fin = true;
-		}
-	}
-}
+$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
 	
 if ($fin == true){
 
