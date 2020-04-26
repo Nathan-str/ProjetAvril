@@ -98,21 +98,21 @@ include 'fonction.php';
 				</select>
 
 				<select id="chg-groupe" name="new-groupe" style='display:none;'>
-					<option id="A1">A1</option>
-					<option id="A2">A2</option>
-					<option id="A3">A3</option>
-					<option id="B1">B1</option>
-					<option id="B2">B2</option>
-					<option id="B2">B3</option>
-					<option id="B2">C1</option>
-					<option id="B2">C2</option>
-					<option id="B2">C3</option>
-					<option id="B2">D1</option>
-					<option id="B2">D2</option>
-					<option id="B2">D3</option>
-					<option id="B2">E1</option>
-					<option id="B2">E2</option>
-					<option id="B2">E3</option>
+					<option id="A1" style="display: block;">A1</option>
+					<option id="A2" style="display: block;">A2</option>
+					<option id="A3" style="display: block;">A3</option>
+					<option id="B1" style="display: none;">B1</option>
+					<option id="B2" style="display: none;">B2</option>
+					<option id="B3" style="display: none;">B3</option>
+					<option id="C1" style="display: none;">C1</option>
+					<option id="C2" style="display: none;">C2</option>
+					<option id="C3" style="display: none;">C3</option>
+					<option id="D1" style="display: none;">D1</option>
+					<option id="D2" style="display: none;">D2</option>
+					<option id="D3" style="display: none;">D3</option>
+					<option id="E1" style="display: none;">E1</option>
+					<option id="E2" style="display: none;">E2</option>
+					<option id="E3" style="display: none;">E3</option>
 				</select>
 
 				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
