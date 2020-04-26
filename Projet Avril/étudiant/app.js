@@ -119,12 +119,12 @@ var oldnom = document.getElementById("oldnom");
 //--------------------------------------------------
 
 	function adaptationFilière(){
-		$L1MIPI = document.getElementById("L1-MIPI");
-		$L2MI = document.getElementById("L2-MI");
-		$L3I = document.getElementById("L3-I");
-		$LPRS = document.getElementById("LP-RS");
-		$LPIRIWS = document.getElementById("LPI-RIWS");
-		$listeFiliere = document.getElementById("chg-filiere");
+		$L1MIPI = document.getElementById("L1-MIPI").value;
+		$L2MI = document.getElementById("L2-MI").value;
+		$L3I = document.getElementById("L3-I").value;
+		$LPRS = document.getElementById("LP-RS").value;
+		$LPIRIWS = document.getElementById("LPI-RIWS").value;
+		$listeFiliere = document.getElementById("chg-filiere").value;
 		$listeGroupe = document.getElementById("chg-groupe");
 
 		$groupes = document.getElementById("groupe");
@@ -144,106 +144,21 @@ var oldnom = document.getElementById("oldnom");
 		$E2 = document.getElementById("E2");
 		$E3 = document.getElementById("E3");
 
-		if ($listeFiliere == "L1-MIPI"){
-			$A1.style.display = "block";
-			$A2.style.display = "block";
-			$A3.style.display = "block";
+		if ($listeFiliere === $L1MIPI){
 
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
+			$listeGroupe.innerHTML = "<option>A1</option><option>A2</option><option>A3</option>";
+		}else if ($listeFiliere === $L2MI) {
 
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
+			$listeGroupe.innerHTML = "<option>B1</option><option>B2</option><option>B3</option>";
+		}else if ($listeFiliere === $L3I) {
+			$listeGroupe.innerHTML = "<option>C1</option><option>C2</option><option>C3</option>";
+		
+		}else if ($listeFiliere === $LPRS) {
 
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
+			$listeGroupe.innerHTML = "<option>D1</option><option>D2</option><option>D3</option>";
+		}else if ($listeFiliere === $LPIRIWS) {
 
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L2MI.selected) {
-			$B1.style.display = "block";
-			$B2.style.display = "block";
-			$B3.style.display = "block";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L3I.selected) {
-			$C1.style.display = "block";
-			$C2.style.display = "block";
-			$C3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPRS.selected) {
-			$D1.style.display = "block";
-			$D2.style.display = "block";
-			$D3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPIRIWS.selected) {
-			$E1.style.display = "block";
-			$E2.style.display = "block";
-			$E3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
+			$listeGroupe.innerHTML = "<option>E1</option><option>E2</option><option>E3</option>";
 		}
 	}
 
@@ -326,105 +241,15 @@ var oldnom = document.getElementById("oldnom");
 	}
 
 	function selection(){
-		if ($L1MIPI.checked && $Bgroupe.checked) {
-			$A1.style.display = "block";
-			$A2.style.display = "block";
-			$A3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L2MI.checked && $Bgroupe.checked) {
-			$B1.style.display = "block";
-			$B2.style.display = "block";
-			$B3.style.display = "block";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($L3I.checked && $Bgroupe.checked) {
-			$C1.style.display = "block";
-			$C2.style.display = "block";
-			$C3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPRS.checked && $Bgroupe.checked) {
-			$D1.style.display = "block";
-			$D2.style.display = "block";
-			$D3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
-
-			$E1.style.display = "none";
-			$E2.style.display = "none";
-			$E3.style.display = "none";
-		}else if ($LPIRIWS.checked && $Bgroupe.checked) {
-			$E1.style.display = "block";
-			$E2.style.display = "block";
-			$E3.style.display = "block";
-
-			$B1.style.display = "none";
-			$B2.style.display = "none";
-			$B3.style.display = "none";
-
-			$C1.style.display = "none";
-			$C2.style.display = "none";
-			$C3.style.display = "none";
-
-			$D1.style.display = "none";
-			$D2.style.display = "none";
-			$D3.style.display = "none";
-
-			$A1.style.display = "none";
-			$A2.style.display = "none";
-			$A3.style.display = "none";
+		if ($L1MIPI.checked) {
+			$groupes.innerHTML = "<option>A1</option><option>A2</option><option>A3</option>";
+		}else if ($L2MI.checked) {
+			$groupes.innerHTML = "<option>B1</option><option>B2</option><option>B3</option>";
+		}else if ($L3I.checked) {
+			$groupes.innerHTML = "<option>C1</option><option>C2</option><option>C3</option>";
+		}else if ($LPRS.checked) {
+			$groupes.innerHTML = "<option>D1</option><option>D2</option><option>D3</option>";
+		}else if ($LPIRIWS.checked) {
+			$groupes.innerHTML = "<option>E1</option><option>E2</option><option>E3</option>";
 		}
 	}
