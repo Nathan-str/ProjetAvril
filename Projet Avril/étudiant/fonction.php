@@ -75,16 +75,16 @@
     }
 
     //Fonction écrivant dans le fichier des logs, toutes les incriptions réussi
-    function inscriptionLogReussi($evenement){
+    function FichierLog($message,$evenement){
 		$fichier = 'fichiers/log.csv';
 		$time = date("D, d M Y H:i:s");
 	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."inscription_réussi".";".$evenement."\n";
+	    $evenement = $time. ";" .$message.";".$evenement."\n";
 
 	    file_put_contents($fichier, $evenement, FILE_APPEND);
 	}
 
-	function inscription(){
+	function formulaireInscription(){
 		echo("<form action=\"inscription.php\" method=\"post\">");
 			echo("<input class=\"input\" type=\"text\" name=\"nom\" minlength=\"3\" placeholder=\"Nom\" required=\"required\" />");
 			echo("<input class=\"input\" type=\"text\" name=\"prenom\" minlength=\"3\" placeholder=\"Prénom\" required=\"required\" />") ;
@@ -94,6 +94,64 @@
 			echo("<input class=\"input\" type=\"password\" name=\"mdp1\" minlength=\"6\" placeholder=\"Confirmation mot de passe\" required=\"required\" />");
 			echo("<input class=\"submit\" type=\"submit\" value=\"Valider\" />");
 		echo("</form>");
+	}
+
+	function inscription($fichier, $fichierID , $page){
+		$nom = $_POST['nom'];
+		$mot_de_passe = $_POST['mdp'];
+		$car_alea = alea();
+		$secure_mot_de_passe = $car_alea . $mot_de_passe;
+
+		//Vérifie si le formulaire a bien été rempli
+		if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['mdp']) && isset($_POST['mdp1']) && !empty($_POST["nom"]) && !empty($_POST['prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) && !empty($_POST['mdp1']) && $_POST['mdp'] == $_POST['mdp1']){
+
+			$donnes = fopen($fichier, 'a+');
+			$monfichier = fopen($fichierID, 'r+');
+		 	//Ouverture du fichier contenant le nombre de visiteurs
+			$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+			$id += 1; // On augmente de 1 ce nombre de pages vues
+			fseek($monfichier, 0); // On remet le curseur au début du fichier
+			fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
+			
+
+			//Met les éléments du formulaire dans le fichier et hache le mot de passe et définie un ID
+			fputs($donnes, $id . ";" . $_POST['nom'] . ";" . $_POST["prenom"] . ";" . $_POST["mail"] . ";" . $_POST["numero"] . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) ."\n");
+
+			fclose($monfichier);
+			fclose($donnes);
+
+			FichierLog("inscription réussi",$_POST["mail"]);
+			header("location:./$page?error=0");
+
+		}elseif($_POST["mdp"] != $_POST["mdp1"]){
+			//Si il y a une erreur alors il est redirigé vers l'accueil
+			FichierLog("inscription échoué (mot de passe différent)",$_POST["mail"]);
+			header("location:./$page?error=3");
+		}elseif($_POST["mdp"]<5 || $_POST["mdp1"]<5){
+			FichierLog("inscription échoué (mot de passe trop petit)",$_POST["mail"]);
+			header("location:./$page?error=4");
+		}
+	}
+
+	function verification($mail, $numero, $fichier){
+		$donne = fopen($fichier, 'r+');
+
+		while(!feof($donne)){
+			$ligne = fgets($donne);
+			if ($ligne != "") {
+				$lignes = substr($ligne, 0,-2);
+				$tableau = explode(";", $ligne);
+
+				if($mail == $tableau[3] || $numero == $tableau[4]){
+				  $fin = False;
+				  break;
+				}else{
+				   $fin = True;
+				}
+			}		
+		}
+		return $fin;
+		
 	}
 
 
@@ -132,7 +190,7 @@
 
 
 	//Fonction écrivant toutes les connexions réussis dans le fichier des logs
-	//Fonction utilisé sur la page "connexion.php"
+	//Fonction utilisé sur la page "connexion.php" (INUTULE)
 	function connexionLogReussi($evenement){
 		$fichier = 'fichiers/log.csv';
 		$time = date("D, d M Y H:i:s");
@@ -143,7 +201,7 @@
 	}
 
 	//Fonction écrivant toutes les connexions ratés dans le fichier des logs
-	//Fonction utilisé sur la page "connexion.php"
+	//Fonction utilisé sur la page "connexion.php" (INUTILE)
 	function connexionLogEchec($evenement){
 		$fichier = 'fichiers/log.csv';
 		$time = date("D, d M Y H:i:s");
@@ -153,12 +211,52 @@
 	    file_put_contents($fichier, $evenement, FILE_APPEND);
 	}
 
-	function connexion(){
+	function formulaireConnexion(){
 		echo("<form action=\"connexion.php\" method=\"post\">");
 			echo("<input class=\"input\" type=\"mail\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"required\" />");
 			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Password\" required=\"required\" /><br />");
 			echo("<input class=\"connexion-submit\" type=\"submit\" value=\"Valider\" />");
 		echo("</form>");
+	}
+
+	function connexion($fichier, $pageRenvoie, $pageErreur){
+		//Vérifie le remplissage du formulaire
+		if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
+
+			$donnes = fopen($fichier, 'r+');
+
+
+			for ($i=0;$i<sizeof(file($fichier));$i++){
+	 			$ligne = fgets($donnes);
+				$tableau = explode(";", $ligne);
+				$car_alea = $tableau[5];
+				$mot_de_passe = $_POST['pwd'];
+				$secure_mot_de_passe = $car_alea . $mot_de_passe;
+
+				if ($_POST["login"] == $tableau[3] && hash("sha256", $secure_mot_de_passe) == $tableau[6]) {
+					//Création des sessions "noms"
+					$_SESSION['pseudo'] = $_POST['login'];
+					$_SESSION['id'] = $tableau[0];
+					stastitiques();
+					//Redirige ensuite vers l'accueil
+					FichierLog("connexion réussi",$tableau[3]);
+					header("location:./$pageRenvoie");
+					exit();
+				}elseif ($i == sizeof(file("fichiers/comptes.csv"))-1){
+					FichierLog("Connexion échoué",$tableau[3]);
+					header("location:./$pageErreur?error=2");
+					exit();
+				}
+		
+			}
+
+		}else{
+			//Si les éléments ne sont pas remplies: redirection avec une erreur
+			FichierLog("Connexion échoué","vide");
+			header("location:./redirection.php?error=1");
+			echo "Veuillez rentrez des champs !";
+			exit();
+		}
 	}
 
 
@@ -460,14 +558,14 @@
 	//Fonction permettant de créer une chaine de caractères aléatoire qui sera la clé d'API
 	//Fonction utilisé sur la page "cle.php"
 	function genererChaineAleatoire($longueur = 10){
-	 $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	 $longueurMax = strlen($caracteres);
-	 $chaineAleatoire = '';
-	 for ($i = 0; $i < $longueur; $i++)
-	 {
-	 $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
-	 }
-	 return $chaineAleatoire;
+		 $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		 $longueurMax = strlen($caracteres);
+		 $chaineAleatoire = '';
+		 for ($i = 0; $i < $longueur; $i++)
+		 {
+		 $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+		 }
+		 return $chaineAleatoire;
 	}
 
 	//Fonction qui permet d'écrire dans le fichier des logs si la clé à pu être récupéré et indique comme événement l'adresse mail et la clé correspondante
@@ -568,17 +666,20 @@
 				fputs($donnes, $strinfos);
 
 				fclose($donnes);
-				CleLogReussi($mail, $cle);
+				FichierLog("Clé distribué", $mail);
 
 				header("location:./documentation.php?error=6");
 
 			}elseif($_GET['pwd'] != $_GET['pwd1']){
 				//Si il y a une erreur alors il est redirigé vers l'accueil
+				FichierLog("Echec clé", $mail);
 				header("location:./documentation.php?error=3");
 			}elseif($_POST["pwd"]<5 || $_POST["pwd1"]<5){
+				FichierLog("Echec clé", $mail);
 				header("location:./documentation.php?error=4");
 			}
 		}else{
+			FichierLog("Echec clé", $mail);
 			header("location:./documentation.php?error=5");
 		}
 	}
