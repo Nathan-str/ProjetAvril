@@ -238,6 +238,28 @@ span.toggle-icons:after{top: -14px;}
 	left: 5%;
 }
 
+#filiere-p{
+	position: relative;
+	left: 40%;
+	font-size: 1.3em;
+	bottom: 10px;
+}
+
+#groupe{
+	position: relative;
+	font-size: 1.5em;
+	left: 41%;
+	bottom: 30px;
+}
+
+#groupe-p{
+	position: relative;
+	left: 40%;
+	font-size: 1.3em;
+	bottom: 10px;
+}
+
+
 .formulaire.is-open{
 	margin: 0;
 	padding: 0;
@@ -525,7 +547,7 @@ span.toggle-icons:after{top: -14px;}
 
 .inscription-cle-api{
 	position: relative;
-	left: 65%;
+	left: 71%;
 	top: 50px;
 }
 
