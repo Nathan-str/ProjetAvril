@@ -23,11 +23,11 @@
 				$_SESSION['id'] = $tableau[0];
 				stastitiques();
 				//Redirige ensuite vers l'accueil
-				connexionLogReussi($tableau[3]);
+				FichierLog("connexion réussi",$tableau[3]);
 				header("location:./informations.php");
 				exit();
 			}elseif ($i == sizeof(file("fichiers/comptes.csv"))-1){
-				connexionLogEchec($tableau[3]);
+				FichierLog("Connexion échoué",$tableau[3]);
 				header("location:./redirection.php?error=2");
 				exit();
 			}
@@ -36,7 +36,7 @@
 
 	}else{
 		//Si les éléments ne sont pas remplies: redirection avec une erreur
-		connexionLogEchec("vide");
+		FichierLog("Connexion échoué","vide");
 		header("location:./redirection.php?error=1");
 		echo "Veuillez rentrez des champs !";
 		exit();
