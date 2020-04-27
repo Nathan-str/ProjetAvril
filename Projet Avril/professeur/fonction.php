@@ -214,7 +214,7 @@
 	function formulaireConnexion(){
 		echo("<form action=\"connexion.php\" method=\"post\">");
 			echo("<input class=\"input\" type=\"mail\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Password\" required=\"required\" /><br />");
+			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Password\" required=\"required\" />");
 			echo("<input class=\"connexion-submit\" type=\"submit\" value=\"Valider\" />");
 		echo("</form>");
 	}
