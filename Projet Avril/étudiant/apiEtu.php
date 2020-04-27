@@ -52,11 +52,9 @@ function verifCleApi(){
 			$lignes = substr($ligne, 0,-1);
 			$tableau = explode(";", $lignes);
 
-			if ($_GET['cle'] == $tableau[1]){
-				if ($tableau[4] <= 20){
+			if ($_GET['cle'] == $tableau[1] && $tableau[4] <= 200){
 					$validation = true;
 					break;
-				}
 			}else{
 				$validation = false;
 			}
@@ -84,7 +82,7 @@ if ($validation == true){
 	}
 }else{
 	FichierLog("Echec API",$_GET['cle']);
-	$jsonError = $jsonError["Error"] = "Error API";
+	$jsonError["Error"] = "Error API KEY";
 	$jsonError = json_encode($jsonError);
 	header('Content-type: application/json');
 	echo($jsonError);
