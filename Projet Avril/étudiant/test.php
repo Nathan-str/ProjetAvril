@@ -1,6 +1,8 @@
 <?php
 	session_start();
 
+	include 'fonction.php';
+
 	function addLogEvent($event)
 	{
 		$fp = 'fichiers/log.txt';
@@ -11,7 +13,11 @@
 	 
 	    file_put_contents($fp, $event, FILE_APPEND);
 	}
-	addLogEvent("Bonjour");
+
+	ApiLog();
+
+	//addLogEvent("Bonjour");
+
 	/*function alea() {
 	    $chn = '';
 	    for ($i=1;$i<=6;$i++){
