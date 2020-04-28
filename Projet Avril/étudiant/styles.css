@@ -35,6 +35,14 @@ html, body {
 	text-transform: uppercase;
 	font-size: 40px;
 	letter-spacing: 3px;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+	border-bottom: 2px solid transparent;
+}
+
+.logo:hover{
+	padding-bottom: 3px;
+	border-color: white;
 }
 
 .lien{
@@ -459,56 +467,26 @@ span.toggle-icons:after{top: -14px;}
 
 .formulaire-changement{
 	position: relative;
+	left: 1%;
+	width: 20%;
+	height: 100%;
+	top: -50px;
+}
+
+.new-form{
+	position: relative;
 	left: 5%;
-	top: 10px;
-}
-
-#chg-nom{
 	font-size: 1.5em;
 	margin-bottom: 5px;
 	position: relative;
 }
 
-#chg-prenom{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
-
-#chg-mail{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
-
-#chg-numero{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
-
-#chg-mdp{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
-
-#chg-filiere{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
-
-#chg-groupe{
-	font-size: 1.5em;
-	margin-bottom: 5px;
-	position: relative;
-}
 
 #chg-submit{
 	font-size: 1.5em;
-	margin-bottom: 5px;
 	position: relative;
+	top: 50px;
+	left: -20%;
 }
 
 
