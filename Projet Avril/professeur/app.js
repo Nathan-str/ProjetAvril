@@ -204,6 +204,19 @@ var oldnom = document.getElementById("oldnom");
 		}	
 	}
 
+	function clickImage(id){
+		
+		var informations = document.getElementById(id);
+
+		if(informations.style.display == "none"){
+			informations.style.display ="block";
+		}else{
+			informations.style.display ="none";
+		}		
+		
+	}
+
+
 	//-----------------------------------------------------
 
 	$Bfiliere = document.getElementById("choice");
@@ -253,3 +266,4 @@ var oldnom = document.getElementById("oldnom");
 			$groupes.innerHTML = "<option>E1</option><option>E2</option><option>E3</option>";
 		}
 	}
+
