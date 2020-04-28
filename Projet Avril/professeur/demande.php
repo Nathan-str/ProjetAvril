@@ -25,6 +25,7 @@ if(isset($_GET['error'])){
 <html>
 <head>
 	<title>Trombinoscope</title>
+	<meta charset="utf-8" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -112,6 +113,10 @@ if (isset($_COOKIE["recherche"])){
 }
 
 ?>
+
+<h2>Informations pour la mosaïque</h2>
+	<p>Pour avoir des informations précises sur la personne, il vous faut cliquer sur la photo correspondante et recliquez dessus pour les masquer.</p>
+
 
 <script src="app.js" meta="utf-8"></script>
 
