@@ -28,7 +28,7 @@
 			}elseif ($_GET['error'] == 0) {
 		?>
 		<script type="text/javascript">
-			alert("Inscription réussi!");
+			alert("Inscription réussie!");
 		</script>
 		<?php
 			}
