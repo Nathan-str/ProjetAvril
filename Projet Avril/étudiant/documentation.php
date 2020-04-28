@@ -162,7 +162,7 @@ include 'fonction.php';
 	<ul>
 		<li class="p-documentation"><p>Filière:</p></li>
 		 <ul><li class="p-documentation"><p>Groupe:</p></li>
-		 	<ul><li class="p-documentation"><p>ID</p></li>
+		 	<ul><li class="p-documentation"><p>NBR</p></li>
 		 		<ul><li class="p-documentation"><p>Nom</p></li>
 		 			<li class="p-documentation"><p>Prénom</p></li>
 		 			<li class="p-documentation"><p>Mail</p></li>
