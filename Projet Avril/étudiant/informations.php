@@ -68,7 +68,7 @@ include 'fonction.php';
 			?>
 
 
-			<div class="checkbox-info">
+			<!--<div class="checkbox-info">
 				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
 				<input id="oldprenom" type="checkbox" onclick="changePrenom()" name="change-prenom" class="checkbox-style" />Modification du prénom 
 				<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" class="checkbox-style" />Modification du mail 
@@ -77,47 +77,48 @@ include 'fonction.php';
 				<input id="oldfiliere" type="checkbox" onclick="changeFiliere()" name="change-filiere" class="checkbox-style" />Modification de la filière et du groupe
 
 
-			</div>
+			</div>-->
 
 			<div class="formulaire-changement">
 
-			<form action="changement.php" method="post">
-				<input id="chg-nom" type="text" name="new-nom" placeholder="Nouveau nom" style='display:none;' />
-				<input id="chg-prenom" type="text" name="new-prenom" placeholder="Nouveau prénom" style='display:none;' />
-				<input id="chg-mail" type="email" name="new-mail" placeholder="Nouvelle adresse mail" style='display:none;' />
-				<input id="chg-numero" type="text" name="new-numero" placeholder="Nouveau numéro" style='display:none;' />
-				<input id="chg-mdp" type="password" name="new-mdp" minlength="6" placeholder="Nouveau mot de passe" style='display:none;' />
-				<p id="chg-picture"></p>
-				
-				<select id="chg-filiere" name="new-filiere" onchange="adaptationFilière()" style='display:none;'>
-					<option id="L1-MIPI">L1-MIPI</option>
-					<option id="L2-MI">L2-MI</option>
-					<option id="L3-I">L3-I</option>
-					<option id="LP-RS">LP-RS</option>
-					<option id="LPI-RIWS">LPI-RIWS</option>
-				</select>
+				<h2>Changer ses informations:</h2>
+				<form action="changement.php" method="post">
+					<input id="chg-nom" type="text" name="new-nom" class="new-form" placeholder="Nouveau nom" />
+					<input id="chg-prenom" type="text" name="new-prenom" class="new-form" placeholder="Nouveau prénom" />
+					<input id="chg-mail" type="email" name="new-mail" class="new-form" placeholder="Nouvelle adresse mail" />
+					<input id="chg-numero" type="text" name="new-numero" class="new-form" placeholder="Nouveau numéro" />
+					<input id="chg-mdp" type="password" name="new-mdp" class="new-form" minlength="6" placeholder="Nouveau mot de passe" />
+					<p id="chg-picture"></p>
+					
+					<select id="chg-filiere" name="new-filiere" class="new-form" onchange="adaptationFilière()">
+						<option id="L1-MIPI">L1-MIPI</option>
+						<option id="L2-MI">L2-MI</option>
+						<option id="L3-I">L3-I</option>
+						<option id="LP-RS">LP-RS</option>
+						<option id="LPI-RIWS">LPI-RIWS</option>
+					</select>
 
-				<select id="chg-groupe" name="new-groupe" style='display:none;'>
-					<option id="A1" style="display: block;">A1</option>
-					<option id="A2" style="display: block;">A2</option>
-					<option id="A3" style="display: block;">A3</option>
-					<option id="B1" style="display: none;">B1</option>
-					<option id="B2" style="display: none;">B2</option>
-					<option id="B3" style="display: none;">B3</option>
-					<option id="C1" style="display: none;">C1</option>
-					<option id="C2" style="display: none;">C2</option>
-					<option id="C3" style="display: none;">C3</option>
-					<option id="D1" style="display: none;">D1</option>
-					<option id="D2" style="display: none;">D2</option>
-					<option id="D3" style="display: none;">D3</option>
-					<option id="E1" style="display: none;">E1</option>
-					<option id="E2" style="display: none;">E2</option>
-					<option id="E3" style="display: none;">E3</option>
-				</select>
+					<select id="chg-groupe" name="new-groupe" class="new-form">
+						<option id="A1" style="display: block;">A1</option>
+						<option id="A2" style="display: block;">A2</option>
+						<option id="A3" style="display: block;">A3</option>
+						<option id="B1" style="display: none;">B1</option>
+						<option id="B2" style="display: none;">B2</option>
+						<option id="B3" style="display: none;">B3</option>
+						<option id="C1" style="display: none;">C1</option>
+						<option id="C2" style="display: none;">C2</option>
+						<option id="C3" style="display: none;">C3</option>
+						<option id="D1" style="display: none;">D1</option>
+						<option id="D2" style="display: none;">D2</option>
+						<option id="D3" style="display: none;">D3</option>
+						<option id="E1" style="display: none;">E1</option>
+						<option id="E2" style="display: none;">E2</option>
+						<option id="E3" style="display: none;">E3</option>
+					</select>
 
-				<input id="chg-submit" type="submit" value="Valider" style='display:none;' />
+					<input id="chg-submit" type="submit" value="Valider" />
 
-			</form>
+				</form>
 
 			</div>
 
