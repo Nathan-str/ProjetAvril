@@ -28,7 +28,7 @@
 			}elseif ($_GET['error'] == 0) {
 		?>
 		<script type="text/javascript">
-			alert("Inscription réussi!");
+			alert("Inscription réussie!");
 		</script>
 		<?php
 			}
@@ -426,7 +426,6 @@
 			$tableau = explode(";", $ligne);
 			$filiere = $tableau[7];
 			$groupe = $tableau[8];
-			$tailleTableau = sizeof($jsonTableau)+1;
 			
 			if ($_GET["filiere"] == $filiere){
 				$cpt +=1;
@@ -475,7 +474,6 @@
 		return $jsonTableau;
 	}
 
-	
 
 
 
@@ -504,6 +502,12 @@
 
 					if ($_SESSION['mail'] == $tableau[0]){
 						echo("<p>Votre clé API: " . $tableau[1] ."</p>");
+						echo("<p>Utilisation: ". $tableau[4] . "/200<br />");
+						if ($tableau[4] > 200) {
+							echo("La clé n'est plus utilisable pour cette heure");
+						}else{
+							echo("La clé est utilisable pour cette heure");
+						}
 						
 					}
 				}
@@ -665,4 +669,6 @@
 			header("location:./documentation.php?error=5");
 		}
 	}
+
+	
 ?>
