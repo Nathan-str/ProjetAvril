@@ -1,27 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 
+
+p{
+	font-family: 'Roboto';
+}
+
 .logo{
+	display: none;
+}
+
+.lien{
 	display: none;
 }
 
 h1{
 	font-family: 'Roboto';
 	font-size: 1.5em;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
+	position: relative;
+	left: 10%;
+	top: 20px;
 }
 
 .profil{
 	float: left;
 	text-align: center;
 	font-size: 0.5em;
-	width: 120px;
-	height: 140px;
+	margin-top: 20px;
+	width: 140px;
+	height: 160px;
 }
 .image{
 	width: 100px;
 	height: 100px;
 }
 
-.impression{
+.info{
+	position: relative;
+	bottom: 20px;
+}
+
+.impression-filiere{
 	display: none;
 }
+
+.impression-groupe{
+	display: none;
+}
+
