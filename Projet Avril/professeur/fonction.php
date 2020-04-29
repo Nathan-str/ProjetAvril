@@ -214,7 +214,7 @@
 	function formulaireConnexion(){
 		echo("<form action=\"connexion.php\" method=\"post\">");
 			echo("<input class=\"input\" type=\"mail\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Password\" required=\"required\" />");
+			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"required\" />");
 			echo("<input class=\"connexion-submit\" type=\"submit\" value=\"Valider\" />");
 		echo("</form>");
 	}
@@ -257,6 +257,15 @@
 			header("location:./redirection.php?error=1");
 			echo "Veuillez rentrez des champs !";
 			exit();
+		}
+	}
+	//----------------------------------------------------------
+
+	function verifSession($session){
+		if(isset($session) && !empty($session)){
+			$continue = true;
+		}else{
+			header("location:./index.php");
 		}
 	}
 
