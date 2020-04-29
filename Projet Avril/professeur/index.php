@@ -9,7 +9,7 @@ include 'fonction.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trombinoscope</title>
+	<title>Administration</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -18,7 +18,7 @@ include 'fonction.php';
 			<nav class="menu" role="navigation">
 				<div class="inner">
 					<div class="gauche">
-						<a class="logo" href="index.php">Trombinoscope</a>
+						<a class="logo" href="index.php">Administration</a>
 					</div>
 
 					<div class="droite">
@@ -43,16 +43,25 @@ include 'fonction.php';
 			</nav>
 	</header>
 
-<p>Inscription</p>
+<h1 class="index-h1">espace administration</h1>
+
+<h2 class="index-h2">Accès à la mosaïque des élèves du département informatique.</h2>
+
+<div class="div-inscription">
+<p class="p-inscription">Inscription</p>
 <?php
 formulaireInscription();
 echo(errorInscription());
 ?>
-<p>Connexion</p>
+</div>
+
+<div class="div-connexion">
+<p class="p-connexion">Connexion</p>
 <?php
 formulaireConnexion();
 echo(errorConnexion());
 ?>
+</div>
 
 </body>
 </html>
