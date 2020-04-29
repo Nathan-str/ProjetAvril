@@ -14,16 +14,20 @@ function compteurCle(){
 				$temps_actuel = time();
 				$temps = date('h',$temps_actuel);
 
-				if ($temps == $tableau[3]) {
-					$cpt = $tableau[4] + 1;
-					$time = $tableau[3];
+				if ($_GET['cle'] == $tableau[1]){
+					if ($temps == $tableau[3]) {
+						$cpt = $tableau[4] + 1;
+						$time = $tableau[3];
+					}else{
+						$time = $temps;
+						$cpt = 1;
+					}	
+					$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $time . ";" . $cpt;
+					array_push($informations, $strinformations);
 				}else{
-					$time = $temps;
-					$cpt = 1;
-				}	
-				$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $time . ";" . $cpt;
-				array_push($informations, $strinformations);
-				
+					$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4];
+					array_push($informations, $strinformations);
+				}
 		}
 
 		fclose($donnes);
