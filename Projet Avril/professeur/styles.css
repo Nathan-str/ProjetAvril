@@ -64,7 +64,205 @@ html, body {
 	margin-right: 5px;
 }
 
+.index-h1{
+	background: #4a69bd;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	margin-top: 2%;
+	font-size: 4em;
+	width: 30%;
+	margin-left: 35%;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 2px 2px 5px black;
+}
 
+.index-h2{
+	background: #4a69bd;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	width: 50%;
+	font-size: 2em;
+	margin-top: -1%;
+	margin-left: 25%;
+	letter-spacing : 0.01em;
+	text-shadow: 2px 2px 5px black;
+}
+
+.div-inscription{
+	position: relative;
+	text-align: center;
+	border-radius: 20px;
+	left: 13%;
+	margin-top: 5%;
+	margin-bottom: 50px;
+	width: 27%;
+	height: 55%;
+	background: #4a69bd;
+}
+
+.p-inscription{
+	background: #353b48;
+	text-align: center;
+	font-size: 2em;
+	width: 50%;
+	height: 10%;
+	border-radius: 10px;
+	color: white;
+	letter-spacing : 0.01em;
+	text-shadow: 1px 1px 4px black;
+	margin-left: 25%;
+	position: relative;
+	top: 15px;
+}
+
+.div-connexion{
+	background: #4a69bd;
+	border-radius: 20px;
+	text-align: center;
+	position: relative;
+	left: 57%;
+	/*margin-top: 50px;
+	margin-bottom: 50px;*/
+	width: 27%;
+	height: 30%;
+	bottom: 60%;
+
+}
+
+.p-connexion{
+	background: #353b48;
+	text-align: center;
+	font-size: 2em;
+	width: 50%;
+	height: 18%;
+	border-radius: 10px;
+	color: white;
+	letter-spacing : 0.01em;
+	text-shadow: 1px 1px 4px black;
+	margin-left: 25%;
+	position: relative;
+	top: 15px;
+}
+
+.input{
+	font-size: 2.5em;
+	border-radius: 7px;
+	margin-bottom: 2%;
+}
+
+.submit{
+	font-size: 2em;
+	border-radius: 10px;
+}
+
+.connexion-submit{
+	font-size: 2em;
+	border-radius: 10px;
+}
+
+.h1-demande{
+	background: #4a69bd;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	margin-top: 2%;
+	font-size: 2.8em;
+	width: 30%;
+	margin-left: 35%;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 2px 2px 5px black;
+}
+
+.legend-mosaique{
+	font-size: 2em;
+}
+
+.label-demande{
+	font-size: 2em;
+}
+
+#formulaire-API{
+	display: flex;
+    flex-wrap: wrap;
+	border-radius: 20px;
+	width: 12%;
+	height: 35%;
+	background: #4a69bd;
+	position: relative;
+	left: 44%;
+	margin-top: 5%;
+}
+
+.div-radio-demande{
+	position: relative;
+	left: 15%;
+	margin-top: 1%;
+}
+
+.div-radio-demande-liste{
+	position: relative;
+	left: 50%;
+	margin-top: 1%;
+	border-radius: 10px;
+}
+
+.div-radio-demande-submit{
+	position: relative;
+	left: 50%;
+	margin-top: 1%;
+	border-radius: 10px;
+}
+
+.radio-demande{
+	transform:scale(1.5);
+	position: relative;
+}
+/*#choice{  
+	width: 1%;
+	height: 2em;
+}
+
+#choice1{ 
+	height: 2em;
+}
+
+#L1-MIPI{ 
+	height: 2em;
+}
+
+#L2-MI{
+	height: 2em;
+}
+
+#L3-I{
+	height: 2em;
+}
+
+#LP-RS{ 
+	height: 2em;
+}
+
+#LPI-RIWS{
+	height: 2em;
+}*/
+
+.en-tete-filiere{
+	position: relative;
+	left: 4%;
+	width: 400px;
+	margin-top: 5%;
+}
+
+.en-tete-groupe{
+	position: relative;
+	left: 2%;
+	width: 605px;
+	margin-top: 5%;
+}
 
 .profil{
 	margin: 50px;
@@ -86,9 +284,17 @@ html, body {
 	width: 200px;
 }
 
-.impression{
+.impression-filiere{
+	border-radius: 10px;
 	position: relative;
 	left: 4%;
-	top: 65px;
+	font-size: 2em;
+}
+
+.impression-groupe{
+	border-radius: 10px;
+	position: relative;
+	left: 2%;
+	bottom: 10px;
 	font-size: 2em;
 }
