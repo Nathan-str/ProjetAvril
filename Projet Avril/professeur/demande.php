@@ -3,7 +3,7 @@ session_start();
 
 include 'fonction.php';
 
-verifSession($_SESSION['pseudo']);
+verifSession($_SESSION['pseudo'], "index.php");
 
 function errorMosaique(){
 	if(isset($_GET['error'])){
