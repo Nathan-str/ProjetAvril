@@ -44,7 +44,6 @@ include 'fonction.php';
 
 <h1 class="h1-key">Utilisation de l'API</h1>
 
-
 <div class="inscription-cle-api">
 	<form action="cle.php" method="get">
 		<label>Demande de clé</label>
