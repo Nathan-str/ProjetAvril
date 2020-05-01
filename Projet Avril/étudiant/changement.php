@@ -4,9 +4,13 @@ session_start();
 include 'fonction.php';
 
 
-$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
+//$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
+
+$continue = double($_POST['new-mail'], "3", 'fichiers/comptes.csv');
+$suite = double($_POST['new-numero'], "4", 'fichiers/comptes.csv');
+
 	
-if ($fin == true){
+if ($continue == true && $suite == true){
 
 	$donnes = fopen('fichiers/comptes.csv', 'r+');
 	$informations = array();
@@ -25,7 +29,7 @@ if ($fin == true){
 
 				if (!empty($_POST['new-mail'])) {
 					$mail = $_POST['new-mail'];
-					$_SESSION['mail'] = $_POST['new-mail'];
+					$_SESSION['pseudo'] = $_POST['new-mail'];
 				}else{
 					$mail = $tableau[3];
 				}
@@ -54,13 +58,13 @@ if ($fin == true){
 					$mdp = $tableau[6];
 				}
 
-				if (!empty($_POST['new-filiere'])) {
+				if (!empty($_POST['new-filiere']) && $_POST['new-groupe'] != "Groupe") {
 					$filiere = $_POST['new-filiere'];
 				}else{
 					$filiere = $tableau[7];
 				}
 
-				if (!empty($_POST['new-groupe'])) {
+				if (!empty($_POST['new-groupe']) && $_POST['new-groupe'] != "Groupe") {
 					$groupe = $_POST['new-groupe'];
 				}else{
 					$groupe = $tableau[8];
