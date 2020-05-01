@@ -253,3 +253,37 @@ var oldnom = document.getElementById("oldnom");
 			$groupes.innerHTML = "<option>E1</option><option>E2</option><option>E3</option>";
 		}
 	}
+
+	function filiereJSON(){
+		let request = new XMLHttpRequest();
+		let fichier = "fichiers/filiere.json";
+		request.open("GET", fichier, true);
+		request.send();
+		let filieres = JSON.parse(request.response);
+		console.log(filieres.count;
+	}
+
+
+
+	function affiche_Groupe(jsonText){
+	    let filiere = document.getElementById("select-filiere").value;
+	    let groupe =document.getElementById("select-groupe");
+
+	    groupe.innerHTML = "<option value=''>...</option>";
+	    //for (let groupe in jsonText["listeFilieres"]){
+	    //    groupe.innerHTML += `<option value='${jsonText["listeFilieres"]["0"]}'>${jsonText["listeFilieres"]["0"]}</option>`;
+	    //}
+			
+		for (var i = 0; i < jsonText["listeFilieres"].length; i++) {
+			if (filiere == jsonText["listeFilieres"][i]["nomFiliere"]) {
+				for (var j = 0; j < jsonText["listeFilieres"][i]["groupes"].length; j++) {
+				
+					groupe.innerHTML += "<option value=" + jsonText["listeFilieres"][i]["groupes"][j] + ">" + jsonText["listeFilieres"][i]["groupes"][j] + "</option>";
+
+				}
+			}
+		}
+	}
+
+	
+
