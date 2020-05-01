@@ -185,6 +185,18 @@ html, body {
 	font-size: 2em;
 }
 
+.select-filiere{
+	font-size: 2em;
+}
+
+.select-groupe{
+	font-size: 2em;
+}
+
+.select-submit{
+	font-size: 2em;
+}
+
 #formulaire-API{
 	display: flex;
     flex-wrap: wrap;
@@ -260,7 +272,7 @@ html, body {
 .en-tete-groupe{
 	position: relative;
 	left: 2%;
-	width: 605px;
+	width: 670px;
 	margin-top: 5%;
 }
 
