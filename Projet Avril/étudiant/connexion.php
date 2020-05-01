@@ -5,7 +5,7 @@
 
 
 	//Vérifie le remplissage du formulaire
-	if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
+	/*if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
 
 		$donnes = fopen('fichiers/comptes.csv', 'r+');
 
@@ -40,6 +40,8 @@
 		header("location:./redirection.php?error=1");
 		echo "Veuillez rentrez des champs !";
 		exit();
-	}
+	}*/
+
+	connexion1($_POST['login'], $_POST['pwd'], 'fichiers/comptes.csv',"informations.php", "redirection.php");
 
 ?>
