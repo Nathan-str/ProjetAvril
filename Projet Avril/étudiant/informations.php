@@ -89,8 +89,12 @@ include 'fonction.php';
 					<input id="chg-numero" type="text" name="new-numero" class="new-form" placeholder="Nouveau numéro" />
 					<input id="chg-mdp" type="password" name="new-mdp" class="new-form" minlength="6" placeholder="Nouveau mot de passe" />
 					<p id="chg-picture"></p>
+					<?php
+						filiereJSON("new-filiere", "new-groupe");
+						$jsonText = jsonText();
+					?>
 					
-					<select id="chg-filiere" name="new-filiere" class="new-form" onchange="adaptationFilière()">
+					<!--<select id="chg-filiere" name="new-filiere" class="new-form" onchange="adaptationFilière()">
 						<option id="L1-MIPI">L1-MIPI</option>
 						<option id="L2-MI">L2-MI</option>
 						<option id="L3-I">L3-I</option>
@@ -114,7 +118,7 @@ include 'fonction.php';
 						<option id="E1" style="display: none;">E1</option>
 						<option id="E2" style="display: none;">E2</option>
 						<option id="E3" style="display: none;">E3</option>
-					</select>
+					</select>-->
 
 					<input id="chg-submit" type="submit" value="Valider" />
 
@@ -131,6 +135,31 @@ include 'fonction.php';
 	</div>
 
 	<script src="app.js" meta="utf-8"></script>
+	<script type="text/javascript">
+	function liste_groupe(){
+		affiche_Groupe(<?php  echo($jsonText);?>);
+	}
+
+	function affiche_Groupe(jsonText){
+	    let filiere = document.getElementById("select-filiere").value;
+	    let groupe =document.getElementById("select-groupe");
+
+	    groupe.innerHTML = "<option value=''>Groupe</option>";
+	    //for (let groupe in jsonText["listeFilieres"]){
+	    //    groupe.innerHTML += `<option value='${jsonText["listeFilieres"]["0"]}'>${jsonText["listeFilieres"]["0"]}</option>`;
+	    //}
+			
+		for (var i = 0; i < jsonText["listeFilieres"].length; i++) {
+			if (filiere == jsonText["listeFilieres"][i]["nomFiliere"]) {
+				for (var j = 0; j < jsonText["listeFilieres"][i]["groupes"].length; j++) {
+				
+					groupe.innerHTML += "<option value=" + jsonText["listeFilieres"][i]["groupes"][j] + ">" + jsonText["listeFilieres"][i]["groupes"][j] + "</option>";
+
+				}
+			}
+		}
+	}
+	</script>
 
 
 	<footer class="le_footer">
