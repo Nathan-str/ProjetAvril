@@ -96,7 +96,7 @@
 		echo("</form>");
 	}
 
-	function inscription($fichier, $fichierID , $page){
+	/*function inscription($fichier, $fichierID , $page){
 		$nom = $_POST['nom'];
 		$mot_de_passe = $_POST['mdp'];
 		$car_alea = alea();
@@ -131,9 +131,73 @@
 			FichierLog("inscription échoué (mot de passe trop petit)",$_POST["mail"]);
 			header("location:./$page?error=4");
 		}
+	}*/
+
+
+	function longueur($mdp){
+		if(strlen($mdp) >= 6){
+			$continue = true;
+		}else{
+			$continue = false;
+		}
+		return $continue;
 	}
 
-	function verification($mail, $numero, $fichier){
+	function inscription1($nom, $prenom, $mail, $numero, $mdp , $mdp1, $fichier, $fichierID,$pageRenvoie, $pageErreur){
+
+		verifSession($nom,"redirection.php?error=1");
+		verifSession($prenom, "redirection.php?error=1");
+		verifSession($mail, "redirection.php?error=1");
+		verifSession($numero, "redirection.php?error=1");
+		verifSession($mdp, "redirection.php?error=1");
+		verifSession($mdp1, "redirection.php?error=1");
+
+		$continue = double($mail, "3", $fichier);
+		$suite = double($numero, "4", $fichier);
+		$longueur = longueur($mdp);
+		$longueur2 = longueur($mdp1);
+
+		if($continue == true && $continue == true){
+			if($longueur == true && $longueur2 == true){
+				if($mdp == $mdp1){
+
+					$car_alea = alea();
+					$secure_mot_de_passe = $car_alea . $mdp;
+
+					$donnes = fopen($fichier, 'a+');
+					$monfichier = fopen($fichierID, 'r+');
+
+					$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+					$id += 1; // On augmente de 1 ce nombre de pages vues
+					fseek($monfichier, 0); // On remet le curseur au début du fichier
+					fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
+
+					fputs($donnes, $id . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) ."\n");
+
+					fclose($monfichier);
+					fclose($donnes);
+
+					FichierLog("inscription réussi",$_POST["mail"]);
+					header("location:./$page?error=0");
+
+
+				}else{
+					FichierLog("inscription échoué (mots de passe différents)",$mail);
+					header("location:./$pageErreur?error=3");
+				}
+				
+			}else{
+				FichierLog("inscription échoué (mot de passe trop petit)",$mail);
+				header("location:./$pageErreur?error=4");
+			}
+		}else{
+			FichierLog("inscription échoué (mail ou numéro déjà utilisé)",$mail);
+			header("location:./$pageErreur?error=5");
+		}
+
+	}
+
+	/*function verification($mail, $numero, $fichier){
 		$donne = fopen($fichier, 'r+');
 
 		while(!feof($donne)){
@@ -152,7 +216,7 @@
 		}
 		return $fin;
 		
-	}
+	}*/
 
 
 	//--------------------------------------------------------------------
@@ -189,27 +253,6 @@
 	}
 
 
-	//Fonction écrivant toutes les connexions réussis dans le fichier des logs
-	//Fonction utilisé sur la page "connexion.php" (INUTULE)
-	function connexionLogReussi($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."connexion_réussi".";".$evenement."\n";
-
-	    file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
-
-	//Fonction écrivant toutes les connexions ratés dans le fichier des logs
-	//Fonction utilisé sur la page "connexion.php" (INUTILE)
-	function connexionLogEchec($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-	    $time = "[".$time."]";
-	    $evenement = $time. ";" ."connexion_echec".";".$evenement."\n";
-
-	    file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
 
 	function formulaireConnexion(){
 		echo("<form action=\"connexion.php\" method=\"post\">");
@@ -219,7 +262,7 @@
 		echo("</form>");
 	}
 
-	function connexion($fichier, $pageRenvoie, $pageErreur){
+	/*function connexion($fichier, $pageRenvoie, $pageErreur){
 		//Vérifie le remplissage du formulaire
 		if (isset($_POST["login"]) && isset($_POST['pwd']) && !empty($_POST["login"]) && !empty($_POST["pwd"])){
 
@@ -257,9 +300,59 @@
 			echo "Veuillez rentrez des champs !";
 			exit();
 		}
+	}*/
+
+
+
+	function connexion1($mail, $mdp, $fichier,$pageRenvoie, $pageErreur){
+		verifSession($mail,"$pageErreur?error=1");
+		verifSession($mdp, "$pageErreur?error=1");
+		$longueur = longueur($mdp);
+
+		$donnes = fopen($fichier, 'r+');
+			
+		for ($i=0;$i<sizeof(file($fichier));$i++){
+		 	$ligne = fgets($donnes);
+			$tableau = explode(";", $ligne);
+
+			if($mail == $tableau[3]){
+
+				$car_alea = $tableau[5];
+				$mot_de_passe = $mdp;
+				$secure_mot_de_passe = $car_alea . $mot_de_passe;
+				$hash = hash("sha256", $secure_mot_de_passe);
+
+				$valider_mail = verifSolo($mail, "3", $fichier);
+				$valider_mdp = verifSolo($hash, "6", $fichier);
+
+				if ($valider_mail == true && $valider_mdp == true){
+
+					if($longueur == true){
+						$_SESSION['pseudo'] = $mail;
+						$_SESSION['id'] = $tableau[0];
+						stastitiques();
+						//Redirige ensuite vers l'accueil
+						FichierLog("connexion réussi",$mail);
+						header("location:./$pageRenvoie");
+					}else{
+						header("location:./$pageErreur?error=6");
+					}
+				}else{
+					header("location:./$pageErreur?error=2");
+				}
+					
+			}
+		}
 	}
 
-
+	//---------------------------------------------------------
+	function verifSession($session, $page){
+		if(isset($session) && !empty($session)){
+			$continue = true;
+		}else{
+			header("location:./" . $page);
+		}
+	}
 	//-----------------------------------------------------------
 	//Fonction pour la page "informations.php"
 
@@ -387,28 +480,6 @@
 	//----------------------------------------
 	//Fonction pour la page "apiEtu.php"
 
-
-	//Fonction permettant d'écrire si l'envoie d'API a fonctionner dans le fichier des logs avec evenement la clé d'API
-	//Fonction utilisé sur la page "apiEtu.php"
-	function ApiLogReussi($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-		$time = "[".$time."]";
-		$evenement = $time. ";" ."api_distribué".";". $evenement."\n";
-
-		file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
-
-	//Fonction permettant d'écrire si l'envoie d'API a raté dans le fichier des logs avec evenement la clé d'API
-	//Fonction utilisé sur la page "apiEtu.php"
-	function ApiLogEchec($evenement){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-		$time = "[".$time."]";
-		$evenement = $time. ";" ."echec_api".";". $evenement ."\n";
-
-		file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
 
 
 	//Fonction permettant d'afficher l'API pour la filière choisi pour tous les comptes étudiants 
@@ -543,7 +614,7 @@
 
 	//Fonction permettant de créer une chaine de caractères aléatoire qui sera la clé d'API
 	//Fonction utilisé sur la page "cle.php"
-	function genererChaineAleatoire($longueur = 10){
+	function genererChaineAleatoire(){
 		 $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		 $longueurMax = strlen($caracteres);
 		 $chaineAleatoire = '';
@@ -554,48 +625,18 @@
 		 return $chaineAleatoire;
 	}
 
-	//Fonction qui permet d'écrire dans le fichier des logs si la clé à pu être récupéré et indique comme événement l'adresse mail et la clé correspondante
-	//Fonction utilisé sur la page "cle.php"
-	function CleLogReussi($evenement, $evenement1){
-		$fichier = 'fichiers/log.csv';
-		$time = date("D, d M Y H:i:s");
-		$time = "[".$time."]";
-		$evenement = $time. ";" ."clé_obtenue".";". $evenement .";" .$evenement1."\n";
 
-		file_put_contents($fichier, $evenement, FILE_APPEND);
-	}
 
-	
-	//Fonction qui vérifie le formulaire et ses informations avec le fichier "cle.csv" contenant les adresses mails et les clés et renvoie la clé si tout est vérifié et que l'adresse mail et le mot de passe existent
-	//Fonction utilisé sur la page "cle.php"
-	function verifCle(){
-		/*$donnes = fopen('fichiers/cle.csv', 'r+');
+		function verifSolo($parametre, $numero, $fichier){
+			$donne = fopen($fichier, 'r+');
 
-		for ($i=0;$i<sizeof(file("fichiers/cle.csv"));$i++){
-		 	$ligne = fgets($donnes);
-		 	$lignes = substr($ligne, 0,-1);
-			$tableau = explode(";", $lignes);
-
-			if ($_GET['key-mail'] == $tableau[0] && $_GET['key-pwd'] == $tableau[2]) {
-				$do = true;
-			}else{
-				$do = false;
-			}
-		}
-		fclose($donnes);*/
-
-		//if ($do == true) {
-			$donne = fopen('fichiers/cle.csv', 'r+');
-			$_SESSION["mail"] = $_GET['key-mail'];
-			$mot_de_passe = $_GET['key-pwd'];
-
-			while(!feof($donne)){
+			for ($i=0;$i<sizeof(file($fichier));$i++){
 				$ligne = fgets($donne);
 				if ($ligne != "") {
 					$lignes = substr($ligne, 0,-1);
 					$tableau = explode(";", $lignes);
 
-					if ($_GET['key-mail'] == $tableau[0] && hash("sha256",$mot_de_passe) == $tableau[2]){
+					if ($parametre == $tableau[$numero]){
 						$continue = true;
 						break;
 					}else{
@@ -605,21 +646,32 @@
 			}
 
 			fclose($donne);
+			return $continue;
+		}
 
-			if ($continue == false){
-				header("location:./documentation.php?error=0");
-			}else{
-				header("location:./documentation.php?error=1");
-			}
+
+
+
+			
+
+	function verifCle(){
+
+		$continue = verifSolo($_GET['key-mail'], "0", 'fichiers/cle.csv');
+		$suite = verifSolo(hash("sha256",$_GET['key-pwd']), "2", 'fichiers/cle.csv');
+
+		if ($continue == true && $suite == true){
+			$_SESSION['mail'] = $_GET['key-mail'];
+			header("location:./documentation.php?error=1");
+		}else{
+			header("location:./documentation.php?error=0");
+		}
 		/*}else{
 			header("location:./documentation.php?error=2");
 		}*/
 	}
 
-	//Fonction permettant d'insérer dans le fichier "cle.csv" l'adresse mail et le mot de passe taper. Si ils n'existent psa déjà, alors écrit dans le fichier l'adresse mail, le mot de passe, la clé créer, l'heure de création et un compteur
-	//Fonction utlisé sur la page "cle.php"
-	function inserCle(){
-		$donne = fopen('fichiers/cle.csv', 'r+');
+	function double($parametre, $numero, $fichier){
+		$donne = fopen($fichier, 'r+');
 
 		while(!feof($donne)){
 			$ligne = fgets($donne);
@@ -627,20 +679,55 @@
 				$lignes = substr($ligne, 0,-2);
 				$tableau = explode(";", $lignes);
 
-				if ($_GET['mail'] == $tableau[0]){
-					$fin = false;
+				if ($parametre == $tableau[$numero]){
+					$continue = false;
 					break;
 				}else{
-					$fin = true;
+					$continue = true;
 				}
 			}
 		}
+
+		fclose($donne);
+		return $continue;
+	}
+
+	function inferieur($parametre, $comparateur,$numero, $limite, $fichier){
+		$donne = fopen($fichier, 'r+');
+
+		for ($i=0;$i<sizeof(file($fichier));$i++){
+			$ligne = fgets($donne);
+			if ($ligne != "") {
+				$lignes = substr($ligne, 0,-1);
+				$tableau = explode(";", $lignes);
+
+				if($parametre == $tableau[$numero])
+					if ($tableau[$comparateur] <= $limite){
+						$continue = true;
+						break;
+					}else{
+						$continue = false;
+					}
+
+
+			}
+		}
+
+		fclose($donne);
+		return $continue;
+	}
+
+	//Fonction permettant d'insérer dans le fichier "cle.csv" l'adresse mail et le mot de passe taper. Si ils n'existent psa déjà, alors écrit dans le fichier l'adresse mail, le mot de passe, la clé créer, l'heure de création et un compteur
+	//Fonction utlisé sur la page "cle.php"
+	function inserCle(){
+		
+		$fin = double($_GET['mail'], "0", 'fichiers/cle.csv');
 
 		if ($fin == true){
 
 			$mail = $_GET['mail'];
 			$password = $_GET['pwd'];
-			$cle = genererChaineAleatoire(20);
+			$cle = genererChaineAleatoire();
 
 			//Vérifie si le formulaire a bien été rempli
 			if (!empty($mail) && !empty($password) && !empty($_GET['pwd1']) && $_GET['pwd1'] == $_GET['pwd']){
@@ -669,6 +756,29 @@
 			header("location:./documentation.php?error=5");
 		}
 	}
+
+	function jsonText(){
+		$jsonText = file_get_contents('fichiers/filiere.json');
+		return $jsonText;
+	}
+
+	function filiereJSON($nameFiliere, $nameGroupe){
+		$jsonText = file_get_contents('fichiers/filiere.json');
+		$jsonArray = json_decode($jsonText,True);
+
+		echo("<select name=$nameFiliere id=select-filiere class=select-filiere onchange=\"liste_groupe();\">");
+		for ($i=0; $i <= sizeof($jsonArray["listeFilieres"]) -1; $i++){
+			echo"<option>".$jsonArray["listeFilieres"][$i]["nomFiliere"]."</option>";
+		}
+		echo("</select>");
+
+		echo("<select name=$nameGroupe id=select-groupe class=select-groupe>");
+			echo("<option>Groupe</option>");
+		echo("</select>");
+	}
+	
+
+
 
 	
 ?>
