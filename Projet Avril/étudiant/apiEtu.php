@@ -61,23 +61,35 @@ function verifCleApi(){
 }
 
 compteurCle();
-$validation = verifCleApi();
+//$validation = verifCleApi();
+$validation = double($_GET['cle'], "1", 'fichiers/cle.csv');
+$inferieur = inferieur($_GET['cle'],"4", "1","200", 'fichiers/cle.csv');
 
-if ($validation == true){
-	FichierLog("API distribué",$_GET['cle']);
-	if ($_GET["choix"] == "filiere"){
-		$json = filiere();
-		$json = json_encode($json);
+if ($validation == false){
+
+	if ($inferieur == true){
+		FichierLog("API distribué",$_GET['cle']);
+		if ($_GET["choix"] == "filiere"){
+			$json = filiere();
+			$json = json_encode($json);
+			header('Content-type: application/json');
+			echo($json);
+		}elseif($_GET["choix"] == "groupe"){
+			$json = groupe($_GET["filiere"], $_GET["groupe"]);
+			$json = json_encode($json);
+			header('Content-type: application/json');
+			echo($json);
+		}
+	}else{
+		FichierLog("Echec API (clé épuisé)",$_GET['cle']);
+		$jsonError["Error"] = "La clé est épuisé";
+		$jsonError = json_encode($jsonError);
 		header('Content-type: application/json');
-		echo($json);
-	}elseif($_GET["choix"] == "groupe"){
-		$json = groupe($_GET["filiere"], $_GET["groupe"]);
-		$json = json_encode($json);
-		header('Content-type: application/json');
-		echo($json);
+		echo($jsonError);
 	}
+
 }else{
-	FichierLog("Echec API",$_GET['cle']);
+	FichierLog("Echec API (mauvaise clé)",$_GET['cle']);
 	$jsonError["Error"] = "Error API KEY";
 	$jsonError = json_encode($jsonError);
 	header('Content-type: application/json');
