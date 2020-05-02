@@ -333,6 +333,8 @@
 					header("location:./$pageErreur?error=2");
 				}
 					
+			}else{
+				header("location:./$pageErreur?error=2");
 			}
 		}
 	}
@@ -346,6 +348,14 @@
 		}
 	}
 
+	function verifElement($session){
+		if(isset($session) && !empty($session)){
+			$continue = true;
+		}else{
+			$continue = false;
+		}
+		return $continue;
+	}
 
 	//-----------------------------------------------------------
 	//Fonction pour la page "informations.php"
@@ -731,9 +741,10 @@
 
 	//}
 
-	function cookieRecherche($filiere,$groupe){
+	function cookieRecherche($filiere,$groupe,$choix){
 		$recherche["filiere"] = $filiere;
 		$recherche["groupe"] = $groupe;
+		$recherche["choix"] = $choix;
 		$jasonRecherche = json_encode($recherche);
 		setcookie("recherche", $jasonRecherche);
 	}
@@ -774,7 +785,7 @@
 
 			}else{
 
-				cookieRecherche($filiere,$groupe);
+				
 
 				$jsonText = file_get_contents('http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere='. $filiere .'&choix=groupe&groupe='.$groupe .'&cle='.$cle);
 				$jsonArray = json_decode($jsonText,True);
@@ -810,13 +821,14 @@
 		$jsonArray = json_decode($jsonText,True);
 
 		echo("<select name=$nameFiliere id=select-filiere class=select-filiere onchange=\"liste_groupe();\">");
+		echo"<option>Filière</option>";
 		for ($i=0; $i <= sizeof($jsonArray["listeFilieres"]) -1; $i++){
 			echo"<option>".$jsonArray["listeFilieres"][$i]["nomFiliere"]."</option>";
 		}
 		echo("</select>");
 
 		echo("<select name=$nameGroupe id=select-groupe class=select-groupe>");
-			echo("<option>Groupe</option>");
+			echo("<option value=Groupe>Groupe</option>");
 		echo("</select>");
 	}
 

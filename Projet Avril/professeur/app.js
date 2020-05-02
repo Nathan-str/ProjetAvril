@@ -16,12 +16,12 @@ $('.toggle-inscription').click(function(e){
 	$('.toggle-inscription').toggleClass('is-open');
 })
 
-$('.toggle-information').click(function(e){
+$('.toggle-traitement').click(function(e){
 	e.preventDefault();
-	$('.formulaire_inscription').toggleClass('is-open');
-	$('.toggle-inscription').toggleClass('is-open');
+	$('.formulaire-traitement').toggleClass('is-open');
+	$('.toggle-traitement').toggleClass('is-open');
+	$('.cube-choix').toggleClass('is-open');
 })
-
 //----------------------------------------------
 //Fonction pour les checkboxs pour changer les informations:
 
@@ -214,6 +214,19 @@ var oldnom = document.getElementById("oldnom");
 			informations.style.display ="none";
 		}		
 		
+	}
+
+	function clickInfo(){
+		var infos = document.getElementsByClassName("info");
+
+		for (i=0;i<infos.length;i++){
+			if (infos[i].style.display == "none"){
+				infos[i].style.display = "block";
+			}else{
+				infos[i].style.display = "none";
+			}
+			
+		}
 	}
 
 
