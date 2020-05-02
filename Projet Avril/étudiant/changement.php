@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
 
 
 //$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
@@ -58,13 +58,13 @@ if ($continue == true && $suite == true){
 					$mdp = $tableau[6];
 				}
 
-				if (!empty($_POST['new-filiere']) && $_POST['new-groupe'] != "Groupe") {
+				if (!empty($_POST['new-filiere']) && $_POST['new-filiere'] != "Filière" && $_POST['new-groupe'] != "Groupe" && $_POST['new-groupe'] != "") {
 					$filiere = $_POST['new-filiere'];
 				}else{
 					$filiere = $tableau[7];
 				}
 
-				if (!empty($_POST['new-groupe']) && $_POST['new-groupe'] != "Groupe") {
+				if (!empty($_POST['new-groupe']) && $_POST['new-groupe'] != "Groupe" && $_POST['new-groupe'] != "") {
 					$groupe = $_POST['new-groupe'];
 				}else{
 					$groupe = $tableau[8];

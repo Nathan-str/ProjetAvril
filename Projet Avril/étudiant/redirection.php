@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
+include 'include/pageElement.php';
+
 
 ?>
 
@@ -16,34 +18,9 @@ include 'fonction.php';
 </head>
 	<body>
 
-		<header role="header" >	
-				<nav class="menu" role="navigation">
-					<div class="inner">
-						<div class="gauche">
-							<a class="logo" href="redirection.php">API etudiant</a>
-						</div>
-
-						<div class="droite">
-							<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
-							<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-							<?php
-								if(!empty($_SESSION['pseudo'])){
-							?>
-									<a href="informations.php" class="lien"><i class="fa fa-drivers-license"></i> Compte</a>
-									<a href="deconnexion.php" class="lien"><i class="fa fa-sign-out"></i> Déconnexion</a>
-							<?php
-								}
-							?>
-
-						</div>
-
-						<div class="nav-toggle">
-							<span class="toggle-icons"></span>
-						</div>
-
-					</div>
-				</nav>
-		</header>
+		<?php
+			headeer();
+		?>
 
 		
 
@@ -63,10 +40,14 @@ include 'fonction.php';
 					<input class="input" type="password" name="mdp1" minlength="6" placeholder="Confirmation mot de passe" required="required" />
 					<input class="submit" type="submit" value="Valider" />
 					<p id="filiere-p">Filière</p>
+
+					<div class="selected-fg">
 					<?php
 						filiereJSON("filiere", "groupe");
 						$jsonText = jsonText();
 					?>
+					</div>
+
 					<!--<input class="radio" type="radio" onclick="selection()" name="filiere" id="L1-MIPI" value="L1-MIPI" checked=""/>L1-MIPI
 					<input class="radio" type="radio" onclick="selection()" name="filiere" id="L2-MI" value="L2-MI" />L2-MI
 					<input class="radio" type="radio" onclick="selection()" name="filiere" id="L3-I" value="L3-I" />L3-I
@@ -138,23 +119,9 @@ include 'fonction.php';
 	}
 	</script>
 
-		<footer class="le_footer">
-			<div class="contenue">
-				<div class="footer-section about">
-					<p>Projet</p>
-				</div>
-				<div class="footer-section links">
-					<p>Liens</p>
-				</div>
-				<div class="footer-section contact-form">
-					<p><i class="fa fa-address-card-o"></i> Contacts</p>
-				</div>
-			</div>
-
-			<div class="fond">
-				<p>Site réalisé par Nathan Sestre</p>
-			</div>	
-		</footer>
+	<?php
+	footeer();
+	?>
 
 	</body>
 </html>

@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
+include 'include/pageElement.php';
 
 
 ?>
@@ -16,32 +17,10 @@ include 'fonction.php';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
-	<header role="header" >	
-			<nav class="menu" role="navigation">
-				<div class="inner">
-					<div class="gauche">
-						<a class="logo" href="redirection.php">API etudiant</a>
-					</div>
-
-					<div class="droite">
-						<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
-						<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-						<?php
-							if(isset($_SESSION['pseudo'])){
-						?>
-								<a href="#" class="lien"><i class="fa fa-drivers-license"></i> Compte</a>
-								<a href="deconnexion.php" class="lien"><i class="fa fa-sign-out"></i> Déconnexion</a>
-						<?php
-							}
-						?>
-					</div>
-
-					<div class="nav-toggle">
-						<span class="toggle-icons"></span>
-					</div>
-				</div>
-			</nav>
-	</header>
+	
+	<?php
+		headeer();
+	?>
 
 	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
@@ -82,13 +61,15 @@ include 'fonction.php';
 			<div class="formulaire-changement">
 
 				<h2>Changer ses informations:</h2>
+
 				<form action="changement.php" method="post">
-					<input id="chg-nom" type="text" name="new-nom" class="new-form" placeholder="Nouveau nom" />
-					<input id="chg-prenom" type="text" name="new-prenom" class="new-form" placeholder="Nouveau prénom" />
+					<input id="chg-nom" type="text" name="new-nom" class="new-form" minlength="3" placeholder="Nouveau nom" />
+					<input id="chg-prenom" type="text" name="new-prenom" class="new-form" minlength="3" placeholder="Nouveau prénom" />
 					<input id="chg-mail" type="email" name="new-mail" class="new-form" placeholder="Nouvelle adresse mail" />
-					<input id="chg-numero" type="text" name="new-numero" class="new-form" placeholder="Nouveau numéro" />
+					<input id="chg-numero" type="text" name="new-numero" class="new-form" minlength="10" maxlength="10" placeholder="Nouveau numéro" />
 					<input id="chg-mdp" type="password" name="new-mdp" class="new-form" minlength="6" placeholder="Nouveau mot de passe" />
 					<p id="chg-picture"></p>
+					<p>*Pour changer sa filiere, il faut aussi préciser le groupe</p>
 					<?php
 						filiereJSON("new-filiere", "new-groupe");
 						$jsonText = jsonText();
@@ -162,23 +143,9 @@ include 'fonction.php';
 	</script>
 
 
-	<footer class="le_footer">
-		<div class="contenue">
-			<div class="footer-section about">
-				<p>Projet</p>
-			</div>
-			<div class="footer-section links">
-				<p>Liens</p>
-			</div>
-			<div class="footer-section contact-form">
-				<p><i class="fa fa-address-card-o"></i> Contacts</p>
-			</div>
-		</div>
-
-		<div class="fond">
-			<p>Site réalisé par Nathan Sestre</p>
-		</div>	
-	</footer>
+	<?php
+		footeer();
+	?>
 
 </body>
 </html>

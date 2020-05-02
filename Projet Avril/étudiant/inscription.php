@@ -1,7 +1,8 @@
 <?php
 	session_start();
 
-	include 'fonction.php';
+	include 'include/fonction.php';
+
 
 	function inscription2($nom, $prenom, $mail, $numero, $mdp , $mdp1, $fichier, $fichierID,$pageRenvoie, $pageErreur){
 
@@ -17,29 +18,29 @@
 		$longueur = longueur($mdp);
 		$longueur2 = longueur($mdp1);
 
+
 		if($continue == true && $suite == true){
 			if($longueur == true && $longueur2 == true){
 				if($mdp == $mdp1){
-					if($_POST['groupe'] != "Groupe"){
+					if($_POST['groupe'] != "Groupe" && $_POST['filiere'] != "Filière" && $_POST['groupe'] != ""){
+							$car_alea = alea();
+							$secure_mot_de_passe = $car_alea . $mdp;
 
-						$car_alea = alea();
-						$secure_mot_de_passe = $car_alea . $mdp;
+							$donnes = fopen($fichier, 'a+');
+							$monfichier = fopen($fichierID, 'r+');
 
-						$donnes = fopen($fichier, 'a+');
-						$monfichier = fopen($fichierID, 'r+');
+							$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+							$id += 1; // On augmente de 1 ce nombre de pages vues
+							fseek($monfichier, 0); // On remet le curseur au début du fichier
+							fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
 
-						$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-						$id += 1; // On augmente de 1 ce nombre de pages vues
-						fseek($monfichier, 0); // On remet le curseur au début du fichier
-						fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
+							fputs($donnes, $id . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) . ";" . $_POST['filiere'] . ";" . $_POST['groupe'] . ";" . "profil_defaut.png" ."\n");
 
-						fputs($donnes, $id . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) . ";" . $_POST['filiere'] . ";" . $_POST['groupe'] . ";" . "profil_defaut.png" ."\n");
+							fclose($monfichier);
+							fclose($donnes);
 
-						fclose($monfichier);
-						fclose($donnes);
-
-						FichierLog("inscription réussi",$_POST["mail"]);
-						header("location:./$pageErreur?error=0");
+							FichierLog("inscription réussi",$_POST["mail"]);
+							header("location:./$pageErreur?error=0");
 					}else{
 						header("location:./$pageErreur?error=6");
 					}

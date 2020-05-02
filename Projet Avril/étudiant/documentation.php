@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
+include 'include/pageElement.php';
 
 ?>
 
@@ -13,43 +14,21 @@ include 'fonction.php';
 	<link rel="stylesheet" type="text/css" href="styles.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+	<script src="app.js" meta="utf-8"></script>
 </head>
 <body>
-	<header role="header" >	
-			<nav class="menu" role="navigation">
-				<div class="inner">
-					<div class="gauche">
-						<a class="logo" href="redirection.php">API etudiant</a>
-					</div>
-
-					<div class="droite">
-						<a href="#" class="lien"><i class='fa fa-book'></i> API service</a>
-						<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
-						<?php
-							if(isset($_SESSION['pseudo'])){
-						?>
-								<a href="informations.php" class="lien"><i class="fa fa-drivers-license"></i> Compte</a>
-								<a href="deconnexion.php" class="lien"><i class="fa fa-sign-out"></i> Déconnexion</a>
-						<?php
-							}
-						?>
-					</div>
-
-					<div class="nav-toggle">
-						<span class="toggle-icons"></span>
-					</div>
-				</div>
-			</nav>
-	</header>
+	<?php
+		headeer();
+	?>
 
 <h1 class="h1-key">Utilisation de l'API</h1>
 
 <div class="inscription-cle-api">
 	<form action="cle.php" method="get">
 		<label>Demande de clé</label>
-		<input type="radio" name="choose" onclick="changement()" id="choix1" value="inscription" checked="" />
+		<input type="radio" name="choose" onclick="changement();" id="choix1" value="inscription" checked="" />
 		<label>Voir clé</label>
-		<input type="radio" name="choose" onclick="changement()" id="choix2" value="connexion"/>
+		<input type="radio" name="choose" onclick="changement();" id="choix2" value="connexion"/>
 
 		<input type="email" name="mail" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
 		<input type="password" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" minlength="6" style='display:block;'/>
@@ -104,7 +83,7 @@ include 'fonction.php';
 	</form>
 </div>-->
 
-<script src="app.js" meta="utf-8"></script>
+
 
 <div class="documentation">
 	<h2 class="h2-documentation">Documentation de l'API</h2>
@@ -175,23 +154,49 @@ include 'fonction.php';
 	<p class="p-documentation">*L'API est limitée à 20 utilisations par heure pour chaque clé.</p>
 </div>
 
-<footer class="le_footer">
-		<div class="contenue">
-			<div class="footer-section about">
-				<p>Projet</p>
-			</div>
-			<div class="footer-section links">
-				<p>Liens</p>
-			</div>
-			<div class="footer-section contact-form">
-				<p><i class="fa fa-address-card-o"></i> Contacts</p>
-			</div>
-		</div>
+<?php
+footeer();
+?>
 
-		<div class="fond">
-			<p>Site réalisé par Nathan Sestre</p>
-	</div>	
-</footer>
+<script>
+	function changement(){
+
+		$choix1 = document.getElementById("choix1");
+		$choix2 = document.getElementById("choix2");
+		
+		$Imail = document.getElementById("Imail");
+		$Ipwd = document.getElementById("Ipwd");
+		$Ipwd1 = document.getElementById("Ipwd1");
+		$Isubmit = document.getElementById("Isubmit");
+
+		$Cmail = document.getElementById("Cmail");
+		$Cpwd = document.getElementById("Cpwd");
+		$Csubmit = document.getElementById("Csubmit");
+
+		if (choix1.checked){
+
+			$Imail.style.display = "block";
+			$Ipwd.style.display = "block";
+			$Ipwd1.style.display = "block";
+			$Isubmit.style.display = "block";
+			$Cmail.style.display = "none";
+			$Cpwd.style.display = "none";
+			$Csubmit.style.display = "none";
+
+		}else if (choix2.checked) {
+
+			$Imail.style.display = "none";
+			$Ipwd.style.display = "none";
+			$Ipwd1.style.display = "none";
+			$Isubmit.style.display = "none";
+			$Cmail.style.display = "block";
+			$Cpwd.style.display = "block";
+			$Csubmit.style.display = "block";
+
+		}	
+	}
+	
+</script>
 
 </body>
 </html>

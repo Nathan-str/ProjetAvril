@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
 
 function compteurCleAffichage(){
 		$donnes = fopen('fichiers/cle.csv', 'r+');

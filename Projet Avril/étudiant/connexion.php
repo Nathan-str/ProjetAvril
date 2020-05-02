@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	include 'fonction.php';
+	include 'include/fonction.php';
 
 
 	//Vérifie le remplissage du formulaire

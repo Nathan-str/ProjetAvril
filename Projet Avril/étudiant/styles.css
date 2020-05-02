@@ -124,13 +124,26 @@ span.toggle-icons:after{top: -14px;}
 	left: 10%;
 }
 
+.select-filiere{
+	font-size: 1.8em;
+}
+
+.select-groupe{
+	font-size: 1.8em;
+}
+
+.selected-fg{
+	position: relative;
+	left: 12%;
+}
+
 .submit{
 	font-size: 1.5em;
 	margin-bottom: 10px;
 	border-radius: 7px;
 	position: relative;
 	left: -40%;
-	top: 210px;
+	top: 180px;
 }
 
 .radio{
@@ -486,7 +499,7 @@ span.toggle-icons:after{top: -14px;}
 	font-size: 1.5em;
 	position: relative;
 	top: 50px;
-	left: -20%;
+	left: -40%;
 }
 
 

@@ -16,10 +16,10 @@ $('.toggle-inscription').click(function(e){
 	$('.toggle-inscription').toggleClass('is-open');
 })
 
-$('.toggle-information').click(function(e){
+$('.toggle-traitement').click(function(e){
 	e.preventDefault();
-	$('.formulaire_inscription').toggleClass('is-open');
-	$('.toggle-inscription').toggleClass('is-open');
+	$('.formulaire-traitement').toggleClass('is-open');
+	$('.toggle-traitement').toggleClass('is-open');
 })
 
 //----------------------------------------------
