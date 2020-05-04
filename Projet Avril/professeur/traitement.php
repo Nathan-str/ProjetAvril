@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include 'fonction.php';
-include 'pageElement.php';
+include 'include/fonction.php';
+include 'include/pageElement.php';
 include 'include/fonctionMosaique.inc.php';
 
 $verifPseudo = verifElement($_SESSION['pseudo']);
@@ -17,12 +17,12 @@ if ($verifPseudo == false){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<title>Administration</title>
-	<link rel="stylesheet" type="text/css" href="styles.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="print.css" media="print">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="print.css" media="print" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
@@ -35,7 +35,7 @@ if ($verifPseudo == false){
 		</div>
 	</div>
 	<div class="cube-choix">
-		<p class="cube-choix-p"> <-- Choix</p>
+		<p class="cube-choix-p">Choix</p>
 	</div>
 	
 

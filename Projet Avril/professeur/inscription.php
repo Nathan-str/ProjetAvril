@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
 include 'include/fonctionInscription.inc.php';
 /*$continue = verification($_POST['mail'], $_POST['numero'], "fichiers/comptes.csv");
 

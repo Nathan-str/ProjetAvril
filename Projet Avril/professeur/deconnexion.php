@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	include 'fonction.php';
+	include 'include/fonction.php';
 
 	//Détruit la session déjà existante
 	FichierLog("déconnexion",$_SESSION['pseudo']);

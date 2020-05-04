@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include 'fonction.php';
-include 'pageElement.php';
+include 'include/fonction.php';
+include 'include/pageElement.php';
 include 'include/fonctionInscription.inc.php';
 include 'include/fonctionConnexion.inc.php';
 
@@ -10,11 +10,11 @@ include 'include/fonctionConnexion.inc.php';
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<title>Administration</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
 	<?php

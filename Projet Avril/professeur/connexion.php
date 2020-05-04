@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'fonction.php';
+include 'include/fonction.php';
 include 'include/fonctionConnexion.inc.php';
 
 //connexion("fichiers/comptes.csv", "demande.php", "index.php");
