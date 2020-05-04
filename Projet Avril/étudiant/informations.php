@@ -37,7 +37,7 @@ include 'include/pageElement.php';
 			?>
 
 			<form accept="test.php" method="post" enctype="multipart/form-data">
-				<p class="modification-image">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" multiple><br />
+				<p class="modification-image-title">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" multiple><br />
 				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image">
 			</form>
 
@@ -45,7 +45,7 @@ include 'include/pageElement.php';
 			<?php
 				comptes();
 			?>
-
+		</div>
 
 			<!--<div class="checkbox-info">
 				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
@@ -60,7 +60,7 @@ include 'include/pageElement.php';
 
 			<div class="formulaire-changement">
 
-				<h2>Changer ses informations:</h2>
+				<h2 class="change-info">Changer ses informations:</h2>
 
 				<form action="changement.php" method="post">
 					<input id="chg-nom" type="text" name="new-nom" class="new-form" minlength="3" placeholder="Nouveau nom" />
@@ -111,7 +111,6 @@ include 'include/pageElement.php';
 			erreur();
 			?>
 
-		</div>
 
 	</div>
 

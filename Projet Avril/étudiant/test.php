@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	include 'fonction.php';
+	include 'include/fonction.php';
 
 	function addLogEvent($event)
 	{
@@ -17,7 +17,7 @@
 	
 	//function FiliereJson(){
 
-		$jsonArray = array();
+		/*$jsonArray = array();
 		$jsonTableau = array();
 
 		//$jsonArray["A1"] = "A1";
@@ -51,7 +51,19 @@
 		$json = json_encode($json);
 		header('Content-type: application/json');
 		$file = fopen("fichiers/filiere.json", "w");
-		fwrite($file, $json);
+		fwrite($file, $json);*/
 	//}
+	function genererChaineAleatoiree($longueur){
+		 $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		 $longueurMax = strlen($caracteres);
+		 $chaineAleatoire = '';
+		 for ($i = 0; $i < $longueur; $i++)
+		 {
+		 $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+		 }
+		 return $chaineAleatoire;
+	}
+
+	print_r(pathinfo('/some/path/.test'));
 
 ?>

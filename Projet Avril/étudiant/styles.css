@@ -38,6 +38,9 @@ html, body {
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 	border-bottom: 2px solid transparent;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
 }
 
 .logo:hover{
@@ -86,16 +89,37 @@ span.toggle-icons, span.toggle-icons:before, span.toggle-icons:after{
 span.toggle-icons:before{top: 12px;}
 span.toggle-icons:after{top: -14px;}
 
+.titre-redirection{
+	background: #F97F51;
+	width: 43%;
+	position: relative;
+	left: 31%;
+	text-align: center;
+	margin-top: 3%;
+	border-radius: 30px;
+}
+
 .h1-redirection{
 	position: relative;
-	left: 35%;
-	top: 35px;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: white;
+   	top: 5px;
+	/*left: 35%;
+	top: 35px;*/
 }
 
 .h2-redirection{
 	position: relative;
-	left: 35%;
-	top: 10px;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: white;
+    font-size: 1.3em;
+    bottom: 10px;
+	/*left: 35%;
+	top: 10px;*/
 }
 
 .form_inscription{
@@ -105,15 +129,19 @@ span.toggle-icons:after{top: -14px;}
 	left: 42%;
 	top: 10px;
 	background-color: #F97F51; 
-	border-radius: 10px;
+	border-radius: 50px;
 }
 
 .p_inscriptions{
 	font-size: 2.5em;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	position: relative;
-	left: 10%;
+	left: 16%;
 	top: 10px;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: white;
 }
 
 .input{
@@ -158,15 +186,19 @@ span.toggle-icons:after{top: -14px;}
 	left: 42%;
 	top: -5px;
 	background-color: #F97F51;
-	border-radius: 10px;
+	border-radius: 50px;
 }
 
 .p_connexions{
 	font-size: 2.5em;
 	margin-bottom: 20px;
 	position: relative;
-	left: 10%;
+	left: 18%;
 	top: 10px;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: white;
 }
 
 .connexion-submit{
@@ -261,9 +293,13 @@ span.toggle-icons:after{top: -14px;}
 
 #filiere-p{
 	position: relative;
-	left: 40%;
+	left: 28%;
 	font-size: 1.3em;
 	bottom: 10px;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 2px 2px 5px black;
+    color: white;
 }
 
 #groupe{
@@ -385,7 +421,11 @@ span.toggle-icons:after{top: -14px;}
 	position: relative;
 	font-size: 2.5em;
 	left: 37%;
-	top: 20px;	
+	top: 35px;	
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: white;
 }
 
 .checkbox-info{
@@ -425,6 +465,9 @@ span.toggle-icons:after{top: -14px;}
 	position: relative;
 	left: 1%;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .p-info-nom{
@@ -433,6 +476,9 @@ span.toggle-icons:after{top: -14px;}
 	left: 12%;
 	top: -53px;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .p-info-mail{
@@ -441,6 +487,9 @@ span.toggle-icons:after{top: -14px;}
 	left: 1%;
 	top: -50px;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .p-info-numero{
@@ -449,6 +498,9 @@ span.toggle-icons:after{top: -14px;}
 	left: 1%;
 	top: -50px;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .p-info-filiere{
@@ -457,6 +509,9 @@ span.toggle-icons:after{top: -14px;}
 	left: 1%;
 	top: -50px;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .p-info-groupe{
@@ -465,12 +520,24 @@ span.toggle-icons:after{top: -14px;}
 	left: 15%;
 	top: -102px;
 	color: #192a56;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .position-info{
 	position: relative;
 	left: 38%;
 	top: 20px;
+}
+
+.modification-image-title{
+	position: relative;
+	left: 11%;
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
+
 }
 
 .modification-image{
@@ -480,10 +547,16 @@ span.toggle-icons:after{top: -14px;}
 
 .formulaire-changement{
 	position: relative;
-	left: 1%;
+	left: 40%;
 	width: 20%;
 	height: 100%;
 	top: -50px;
+}
+
+.change-info{
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
 }
 
 .new-form{
@@ -492,6 +565,7 @@ span.toggle-icons:after{top: -14px;}
 	font-size: 1.5em;
 	margin-bottom: 5px;
 	position: relative;
+	border-radius: 10px;
 }
 
 
@@ -528,19 +602,71 @@ span.toggle-icons:after{top: -14px;}
 
 .h1-key{
 	position: relative;
-	left: 38%;
+	text-align: center;
+	left: 35%;
+	width: 30%;
 	font-size: 3em;
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
+    color: #f7f1e3;
+    background: #F97F51;
+	border-radius: 10px;
+}
+
+.demande-cle-label{
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px white;
+    color: black;
+    font-size: 1.5em;
 }
 
 .form-cle-api{
 	font-size: 1.2em;
+	border-radius: 10px;
+	margin-top: 5px;
+	text-align: center;
+	position: relative;
+	margin-top: 1%;
+	top: 20px;
+	left: 17%;
+}
+
+.form-cle-api-submit-demande{
+	font-size: 1.2em;
+	border-radius: 10px;
+	margin-top: 5px;
+	text-align: center;
+	position: relative;
+	margin-top: 1%;
+	top: 20px;
+	left: 30%;
+	margin-bottom: 50px;
+}
+
+.form-cle-api-submit-voir{
+	font-size: 1.2em;
+	border-radius: 10px;
+	margin-top: 5px;
+	text-align: center;
+	position: relative;
+	margin-top: 1%;
+	top: 20px;
+	left: 40%;
+	margin-bottom: 80px;
 }
 
 .inscription-cle-api{
 	position: relative;
 	left: 71%;
 	top: 50px;
+	background: #F97F51;
+	width: 20%;
+	height: 20%;
+	text-align: center;
+	border-radius: 20px;
 }
+
+
 
 .demande-cle-api{
 	position: relative;
@@ -570,6 +696,8 @@ span.toggle-icons:after{top: -14px;}
 	font-size: 2em;
 	margin-bottom: 100px;
 	margin-top: 50px;
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px white;
 }
 
 .h3-documentation{
@@ -578,6 +706,8 @@ span.toggle-icons:after{top: -14px;}
 	font-size: 1.8em;
 	margin-top: 50px;
 	margin-bottom: 50px;
+	letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px white;
 }
 
 .p-documentation{
@@ -619,6 +749,7 @@ table{
 	padding: 10px;
 	border: 1px solid white;
 }
+
 
 .le_footer .fond{
 	background: #343a40;

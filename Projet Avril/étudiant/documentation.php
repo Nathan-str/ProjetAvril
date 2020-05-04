@@ -13,8 +13,8 @@ include 'include/pageElement.php';
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="styles.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
-	<script src="app.js" meta="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="app.js"></script>
 </head>
 <body>
 	<?php
@@ -25,19 +25,19 @@ include 'include/pageElement.php';
 
 <div class="inscription-cle-api">
 	<form action="cle.php" method="get">
-		<label>Demande de clé</label>
+		<label class="demande-cle-label">Demande de clé</label>
 		<input type="radio" name="choose" onclick="changement();" id="choix1" value="inscription" checked="" />
-		<label>Voir clé</label>
+		<label class="demande-cle-label">Voir clé</label>
 		<input type="radio" name="choose" onclick="changement();" id="choix2" value="connexion"/>
 
-		<input type="email" name="mail" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
+		<input type="email" name="email" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
 		<input type="password" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" minlength="6" style='display:block;'/>
 		<input type="password" name="pwd1" placeholder="Confirmation mot de passe" id="Ipwd1" minlength="6" class="form-cle-api" style='display:block;'/>
-		<input type="submit" value="Inscription" id="Isubmit" class="form-cle-api" style='display:block;'/>
+		<input type="submit" value="Demander clé" id="Isubmit" class="form-cle-api-submit-demande" style='display:block;'/>
 
 		<input type="email" name="key-mail" placeholder="Adresse mail" id="Cmail" class="form-cle-api" style='display:none;'/>
 		<input type="password" name="key-pwd" placeholder="Mot de passe" id="Cpwd" minlength="6" class="form-cle-api" style='display:none;'/>
-		<input type="submit" value="GET KEY" id="Csubmit" class="form-cle-api" style='display:none;'/>
+		<input type="submit" value="Voir clé" id="Csubmit" class="form-cle-api-submit-voir" style='display:none;'/>
 	</form>
 
 	<?php

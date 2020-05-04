@@ -2,6 +2,7 @@
 session_start();
 
 include 'include/fonction.php';
+include 'include/fonctionInscription.inc.php';
 
 
 //$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
@@ -23,37 +24,64 @@ if ($continue == true && $suite == true){
 		$post_password = $_POST["new-mdp"];
 		$lettre = $tableau[5];
 		$strpassword = $lettre . $post_password;
-		$password = hash("sha256", $strpassword); 
+		$password = hash("sha256", $strpassword);
+
+		$longueurMdp = longueur($post_password);
+
+		$regexNom = Regex('#[a-zA-Z]+[^;|]#',$_POST['new-nom']);
+		$regexPrenom = Regex('#[a-zA-Z]+[^;|]#', $_POST['new-prenom']);
+		$regexNumero = Regex("#[0-9]{10}#", $_POST['new-numero']);
+		$regexMail = Regex("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/", $_POST['new-mail']);
+
+		$regexNomPv = Regex("/^[^;]*$/", $_POST['new-nom']);
+		$regexPrenomPv = Regex("/^[^;]*$/", $_POST['new-prenom']);
+		$regexMailPv = Regex("/^[^;]*$/", $_POST['new-mail']);
+
 
 			if ($_SESSION['id'] == $tableau[0]){
 
-				if (!empty($_POST['new-mail'])) {
+				if (!empty($_POST['new-mail']) && $regexMail == true && $regexMailPv == true) {
 					$mail = $_POST['new-mail'];
 					$_SESSION['pseudo'] = $_POST['new-mail'];
+				}elseif ($regexMailPv == false || $regexMail == false) {
+					$mail = $tableau[3];
+					header("location:./informations.php?error=rmail");
 				}else{
 					$mail = $tableau[3];
 				}
 
-				if (!empty($_POST['new-nom'])) {
+				if (!empty($_POST['new-nom']) && $regexNom == true && $regexNomPv == true) {
 					$nom = $_POST['new-nom'];
+				}elseif ($regexNom == false || $regexNomPv == false) {
+					$nom = $tableau[1];
+					header("location:./informations.php?error=rnom");
 				}else{
 					$nom = $tableau[1];
 				}
 
-				if (!empty($_POST['new-prenom'])) {
+				if (!empty($_POST['new-prenom']) && $regexPrenom == true && $regexPrenomPv == true) {
 					$prenom = $_POST['new-prenom'];
+				}elseif ($regexPrenom == false || $regexPrenomPv == false) {
+					$prenom = $tableau[2];
+					header("location:./informations.php?error=rprenom");
 				}else{
 					$prenom = $tableau[2];
 				}
 
-				if (!empty($_POST['new-numero'])) {
+				if (!empty($_POST['new-numero']) && $regexNumero == true) {
 					$numero = $_POST['new-numero'];
+				}elseif ($regexNumero == false) {
+					$numero = $tableau[4];
+					header("location:./informations.php?error=rnumero");
 				}else{
 					$numero = $tableau[4];
 				}
 
-				if (!empty($_POST['new-mdp'])) {
+				if (!empty($_POST['new-mdp']) && $longueurMdp == true) {
 					$mdp = $password;
+				}elseif ($longueurMdp == false){
+					$mdp = $tableau[6];
+					header("location:./informations.php?error=lmdp");
 				}else{
 					$mdp = $tableau[6];
 				}

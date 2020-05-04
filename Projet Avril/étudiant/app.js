@@ -260,7 +260,6 @@ var oldnom = document.getElementById("oldnom");
 		request.open("GET", fichier, true);
 		request.send();
 		let filieres = JSON.parse(request.response);
-		console.log(filieres.count;
 	}
 
 

@@ -26,8 +26,10 @@ include 'include/pageElement.php';
 
 		<div class="page-wrapper">
 
+			<div class="titre-redirection">
 			<h1 class="h1-redirection">Vous êtes étudiants ?</h1>
 			<h2 class="h2-redirection">Inscrivez-vous pour transmettre et accèdez à vos informations</h2>
+			</div>
 
 			<div class="form_inscription">
 				<p class="p_inscriptions">Inscription</p>
@@ -39,7 +41,7 @@ include 'include/pageElement.php';
 					<input class="input" type="password" name="mdp" minlength="6" placeholder="Mot de passe" required="required" />
 					<input class="input" type="password" name="mdp1" minlength="6" placeholder="Confirmation mot de passe" required="required" />
 					<input class="submit" type="submit" value="Valider" />
-					<p id="filiere-p">Filière</p>
+					<p id="filiere-p">Filiere/groupe</p>
 
 					<div class="selected-fg">
 					<?php
