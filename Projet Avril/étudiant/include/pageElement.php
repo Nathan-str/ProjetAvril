@@ -1,0 +1,61 @@
+<?php
+
+function headeer(){
+	?>
+	<header role="header" >	
+				<nav class="menu" role="navigation">
+					<div class="inner">
+						<div class="gauche">
+							<a class="logo" href="redirection.php">API etudiant</a>
+						</div>
+
+						<div class="droite">
+							<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
+							<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
+							<?php
+								if(!empty($_SESSION['pseudo'])){
+							?>
+									<a href="informations.php" class="lien"><i class="fa fa-drivers-license"></i> Compte</a>
+									<a href="deconnexion.php" class="lien"><i class="fa fa-sign-out"></i> Déconnexion</a>
+							<?php
+								}
+							?>
+
+						</div>
+
+						<div class="nav-toggle">
+							<span class="toggle-icons"></span>
+						</div>
+
+					</div>
+				</nav>
+		</header>
+
+	<?php
+}
+
+function footeer(){
+	?>
+	<footer class="le_footer">
+			<div class="contenue">
+				<div class="footer-section about">
+					<p>Date</p>
+					<ul><li><p>Projet du 20/04 au 10/05</p></li></ul>
+				</div>
+				<div class="footer-section links">
+					<p>Liens</p>
+					<ul><li><a href="redirection.php" style="color: white;">Accueil</a></li></ul>
+				</div>
+				<div class="footer-section contact-form">
+					<p><i class="fa fa-address-card-o"></i> Contacts</p>
+					<ul><li><a href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></li></ul>
+				</div>
+			</div>
+
+			<div class="fond">
+				<p>Site réalisé par Nathan Sestre</p>
+			</div>	
+		</footer>
+		<?php
+}
+?>
