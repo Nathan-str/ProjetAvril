@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>API</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="styles.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	
+		<header>	
+				<nav class="menu">
+					<div class="inner">
+						<div class="gauche">
+							<a class="logo" href="redirection.php">API etudiant</a>
+						</div>
+
+						<div class="droite">
+							<a href="documentation.php" class="lien"><i class='fa fa-book'></i> API service</a>
+							<!--<a href="#" class="lien"><i class="fa fa-globe"></i> A propos</a>-->
+																<a href="informations.php" class="lien"><i class="fa fa-drivers-license"></i> Compte</a>
+									<a href="deconnexion.php" class="lien"><i class="fa fa-sign-out"></i> Déconnexion</a>
+							
+						</div>
+
+						<div class="nav-toggle">
+							<span class="toggle-icons"></span>
+						</div>
+
+					</div>
+				</nav>
+		</header>
+
+	
+	<div class="page-wrapper">
+		<h1 class="h1-info">Informations du compte</h1>
+
+		<!--<input type="file" name="input-image" id="input-image" accept=".jpg, .jpeg, .png"  multiple />
+		<div class="image-pre" id="imagePre">
+			<img src="" alt="Photo de profil" class="image-preview__image" />
+			<span class="image-preview__texte">Photo de profil</span>
+		</div>-->
+		<div class="position-info">
+			<img src='images/501.png
+' width='170' height='170' class="pp" alt="error" /><br />
+			<form method="post" enctype="multipart/form-data">
+				<p class="modification-image-title">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" /><br />
+				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image" />
+			</form>
+
+
+			<p class="p-info-prenom">Prénom: Nathan</p><p class="p-info-nom">Nom: Sestre</p><p class="p-info-mail">Adresse mail: sestre.nathan@orange.fr</p><p class="p-info-numero">Numéro de téléphone: 0619808005</p><p class="p-info-filiere">Filière: L2-MI</p><p class="p-info-groupe">Groupe: B2</p>		</div>
+
+			<!--<div class="checkbox-info">
+				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
+				<input id="oldprenom" type="checkbox" onclick="changePrenom()" name="change-prenom" class="checkbox-style" />Modification du prénom 
+				<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" class="checkbox-style" />Modification du mail 
+				<input id="oldnumero" type="checkbox" onclick="changeNumero()" name="change-numero" class="checkbox-style" />Modification du numéro 
+				<input id="oldmdp" type="checkbox" onclick="changeMdp()" name="change-mdp" class="checkbox-style" />Modification du mot de passe
+				<input id="oldfiliere" type="checkbox" onclick="changeFiliere()" name="change-filiere" class="checkbox-style" />Modification de la filière et du groupe
+
+
+			</div>-->
+
+			<div class="formulaire-changement">
+
+				<h2 class="change-info">Changer ses informations:</h2>
+
+				<form action="changement.php" method="post">
+					<input id="chg-nom" type="text" name="new-nom" class="new-form" minlength="3" placeholder="Nouveau nom" />
+					<input id="chg-prenom" type="text" name="new-prenom" class="new-form" minlength="3" placeholder="Nouveau prénom" />
+					<input id="chg-mail" type="email" name="new-mail" class="new-form" placeholder="Nouvelle adresse mail" />
+					<input id="chg-numero" type="text" name="new-numero" class="new-form" minlength="10" maxlength="10" placeholder="Nouveau numéro" />
+					<input id="chg-mdp" type="password" name="new-mdp" class="new-form" minlength="6" placeholder="Nouveau mot de passe" />
+					<p id="chg-picture"></p>
+					<p>*Pour changer sa filiere, il faut aussi préciser le groupe</p>
+					<select name="new-filiere" id="select-filiere" class="select-filiere" onchange="liste_groupe();"><option>Filière</option><option>LPI-RIWS</option><option>LP-RS</option><option>L1-MIPI</option><option>L2-MI</option><option>L3-I</option></select><select name="new-groupe" id="select-groupe" class="select-groupe"><option>Groupe</option></select>					
+					<!--<select id="chg-filiere" name="new-filiere" class="new-form" onchange="adaptationFilière()">
+						<option id="L1-MIPI">L1-MIPI</option>
+						<option id="L2-MI">L2-MI</option>
+						<option id="L3-I">L3-I</option>
+						<option id="LP-RS">LP-RS</option>
+						<option id="LPI-RIWS">LPI-RIWS</option>
+					</select>
+
+					<select id="chg-groupe" name="new-groupe" class="new-form">
+						<option id="A1" style="display: block;">A1</option>
+						<option id="A2" style="display: block;">A2</option>
+						<option id="A3" style="display: block;">A3</option>
+						<option id="B1" style="display: none;">B1</option>
+						<option id="B2" style="display: none;">B2</option>
+						<option id="B3" style="display: none;">B3</option>
+						<option id="C1" style="display: none;">C1</option>
+						<option id="C2" style="display: none;">C2</option>
+						<option id="C3" style="display: none;">C3</option>
+						<option id="D1" style="display: none;">D1</option>
+						<option id="D2" style="display: none;">D2</option>
+						<option id="D3" style="display: none;">D3</option>
+						<option id="E1" style="display: none;">E1</option>
+						<option id="E2" style="display: none;">E2</option>
+						<option id="E3" style="display: none;">E3</option>
+					</select>-->
+
+					<input id="chg-submit" type="submit" value="Valider" />
+
+				</form>
+
+			</div>
+
+			
+
+	</div>
+
+	<script src="app.js"></script>
+	<script>
+	function liste_groupe(){
+		affiche_Groupe({
+    "listeFilieres":[
+
+        {
+            "nomFiliere":"LPI-RIWS",
+            "groupes":[
+                "LPI-1",
+                "LPI-2",
+                "LPI-3"
+            ]
+        },
+
+        {
+            "nomFiliere":"LP-RS",
+            "groupes":[
+                "LP-1",
+                "LP-2",
+                "LP-3"
+            ]
+        },
+
+        {
+            "nomFiliere":"L1-MIPI",
+            "groupes":[
+                "A1",
+                "A2",
+                "A3"
+            ]
+        },  
+
+        {
+            "nomFiliere":"L2-MI",
+            "groupes":[
+                "B1",
+                "B2",
+                "B3"
+            ]
+	   },
+
+        {
+            "nomFiliere":"L3-I",
+            "groupes":[
+                "C1",
+                "C2",
+                "C3"
+            ]
+	  }
+    ]
+    
+});
+	}
+
+	function affiche_Groupe(jsonText){
+	    let filiere = document.getElementById("select-filiere").value;
+	    let groupe =document.getElementById("select-groupe");
+
+	    groupe.innerHTML = "<option value=''>Groupe</option>";
+	    //for (let groupe in jsonText["listeFilieres"]){
+	    //    groupe.innerHTML += `<option value='${jsonText["listeFilieres"]["0"]}'>${jsonText["listeFilieres"]["0"]}</option>`;
+	    //}
+			
+		for (var i = 0; i < jsonText["listeFilieres"].length; i++) {
+			if (filiere == jsonText["listeFilieres"][i]["nomFiliere"]) {
+				for (var j = 0; j < jsonText["listeFilieres"][i]["groupes"].length; j++) {
+				
+					groupe.innerHTML += "<option value=" + jsonText["listeFilieres"][i]["groupes"][j] + ">" + jsonText["listeFilieres"][i]["groupes"][j] + "</option>";
+
+				}
+			}
+		}
+	}
+	</script>
+
+
+		<footer class="le_footer">
+			<div class="contenue">
+				<div class="footer-section about">
+					<p>Date</p>
+					<ul><li><p>Projet du 20/04 au 10/05</p></li></ul>
+				</div>
+				<div class="footer-section links">
+					<p>Liens</p>
+					<ul><li><a href="redirection.php" style="color: white;">Accueil</a></li></ul>
+				</div>
+				<div class="footer-section contact-form">
+					<p><i class="fa fa-address-card-o"></i> Contacts</p>
+					<ul><li><a href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></ul>
+				</div>
+			</div>
+
+			<div class="fond">
+				<p>Site réalisé par Nathan Sestre</p>
+			</div>	
+		</footer>
+		
+</body>
+</html>
