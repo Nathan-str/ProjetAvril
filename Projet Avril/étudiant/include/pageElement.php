@@ -2,8 +2,8 @@
 
 function headeer(){
 	?>
-	<header role="header" >	
-				<nav class="menu" role="navigation">
+	<header>	
+				<nav class="menu">
 					<div class="inner">
 						<div class="gauche">
 							<a class="logo" href="redirection.php">API etudiant</a>
@@ -48,7 +48,7 @@ function footeer(){
 				</div>
 				<div class="footer-section contact-form">
 					<p><i class="fa fa-address-card-o"></i> Contacts</p>
-					<ul><li><a href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></li></ul>
+					<ul><li><a href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></ul>
 				</div>
 			</div>
 
