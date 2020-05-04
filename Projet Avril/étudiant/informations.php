@@ -3,18 +3,19 @@ session_start();
 
 include 'include/fonction.php';
 include 'include/pageElement.php';
+include 'include/fonctionCompte.inc.php';
 
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<title>API</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="styles.css"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 	
@@ -36,9 +37,9 @@ include 'include/pageElement.php';
 				Pphoto();
 			?>
 
-			<form accept="test.php" method="post" enctype="multipart/form-data">
-				<p class="modification-image-title">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" multiple><br />
-				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image">
+			<form method="post" enctype="multipart/form-data">
+				<p class="modification-image-title">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" /><br />
+				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image" />
 			</form>
 
 
@@ -114,8 +115,8 @@ include 'include/pageElement.php';
 
 	</div>
 
-	<script src="app.js" meta="utf-8"></script>
-	<script type="text/javascript">
+	<script src="app.js"></script>
+	<script>
 	function liste_groupe(){
 		affiche_Groupe(<?php  echo($jsonText);?>);
 	}

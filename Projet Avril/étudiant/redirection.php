@@ -3,18 +3,20 @@ session_start();
 
 include 'include/fonction.php';
 include 'include/pageElement.php';
+include 'include/fonctionInscription.inc.php';
+include 'include/fonctionConnexion.inc.php';
 
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 	<title>API</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="styles.css"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 	<body>
 
@@ -83,8 +85,8 @@ include 'include/pageElement.php';
 			<div class="form_connexion">
 				<p class="p_connexions">Connexion</p>
 				<form action="connexion.php" method="post">
-					<input class="input" type="mail" name="login" minlength="6" placeholder="Adresse Mail" required="required" />
-					<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="required" /><br />
+					<input class="input" type="email" name="login" minlength="6" placeholder="Adresse Mail" required="" />
+					<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="" /><br />
 					<input class="connexion-submit" type="submit" value="Valider" />
 				</form>
 				<?php
@@ -94,8 +96,8 @@ include 'include/pageElement.php';
 
 		</div>
 
-	<script src="app.js" meta="utf-8"></script>
-	<script type="text/javascript">
+	<script src="app.js"></script>
+	<script>
 	function liste_groupe(){
 		affiche_Groupe(<?php  echo($jsonText);?>);
 	}

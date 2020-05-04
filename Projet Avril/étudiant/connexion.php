@@ -2,6 +2,7 @@
 	session_start();
 
 	include 'include/fonction.php';
+	include 'include/fonctionConnexion.inc.php';
 
 
 	//Vérifie le remplissage du formulaire

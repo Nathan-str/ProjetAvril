@@ -2,6 +2,7 @@
 	session_start();
 
 	include 'include/fonction.php';
+	include 'include/fonctionInscription.inc.php';
 
 
 	function inscription2($nom, $prenom, $mail, $numero, $mdp , $mdp1, $fichier, $fichierID,$pageRenvoie, $pageErreur){
