@@ -3,6 +3,7 @@ session_start();
 
 include 'fonction.php';
 include 'pageElement.php';
+include 'include/fonctionMosaique.inc.php';
 
 $verifPseudo = verifElement($_SESSION['pseudo']);
 

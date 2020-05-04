@@ -38,6 +38,9 @@ html, body {
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 	border-bottom: 2px solid transparent;
+	text-transform : uppercase;
+    letter-spacing : 0.01em;
+    text-shadow: 1px 1px 3px black;
 }
 
 .logo:hover{
@@ -216,7 +219,7 @@ html, body {
 	position: relative;
 	text-align: center;
 	left: 80%;
-	bottom: 3.3%;
+	bottom: 4%;
 }
 
 .cube-choix-p{
@@ -235,13 +238,13 @@ html, body {
 .all_infos{
 	position: relative;
 	right: 22%;
-	top: 40px;
+	top: 30px;
 }
 
 .all_infos-p{
 	position: relative;
 	left: 5%;
-	top: 17px;
+	top: 10px;
 }
 
 .toggle-traitement{
@@ -309,11 +312,12 @@ span.traitement-icon:after{
 	left: 80%;
 	border-radius: 10px;
 	display: none;
+	bottom: 1%;
 }
 
 .formulaire-traitement-form{
 	position: relative;
-	top: 15%;
+	top: 10%;
 }
 
 .en-tete-filiere{

@@ -6,58 +6,37 @@
 	//Fonction qui renvoie les différentes erreurs en cas de problèmes d'inscription sur la page "redirection.php"
 	function errorInscription(){
 
-		if(isset($_GET['error'])){
-		if($_GET['error'] == 3){ //2: GET définie dans la page vérifiant les identifiants 
-		?>
-		<script type="text/javascript">
-			alert("Les mots de passes ne sont pas identiques !");
-		</script>
-		<?php
-		}elseif($_GET['error'] == 4){
-		?>
-		<script type="text/javascript">
-			alert("Les mots de passes doivent être de 6 caractères minimum!");
-		</script>
-		<?php
-		}elseif($_GET['error'] == 5){
-		?>
-		<script type="text/javascript">
-			alert("L'adresse mail ou le numéro est déjà utilisé!");
-		</script>
-		<?php
-			}elseif ($_GET['error'] == 0) {
-		?>
-		<script type="text/javascript">
-			alert("Inscription réussie!");
-		</script>
-		<?php
-			}
-		}
+		error("0", "Inscription réussi !");
+		error("3", "Les mots de passes ne sont pas identiques !");
+		error("4", "Les mots de passes doivent être de 6 caractères minimum !");
+		error("5", "L'adresse mail ou le numéro est déjà utilisé !");
+		error("6", "Filière ou groupe manquant !");
+		error("7", "La syntaxe du numéro est incorrect !");
+		error("8", "La syntaxe du nom est incorrect !");
+		error("9", "La syntaxe du mail est incorrect !");
+		error("10", "La syntaxe du mot de passe est incorrect !");
 	}
 
 	//Fonction qui renvoie les messages d'erreurs en cas de problème de connexion sur la page  "redirection.php"
 
 	function errorConnexion(){
 
-		if(isset($_GET['error'])){
-			if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-			?>
-			<script type="text/javascript">
-				alert("Mauvais identifiants !")
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-			?>
-			<script type="text/javascript">
-				alert("Veuillez entrer des champs !")
-			</script>
-			<?php 			
-			}
-		}
+		error("2", "Mauvais identifiants!");
+		error("1", "Veuillez entrez des champs !");
 
 	}
 
-
+	function error($numero, $message){
+		if(isset($_GET['error'])){
+			if($_GET['error'] == $numero){
+			?>
+			<script type="text/javascript">
+				alert("<?php echo($message);?>");
+			</script>
+			<?php
+			}
+		}
+	}
 
 
 	//------------------------------------------------------------------
@@ -72,6 +51,15 @@
 	        $chn .= chr(floor(rand(0, 25)+97));
 	        return $chn;
 	    }
+    }
+
+    function Regex($pattern, $pseudo){
+    	if(preg_match($pattern, $pseudo)){
+    		$continue = true;
+    	}else{
+    		$continue = false;
+    	}
+    	return $continue;
     }
 
     //Fonction écrivant dans le fichier des logs, toutes les incriptions réussi
@@ -156,29 +144,59 @@
 		$longueur = longueur($mdp);
 		$longueur2 = longueur($mdp1);
 
+		$regexNom = Regex('#[a-zA-Z]+[^;|]#',$nom);
+		$regexPrenom = Regex('#[a-zA-Z]+[^;|]#', $prenom);
+		$regexMail = Regex("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/", $mail);
+		$regexNumero = Regex("#[0-9]{10}#", $numero);
+		$regexMdp = Regex('#[a-zA-Z0-9]+[^;|]#', $mdp);
+
+		$regexNomPv= Regex("/^[^;]*$/", $nom);
+		$regexPrenomPv = Regex("/^[^;]*$/", $prenom);
+		$regexMdpPv = Regex("/^[^;]*$/", $mdp);
+		$regexMailPv = Regex("/^[^;]*$/", $mail);
+
 		if($continue == true && $suite == true){
 			if($longueur == true && $longueur2 == true){
 				if($mdp == $mdp1){
+					if($regexNumero == true){
+						if($regexNom == true && $regexPrenom == true && $regexNomPv == true && $regexPrenomPv == true){
+							if($regexMail == true && $regexMailPv == true){
+								if($regexMdp == true && $regexMdpPv == true){
+									$car_alea = alea();
+									$secure_mot_de_passe = $car_alea . $mdp;
 
-					$car_alea = alea();
-					$secure_mot_de_passe = $car_alea . $mdp;
+									$donnes = fopen($fichier, 'a+');
+									$monfichier = fopen($fichierID, 'r+');
 
-					$donnes = fopen($fichier, 'a+');
-					$monfichier = fopen($fichierID, 'r+');
+									$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
+									$id += 1; // On augmente de 1 ce nombre de pages vues
+									fseek($monfichier, 0); // On remet le curseur au début du fichier
+									fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
 
-					$id = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-					$id += 1; // On augmente de 1 ce nombre de pages vues
-					fseek($monfichier, 0); // On remet le curseur au début du fichier
-					fputs($monfichier, $id); // On écrit le nouveau nombre de pages vues
+									fputs($donnes, $id . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) ."\n");
 
-					fputs($donnes, $id . ";" . $nom . ";" . $prenom . ";" . $mail . ";" . $numero . ";" . $car_alea . ";" .hash("sha256",$secure_mot_de_passe) ."\n");
+									fclose($monfichier);
+									fclose($donnes);
 
-					fclose($monfichier);
-					fclose($donnes);
-
-					FichierLog("inscription réussi",$_POST["mail"]);
-					header("location:./$page?error=0");
-
+									FichierLog("inscription réussi",$_POST["mail"]);
+									header("location:./$page?error=0");
+								}else{
+									FichierLog("inscription échoué (mauvaise syntaxe mot de passe)",$mail);
+									header("location:./$pageErreur?error=10");
+								}
+							}else{
+								FichierLog("inscription échoué (mauvaise syntaxe mail)",$mail);
+								header("location:./$pageErreur?error=9");
+							}
+						}else{
+							FichierLog("inscription échoué (mauvaise syntaxe nom)",$mail);
+							header("location:./$pageErreur?error=8");
+						}
+						
+					}else{
+						FichierLog("inscription échoué (mauvaise syntaxe numéro)",$mail);
+						header("location:./$pageErreur?error=7");
+					}
 
 				}else{
 					FichierLog("inscription échoué (mots de passe différents)",$mail);
@@ -329,12 +347,14 @@
 					//Redirige ensuite vers l'accueil
 					FichierLog("connexion réussi",$mail);
 					header("location:./$pageRenvoie");
+					exit();
 				}else{
 					header("location:./$pageErreur?error=2");
 				}
 					
-			}else{
+			}elseif ($i == sizeof(file("$fichier"))-1){
 				header("location:./$pageErreur?error=2");
+				exit();
 			}
 		}
 	}
@@ -358,257 +378,9 @@
 	}
 
 	//-----------------------------------------------------------
-	//Fonction pour la page "informations.php"
-
-	//Fonction écrivant toutes les infos de comptes pour le compte connecté, depuis le fichier "comptes.csv"
-	//Fonction utilisé sur la page "informations.php"
-	function comptes(){
-		$donnes = fopen('fichiers/comptes.csv', 'r+');
-
-		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 			$ligne = fgets($donnes);
-				$tableau = explode(";", $ligne);
-
-			if ($_SESSION['id'] == $tableau[0]){
-				$prenom = $tableau[2];
-				$nom = $tableau[1];
-				$mail = $tableau[3];
-				$numero = $tableau[4];
-				$filiere = $tableau[7];
-				$groupe = $tableau[8];	
-			}
-			
-		}
-		echo("<p class=\"p-info-prenom\">Prénom: " . $prenom."</p>");
-		echo("<p class=\"p-info-nom\">Nom: " . $nom."</p>");
-		echo("<p class=\"p-info-mail\">Adresse mail: " . $mail."</p>");
-		echo("<p class=\"p-info-numero\">Numéro de téléphone: " . $numero . "</p>");
-		echo("<p class=\"p-info-filiere\">Filière: " . $filiere . "</p>");
-		echo("<p class=\"p-info-groupe\">Groupe: " . $groupe . "</p>");
-	}
-
-
-	//Fonction permettant de télécharger une image choisi dans le dossier d'images indiqué (ici celui du site)
-	//Les images correspondant aux comptes ayant le même nom, écrase l'ancienne image
-	//Fonction utilisé sur la page "informations.php"
-	function upload(){
-		if(isset($_POST['upload'])){
-
-			$poids = filesize($_FILES['image']['tmp_name']);
-			$nom_image = $_SESSION['id'] . ".png";
-			if($_FILES['image']['error'] == 4 ){
-				$nom_image = "profil_defaut.png";
-			}
-			$type_image = $_FILES['image']['type'];
-			$taille_image = $_FILES['image']['size'];
-			$image_tmp_name=$_FILES['image']['tmp_name'];
-			$description = $_POST['desc'];
-
-
-			if ($poids > (300 * 1024) ) {
-				header("location:./informations.php?error=1");
-			}else{
-				move_uploaded_file($image_tmp_name, "images/$nom_image");
-			}
-			
-
-			//$donnes = fopen('fichiers/images.csv', 'a+');
-
-			$donnes = fopen('fichiers/comptes.csv', 'r+');
-			$informations = array();
-			for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-		 		$ligne = fgets($donnes);
-		 		$lignes = substr($ligne, 0,-1);
-				$tableau = explode(";", $lignes);
-				if ($tableau[0] == $_SESSION['id']){
-					$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $nom_image;
-					array_push($informations, $strinformations);
-				}else{
-					$strinformations = $tableau[0] . ";" . $tableau[1] . ";" . $tableau[2] . ";" . $tableau[3] . ";" . $tableau[4] . ";" . $tableau[5] . ";" . $tableau[6] . ";" . $tableau[7] . ";" . $tableau[8] . ";" . $tableau[9];
-					array_push($informations, $strinformations);
-				}
-			}
-			fclose($donnes);
-
-			$donnes = fopen('fichiers/comptes.csv', 'w');
-
-			for ($i=0;$i<sizeof($informations);$i++){
-				fputs($donnes, $informations[$i] . "\n");
-			}
-			fclose($donnes);
-		}
-	}
-
-	//Fonction affichant l'image correspondant à l'utilisateur (par le nom de l'image étant l'ID)
-	//Fonction utilisé pour la page "informations.php"
-	function Pphoto(){
-		
-		$erreur = $_FILES['image']['error'];
-		$donnes = fopen('fichiers/comptes.csv', 'r+');
-
-		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 		$ligne = fgets($donnes);
-			$tableau = explode(";", $ligne);
-
-			if ($tableau[0] == $_SESSION["id"]){
-				$nom_image = $tableau[9];
-			}
-		}
-
-		echo"<img src='images/$nom_image' width='170' height='170' class=\"pp\"><br>$description";
-		
-	}
-
-	//Fonction permettant d'afficher un message d'erreur si le nouveau email indiqué ou le nouveau numéro indiqué existe déjà
-	//Fonction utilisé sur la page "informations.php"
-	function erreur(){
-		if(isset($_GET['error'])){
-			if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-			?>
-			<script type="text/javascript">
-				alert("L'email ou le numero existe déjà' !");
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 3) {
-			?>
-			<script type="text/javascript">
-				alert("Le numéro existe déjà' !");
-			</script>	
-			<?php
-			}
-		}
-	}
-
-
-
-	//----------------------------------------
-	//Fonction pour la page "apiEtu.php"
-
-
-
-	//Fonction permettant d'afficher l'API pour la filière choisi pour tous les comptes étudiants 
-	//Fonction utilisé pour la page "apiEtu.php"
-	function filiere(){
-
-		$donnes = fopen('fichiers/comptes.csv', 'r+');
-		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 		$ligne = fgets($donnes);
-	 		$lignes = substr($ligne, 0,-1);
-			$tableau = explode(";", $ligne);
-			$filiere = $tableau[7];
-			
-			if ($_GET["filiere"] == $filiere){
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["nom"] = $tableau[1];
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["prenom"] = $tableau[2];
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["mail"] = $tableau[3];
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["numero"] = $tableau[4];
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["image"] = $tableau[9];
-				$jsonArray["$filiere"]["$tableau[8]"]["$tableau[0]"]["id"] = $tableau[0];
-			}
-		}
-		fclose($donnes);
-		return $jsonArray;
-	}
-
-
-	//Fonction permettant d'afficher l'API pour la filière et le groupe choisi pour tous les comptes étudiants 
-	//Fonction utilisé pour la page "apiEtu.php"
-	function groupe($filiere, $groupe){
-
-	    $donnes = fopen('fichiers/comptes.csv', 'r+');
-		for ($i=0;$i<sizeof(file("fichiers/comptes.csv"));$i++){
-	 		$ligne = fgets($donnes);
-	 		$lignes = substr($ligne, 0,-1);
-			$tableau = explode(";", $ligne);
-
-			if($filiere == $tableau[7] && $groupe == $tableau[8]){
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["nom"] = $tableau[1];
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["prenom"] = $tableau[2];
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["mail"] = $tableau[3];
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["numero"] = $tableau[4];
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["image"] = $tableau[9];
-				$jsonArray["$filiere"]["$groupe"]["$tableau[0]"]["id"] = $tableau[0];
-			}
-
-		}
-		fclose($donnes);
-		return $jsonArray;
-	}
-
-
-
-	//------------------------------------
-	//Fonction pour la page "cle.php"
-
-
-	//Fonction permettant d'afficher des messages d'erreurs si il y a eu un problème avec l'authentification de la clé d'API
-	//Fonction utilisé sur la page "documentation.php"
-	function errorConnexionCle(){
-
-		if(isset($_GET['error'])){
-			if($_GET['error'] == 0){ //2: GET définie dans la page vérifiant les identifiants 
-			?>
-			<script type="text/javascript">
-				alert("Mauvais identifiants!")
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 1) { //1: GET définie dans la page vérifiant les identifiants
-				$donnes = fopen('fichiers/cle.csv', 'r+');
-
-				for ($i=0;$i<sizeof(file("fichiers/cle.csv"));$i++){
-	 				$ligne = fgets($donnes);
-					$tableau = explode(";", $ligne);
-		
-
-					if ($_SESSION['mail'] == $tableau[0]){
-						echo("<p>Votre clé API: " . $tableau[1] ."</p>");
-						
-					}
-				}
-				fclose($donnes);
-			}elseif ($_GET['error'] == 3) {
-			?>
-			<script type="text/javascript">
-				alert("Les mots de passes sont différents !");
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 6) {
-			?>
-			<script type="text/javascript">
-				alert("Clé créée !");
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 5) {
-			?>
-			<script type="text/javascript">
-				alert("L'adresse mail existe déjà !");
-			</script>
-			<?php
-			}else if ($_GET['error'] == 4) {
-			?>
-			<script type="text/javascript">
-				alert("Il manque des champs !");
-			</script>
-			<?php
-			}
-		}
-	}
-
-
-	//Fonction permettant de créer une chaine de caractères aléatoire qui sera la clé d'API
-	//Fonction utilisé sur la page "cle.php"
-	function genererChaineAleatoire($longueur = 10){
-		 $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		 $longueurMax = strlen($caracteres);
-		 $chaineAleatoire = '';
-		 for ($i = 0; $i < $longueur; $i++)
-		 {
-		 $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
-		 }
-		 return $chaineAleatoire;
-	}
-
 	
+
+
 	function verifSolo($parametre, $numero, $fichier){
 			$donne = fopen($fichier, 'r+');
 
@@ -632,23 +404,6 @@
 	}
 
 	
-	//Fonction qui vérifie le formulaire et ses informations avec le fichier "cle.csv" contenant les adresses mails et les clés et renvoie la clé si tout est vérifié et que l'adresse mail et le mot de passe existent
-	//Fonction utilisé sur la page "cle.php"
-	function verifCle(){
-
-		$continue = verifSolo($_GET['key-mail'], "0", 'fichiers/cle.csv');
-		$suite = verifSolo(hash("sha256",$_GET['key-pwd']), "2", 'fichiers/cle.csv');
-
-		if ($continue == true && $suite == true){
-			$_SESSION['mail'] = $_GET['key-mail'];
-			header("location:./documentation.php?error=1");
-		}else{
-			header("location:./documentation.php?error=0");
-		}
-		/*}else{
-			header("location:./documentation.php?error=2");
-		}*/
-	}
 
 	function double($parametre, $numero, $fichier){
 		$donne = fopen($fichier, 'r+');
@@ -673,59 +428,7 @@
 	}
 
 
-	//Fonction permettant d'insérer dans le fichier "cle.csv" l'adresse mail et le mot de passe taper. Si ils n'existent psa déjà, alors écrit dans le fichier l'adresse mail, le mot de passe, la clé créer, l'heure de création et un compteur
-	//Fonction utlisé sur la page "cle.php"
-	function inserCle(){
-		$donne = fopen('fichiers/cle.csv', 'r+');
-
-		while(!feof($donne)){
-			$ligne = fgets($donne);
-			if ($ligne != "") {
-				$lignes = substr($ligne, 0,-2);
-				$tableau = explode(";", $lignes);
-
-				if ($_GET['mail'] == $tableau[0]){
-					$fin = false;
-					break;
-				}else{
-					$fin = true;
-				}
-			}
-		}
-
-		if ($fin == true){
-
-			$mail = $_GET['mail'];
-			$password = $_GET['pwd'];
-			$cle = genererChaineAleatoire(20);
-
-			//Vérifie si le formulaire a bien été rempli
-			if (!empty($mail) && !empty($password) && !empty($_GET['pwd1']) && $_GET['pwd1'] == $_GET['pwd']){
-
-				$donnes = fopen('fichiers/cle.csv', 'a+');
-				
-				//Met les éléments du formulaire dans le fichier et hache le mot de passe et définie une date et un compteur
-				$strinfos = $_GET['mail'] . ";" . $cle . ";" .hash("sha256",$password) . ";" . date(h) . ";" . "0" ."\n";
-				fputs($donnes, $strinfos);
-
-				fclose($donnes);
-				FichierLog("Clé distribué", $mail);
-
-				header("location:./documentation.php?error=6");
-
-			}elseif($_GET['pwd'] != $_GET['pwd1']){
-				//Si il y a une erreur alors il est redirigé vers l'accueil
-				FichierLog("Echec clé", $mail);
-				header("location:./documentation.php?error=3");
-			}elseif($_POST["pwd"]<5 || $_POST["pwd1"]<5){
-				FichierLog("Echec clé", $mail);
-				header("location:./documentation.php?error=4");
-			}
-		}else{
-			FichierLog("Echec clé", $mail);
-			header("location:./documentation.php?error=5");
-		}
-	}
+	
 
 	function choix($get){
 		if($get == "filiere"){
@@ -775,6 +478,7 @@
 
 					$cpt += 1;
 
+
 					echo("<div class=profil>");
 					echo("<img src=http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"][$i]['image'] . "width=200 height=200 style=border-radius:10px; alt=error class=image onclick=\"clickImage($i)\";><br />");
 					echo "<p>".$jsonArray["$filiere"][$i]['prenom'] . " " . $jsonArray["$filiere"][$i]['nom'] . "</p><br />";
@@ -800,6 +504,7 @@
 
 					$cpt += 1;
 
+
 					echo("<div class=profil>");
 					echo("<img src=http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"]["$groupe"][$i]['image'] . "width=200 height=200 style=border-radius:10px; alt=error class=image onclick=\"clickImage($i)\";><br />");
 					echo "<p>".$jsonArray["$filiere"]["$groupe"][$i]['prenom'] . " " . $jsonArray["$filiere"]["$groupe"][$i]['nom'] . "</p><br />";
@@ -812,12 +517,12 @@
 	}
 
 	function jsonText(){
-		$jsonText = file_get_contents('fichiers/filiere.json');
+		$jsonText = file_get_contents('http://nathan-str-etudiant.alwaysdata.net/fichiers/filiere.json');
 		return $jsonText;
 	}
 
 	function filiereJSON($nameFiliere, $nameGroupe){
-		$jsonText = file_get_contents('fichiers/filiere.json');
+		$jsonText = file_get_contents('http://nathan-str-etudiant.alwaysdata.net/fichiers/filiere.json');
 		$jsonArray = json_decode($jsonText,True);
 
 		echo("<select name=$nameFiliere id=select-filiere class=select-filiere onchange=\"liste_groupe();\">");

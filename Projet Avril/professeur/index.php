@@ -3,6 +3,8 @@ session_start();
 
 include 'fonction.php';
 include 'pageElement.php';
+include 'include/fonctionInscription.inc.php';
+include 'include/fonctionConnexion.inc.php';
 
 
 ?>
