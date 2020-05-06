@@ -33,24 +33,31 @@
 				$jsonText = file_get_contents('http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&filiere='.$filiere.'&cle=' .$cle);
 				$jsonArray = json_decode($jsonText,True);
 
-				echo("<h1 class=\"en-tete-filiere>Elèves de la filière\" " . $filiere . ":</h1>");
+				if (!isset($jsonArray["Error"])){
 
-				echo("<form>");
-					echo("<input type=\"button\" class=\"impression-filiere\" value=\"Imprimer la page\" onClick=\"window.print()\" />");
-				echo("</form>");
+					echo("<h1 class=\"en-tete-filiere\">Elèves de la filière " . $filiere . ":</h1>");
 
-				for ($i=1; $i <= sizeof($jsonArray["$filiere"]); $i++){
+					echo("<form>");
+						echo("<input type=\"button\" class=\"impression-filiere\" value=\"Imprimer la page\" onClick=\"window.print()\" />");
+					echo("</form>");
 
-					$cpt += 1;
+					for ($i=1; $i <= sizeof($jsonArray["$filiere"]); $i++){
+
+						$cpt += 1;
 
 
-					echo("<div class=\"profil\">");
-					echo("<img src=\"http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"][$i]['image'] . "\" width=\"200\" height=\"200\" style=\"border-radius:10px;\" alt=\"error\" class=\"image\" onclick=\"clickImage($i);\" /><br />");
-					echo "<p>".$jsonArray["$filiere"][$i]['prenom'] . " " . $jsonArray["$filiere"][$i]['nom'] . "</p><br />";
-					echo "<p class=info id=$i style=\"display: none;\">".$jsonArray["$filiere"][$i]['mail'] . "<br />". $jsonArray["$filiere"][$i]['numero'] . "</p><br />";
-					echo("</div>");	
+						echo("<div class=\"profil\">");
+						echo("<img src=\"http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"][$i]['image'] . "\" width=\"200\" height=\"200\" style=\"border-radius:10px;\" alt=\"error\" class=\"image\" onclick=\"clickImage($i);\" /><br />");
+						echo "<p>".$jsonArray["$filiere"][$i]['prenom'] . " " . $jsonArray["$filiere"][$i]['nom'] . "</p><br />";
+						echo "<p class=info id=$i style=\"display: none;\">".$jsonArray["$filiere"][$i]['mail'] . "<br />". $jsonArray["$filiere"][$i]['numero'] . "</p><br />";
+						echo("</div>");	
 
+					}
+				}else{
+					messageErreurCle();
 				}
+
+				
 
 			}else{
 
@@ -59,26 +66,44 @@
 				$jsonText = file_get_contents('http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere='. $filiere .'&choix=groupe&groupe='.$groupe .'&cle='.$cle);
 				$jsonArray = json_decode($jsonText,True);
 
-				echo("<h1 class=\"en-tete-groupe\">Elèves du groupe " . $groupe . " de la filière " . $filiere . ":</h1>");
+				if (!isset($jsonArray["Error"])){
 
-				echo("<form>");
-					echo("<input type=\"button\" class=\"impression-groupe\" value=\"Imprimer la page\" onClick=\"window.print()\" />");
-				echo("</form>");
+					echo("<h1 class=\"en-tete-groupe\">Elèves du groupe " . $groupe . " de la filière " . $filiere . ":</h1>");
 
-				for ($i=1; $i <= sizeof($jsonArray["$filiere"]["$groupe"]); $i++){
+					echo("<form>");
+						echo("<input type=\"button\" class=\"impression-groupe\" value=\"Imprimer la page\" onClick=\"window.print()\" />");
+					echo("</form>");
 
-					$cpt += 1;
+					for ($i=1; $i <= sizeof($jsonArray["$filiere"]["$groupe"]); $i++){
+
+						$cpt += 1;
 
 
-					echo("<div class=\"profil\">");
-					echo("<img src=\"http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"]["$groupe"][$i]['image'] . "\" width=\"200\" height=\"200\" style=\"border-radius:10px;\" alt=\"error\" class=\"image\" onclick=\"clickImage($i);\" /><br />");
-					echo "<p>".$jsonArray["$filiere"]["$groupe"][$i]['prenom'] . " " . $jsonArray["$filiere"]["$groupe"][$i]['nom'] . "</p><br />";
-					echo "<p class=\"info\" id=\"$i\" style=\"display: none;\">".$jsonArray["$filiere"]["$groupe"][$i]['mail'] . "<br />". $jsonArray["$filiere"]["$groupe"][$i]['numero'] . "</p><br />";
-					echo("</div>");	
+						echo("<div class=\"profil\">");
+						echo("<img src=\"http://nathan-str-etudiant.alwaysdata.net/images/" . $jsonArray["$filiere"]["$groupe"][$i]['image'] . "\" width=\"200\" height=\"200\" style=\"border-radius:10px;\" alt=\"error\" class=\"image\" onclick=\"clickImage($i);\" /><br />");
+						echo "<p>".$jsonArray["$filiere"]["$groupe"][$i]['prenom'] . " " . $jsonArray["$filiere"]["$groupe"][$i]['nom'] . "</p><br />";
+						echo "<p class=\"info\" id=\"$i\" style=\"display: none;\">".$jsonArray["$filiere"]["$groupe"][$i]['mail'] . "<br />". $jsonArray["$filiere"]["$groupe"][$i]['numero'] . "</p><br />";
+						echo("</div>");	
 
+					}
+				}else{
+					messageErreurCle();
 				}
+
+				
 
 			}
 	}
+
+	function messageErreurCle(){
+		echo("<div class=\"cle-epuise\">");
+		echo("<h1 class=\"h1-cle-epuise\">Erreur</h1>");
+		echo("<p class=\"p-cle-epuise\">La mosaïque a trop été utilisée !</p>");
+		echo("<p class=\"p-cle-epuise\">Réessayez l'heure suivante !</p>");
+		echo("</div>");
+	}
+
+
+	
 
 ?>
