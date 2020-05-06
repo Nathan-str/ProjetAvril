@@ -46,7 +46,8 @@
 			if ($poids > (300 * 1024) ) {
 				header("location:./informations.php?error=1");
 			}else{
-				move_uploaded_file($image_tmp_name, "images/$nom_image");
+				move_uploaded_file($image_tmp_name, "images/$nom_image");	
+				header("location:./informations.php");
 			}
 			
 
@@ -100,21 +101,9 @@
 	//Fonction permettant d'afficher un message d'erreur si le nouveau email indiqué ou le nouveau numéro indiqué existe déjà
 	//Fonction utilisé sur la page "informations.php"
 	function erreur(){
-		if(isset($_GET['error'])){
-			if($_GET['error'] == 2){ //2: GET définie dans la page vérifiant les identifiants 
-			?>
-			<script type="text/javascript">
-				alert("L'email ou le numero existe déjà' !");
-			</script>
-			<?php
-			}elseif ($_GET['error'] == 3) {
-			?>
-			<script type="text/javascript">
-				alert("Le numéro existe déjà' !");
-			</script>	
-			<?php
-			}
-		}
+		error("1", "L'image est trop lourde (+300ko) !");
+		error("2", "L'email ou le numero existe déjà' !");
+		error("3", "Le numéro existe déjà' !");
 	}
 
 ?>

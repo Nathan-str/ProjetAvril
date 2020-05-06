@@ -6,7 +6,7 @@ function headeer(){
 				<nav class="menu">
 					<div class="inner">
 						<div class="gauche">
-							<a class="logo" href="redirection.php">API etudiant</a>
+							<a class="logo" href="index.php">API etudiant</a>
 						</div>
 
 						<div class="droite">
@@ -44,7 +44,7 @@ function footeer(){
 				</div>
 				<div class="footer-section links">
 					<p>Liens</p>
-					<ul><li><a href="redirection.php" style="color: white;">Accueil</a></li></ul>
+					<ul><li><a href="index.php" style="color: white;">Accueil</a></li></ul>
 				</div>
 				<div class="footer-section contact-form">
 					<p><i class="fa fa-address-card-o"></i> Contacts</p>

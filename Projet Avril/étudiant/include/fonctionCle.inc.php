@@ -22,9 +22,9 @@
 						echo("<p>Votre clé API: " . $tableau[1] ."</p>");
 						echo("<p>Utilisation: ". $tableau[4] . "/200<br />");
 						if ($tableau[4] > 200) {
-							echo("La clé n'est plus utilisable pour cette heure");
+							echo("La clé n'est plus utilisable pour cette heure</p>");
 						}else{
-							echo("La clé est utilisable pour cette heure");
+							echo("La clé est utilisable pour cette heure</p>");
 						}
 						
 					}
@@ -75,22 +75,53 @@
 	function verifCle(){
 
 		$mdp = $_GET['key-pwd'];
-		$hash = hash("sha256",$mdp);
+		$mail = $_GET['key-mail'];
 
+		verifSession($mail,"documentation.php?error=0");
 		verifSession($mdp, "documentation.php?error=0");
+		$longueur = longueur($mdp);
 
-		$continue = verifSolo($_GET['key-mail'], "0", 'fichiers/cle.csv');
-		$suite = verifSolo($hash, "2", 'fichiers/cle.csv');
+		$donnes = fopen("./fichiers/cle.csv", 'r+');
+			
+		for ($i=0;$i<sizeof(file("./fichiers/cle.csv"));$i++){
+		 	$ligne = fgets($donnes);
+		 	$ligne = str_replace("\n", "", $ligne);
+			$tableau = explode(";", $ligne);
 
-		if ($continue == true && $suite == true){
-			$_SESSION['mail'] = $_GET['key-mail'];
-			header("location:./documentation.php?error=1");
-		}else{
-			header("location:./documentation.php?error=0");
+
+			if($mail == $tableau[0]){
+
+				$hash = hash("sha256", $mdp);
+
+
+				$valider_mail = verifSolo($mail, 0, "./fichiers/cle.csv");
+				$valider_mdp = verifMdp($mail,0,$hash, 2, "./fichiers/cle.csv");
+
+				//tester avec la fonction
+				if ($valider_mdp == true){
+
+					if($longueur == true){
+				
+						$_SESSION['mail'] = $_GET['key-mail'];
+						//echo("ça marche");
+						header("location:./documentation.php?error=1");
+						exit();
+					}else{
+						//echo("trop court");
+						header("location:./documentation.php?error=0");
+					}
+				}else{
+					//echo("mdp error");
+					header("location:./documentation.php?error=0");
+				}
+					
+			}elseif ($i == sizeof(file("./fichiers/cle.csv"))-1){
+				//echo("error mail");
+				header("location:./documentation.php?error=0");
+				exit();
+			}
 		}
-		/*}else{
-			header("location:./documentation.php?error=2");
-		}*/
+
 	}
 
 	function inserCle(){
@@ -110,10 +141,10 @@
 			$regexMailPv = Regex("/^[^;]*$/", $mail);
 
 			verifSession($mail, "documentation.php?error=5");
-			verifSession($password, "documentation.php?error=5");
+			$valideMdp = verifSession($password, "documentation.php?error=5");
 
 			//Vérifie si le formulaire a bien été rempli
-			if ($_GET['pwd1'] == $_GET['pwd'] && $regexMail == true && $regexMailPv == true){
+			if ($password == $password1 && !empty($password) && $regexMail == true && $regexMailPv == true){
 
 				$donnes = fopen('fichiers/cle.csv', 'a+');
 				

@@ -115,6 +115,32 @@
 			return $continue;
 		}	
 
+		function verifMdp($limite,$numeroLimite,$parametre, $numero, $fichier){
+
+			$donne = fopen($fichier, 'r+');
+
+			for ($i=0;$i<sizeof(file($fichier));$i++){
+				$ligne = fgets($donne);
+				if ($ligne != "") {
+					$lignes = substr($ligne, 0,-1);
+					$tableau = explode(";", $lignes);
+
+					if ($limite == $tableau[$numeroLimite]){
+						if ($parametre == $tableau[$numero]){
+							$continue = true;
+							break;
+						}else{
+							$continue = false;
+						}
+					}
+				}
+			}
+
+			fclose($donne);
+			return $continue;
+
+		}
+
 	function double($parametre, $numero, $fichier){
 		$donne = fopen($fichier, 'r+');
 

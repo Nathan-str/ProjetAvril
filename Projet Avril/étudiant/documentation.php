@@ -3,6 +3,7 @@ session_start();
 
 include 'include/fonction.php';
 include 'include/pageElement.php';
+include 'include/fonctionConnexion.inc.php';
 include 'include/fonctionCle.inc.php';
 include 'include/fonctionApi.inc.php';
 
@@ -42,6 +43,9 @@ include 'include/fonctionApi.inc.php';
 		<input type="submit" value="Voir clé" id="Csubmit" class="form-cle-api-submit-voir" style='display:none;'/>
 	</form>
 
+</div>
+
+<div class="message-cle">
 	<?php
 	errorConnexionCle();
 	?>
@@ -79,7 +83,7 @@ include 'include/fonctionApi.inc.php';
 
 	<h3 class="h3-documentation">Par Filière:</h3>
 	<p class="p-documentation">Pour accéder à l'API de toutes une filière, il faut suivre le chemin suivant:</p>
-	<ul><li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&filiere=/nom_filiere/&cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&filiere=/nom_filiere/&cle=/cleAPI/</a></li></ul>
+	<ul><li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&amp;filiere=/nom_filiere/&amp;cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?choix=filiere&amp;filiere=/nom_filiere/&amp;cle=/cleAPI/</a></li></ul>
 	<p class="p-documentation">Il faut donc indiquer, notre choix, la filière souhaité, la clé d'API fournie</p>
 	<p class="p-documentation">Exemple: </p>
 	<ul>
@@ -89,7 +93,7 @@ include 'include/fonctionApi.inc.php';
 
 	<h3 class="h3-documentation">Par Groupe:</h3>
 	<p class="p-documentation">Pour accéder à l'API d'un groupe spécifique, il faut suivre le chemin suivant:</p>
-	<ul><li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&choix=groupe&groupe=/nom_groupe/&cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&choix=groupe&groupe=/nom_groupe/&cle=/cleAPI/</a></li></ul>
+	<ul><li class="p-documentation"><a href="http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&amp;choix=groupe&amp;groupe=/nom_groupe/&amp;cle=/cleAPI/">http://nathan-str-etudiant.alwaysdata.net/apiEtu.php?filiere=/nom_filiere/&amp;choix=groupe&amp;groupe=/nom_groupe/&amp;cle=/cleAPI/</a></li></ul>
 	<p class="p-documentation">Il faut donc indiquer, notre choix, la filière souhaité, le groupe correspondant à la filière et la clé d'API fournie</p>
 	<p class="p-documentation">Exemple: </p>
 	<ul>
@@ -98,23 +102,14 @@ include 'include/fonctionApi.inc.php';
 		<li class="p-documentation"><p>/cleAPI/ = fdsds65fsd65fsdfdsf</p></li>
 	</ul>
 
-	<h3 class="h3-documentation">Construction de l'API</h3>
+	<h3 class="h3-documentation">Construction de l'API pour les filières</h3>
 
-	<ul>
-		<li class="p-documentation"><p>Filière:</p></li>
-		 <ul><li class="p-documentation"><p>Groupe:</p></li>
-		 	<ul><li class="p-documentation"><p>NBR</p></li>
-		 		<ul><li class="p-documentation"><p>Nom</p></li>
-		 			<li class="p-documentation"><p>Prénom</p></li>
-		 			<li class="p-documentation"><p>Mail</p></li>
-		 			<li class="p-documentation"><p>Numéro</p></li>
-		 			<li class="p-documentation"><p>ID</p></li>
-		 			<li class="p-documentation-end"><p>Image</p></li>
-		 		</ul>
-		 	</ul>
-		 </ul>
-	</ul>
-	<p class="p-documentation">*L'API est limitée à 20 utilisations par heure pour chaque clé.</p>
+	<img src="images/api-filiere.png" alt="error" style="position: relative; bottom: 4%; left: 8%; border-radius: 10px;" />
+
+	<h3 class="h3-documentation">Construction de l'API pour les groupes</h3>
+
+	<img src="images/API.png" alt="error" style="position: relative; bottom: 4%; left: 8%; border-radius: 10px;" />
+	<p class="p-documentation">*L'API est limitée à 200 utilisations par heure pour chaque clé.</p>
 </div>
 
 <?php

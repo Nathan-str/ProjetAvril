@@ -76,31 +76,7 @@ include 'include/fonctionCompte.inc.php';
 						$jsonText = jsonText();
 					?>
 					
-					<!--<select id="chg-filiere" name="new-filiere" class="new-form" onchange="adaptationFilière()">
-						<option id="L1-MIPI">L1-MIPI</option>
-						<option id="L2-MI">L2-MI</option>
-						<option id="L3-I">L3-I</option>
-						<option id="LP-RS">LP-RS</option>
-						<option id="LPI-RIWS">LPI-RIWS</option>
-					</select>
-
-					<select id="chg-groupe" name="new-groupe" class="new-form">
-						<option id="A1" style="display: block;">A1</option>
-						<option id="A2" style="display: block;">A2</option>
-						<option id="A3" style="display: block;">A3</option>
-						<option id="B1" style="display: none;">B1</option>
-						<option id="B2" style="display: none;">B2</option>
-						<option id="B3" style="display: none;">B3</option>
-						<option id="C1" style="display: none;">C1</option>
-						<option id="C2" style="display: none;">C2</option>
-						<option id="C3" style="display: none;">C3</option>
-						<option id="D1" style="display: none;">D1</option>
-						<option id="D2" style="display: none;">D2</option>
-						<option id="D3" style="display: none;">D3</option>
-						<option id="E1" style="display: none;">E1</option>
-						<option id="E2" style="display: none;">E2</option>
-						<option id="E3" style="display: none;">E3</option>
-					</select>-->
+					
 
 					<input id="chg-submit" type="submit" value="Valider" />
 
@@ -121,25 +97,7 @@ include 'include/fonctionCompte.inc.php';
 		affiche_Groupe(<?php  echo($jsonText);?>);
 	}
 
-	function affiche_Groupe(jsonText){
-	    let filiere = document.getElementById("select-filiere").value;
-	    let groupe =document.getElementById("select-groupe");
-
-	    groupe.innerHTML = "<option value=''>Groupe</option>";
-	    //for (let groupe in jsonText["listeFilieres"]){
-	    //    groupe.innerHTML += `<option value='${jsonText["listeFilieres"]["0"]}'>${jsonText["listeFilieres"]["0"]}</option>`;
-	    //}
-			
-		for (var i = 0; i < jsonText["listeFilieres"].length; i++) {
-			if (filiere == jsonText["listeFilieres"][i]["nomFiliere"]) {
-				for (var j = 0; j < jsonText["listeFilieres"][i]["groupes"].length; j++) {
-				
-					groupe.innerHTML += "<option value=" + jsonText["listeFilieres"][i]["groupes"][j] + ">" + jsonText["listeFilieres"][i]["groupes"][j] + "</option>";
-
-				}
-			}
-		}
-	}
+	
 	</script>
 
 
