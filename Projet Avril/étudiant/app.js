@@ -1,3 +1,5 @@
+//Effectue les modifications si les éléments indiqués sont ouverts
+//Utiliser pour le menu burger.
 $('.nav-toggle').click(function(e){
 	e.preventDefault();
 	$('.droite').toggleClass('is-open');
@@ -64,7 +66,7 @@ $('.toggle-traitement').click(function(e){
 
 	//-----------------------------------------------------
 
-
+	//Ouvre le fichier JSON des filières (plus utile)
 	function filiereJSON(){
 		let request = new XMLHttpRequest();
 		let fichier = "fichiers/filiere.json";
@@ -74,15 +76,12 @@ $('.toggle-traitement').click(function(e){
 	}
 
 
-
+	//Fonction permettant de varier la liste des groupes du JSON des filières selon la filière sélectionnée.
 	function affiche_Groupe(jsonText){
 	    let filiere = document.getElementById("select-filiere").value;
 	    let groupe =document.getElementById("select-groupe");
 
 	    groupe.innerHTML = "<option value=''>Groupe</option>";
-	    //for (let groupe in jsonText["listeFilieres"]){
-	    //    groupe.innerHTML += `<option value='${jsonText["listeFilieres"]["0"]}'>${jsonText["listeFilieres"]["0"]}</option>`;
-	    //}
 			
 		for (var i = 0; i < jsonText["listeFilieres"].length; i++) {
 			if (filiere == jsonText["listeFilieres"][i]["nomFiliere"]) {

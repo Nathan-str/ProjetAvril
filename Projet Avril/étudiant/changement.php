@@ -5,8 +5,7 @@ include 'include/fonction.php';
 include 'include/fonctionInscription.inc.php';
 
 
-//$fin = verification($_POST['new-mail'], $_POST['new-numero'] , 'fichiers/comptes.csv');
-
+//Vérifie si le mail ou le numéro n'existe pas déjà.
 $continue = double($_POST['new-mail'], "3", 'fichiers/comptes.csv');
 $suite = double($_POST['new-numero'], "4", 'fichiers/comptes.csv');
 
@@ -26,8 +25,10 @@ if ($continue == true && $suite == true){
 		$strpassword = $lettre . $post_password;
 		$password = hash("sha256", $strpassword);
 
+		//Vérifie la longueur du mot de passe.
 		$longueurMdp = longueur($post_password);
 
+		//Vérifie le Regex de tous les éléments.
 		$regexNom = Regex('#[a-zA-Z]+[^;|]#',$_POST['new-nom']);
 		$regexPrenom = Regex('#[a-zA-Z]+[^;|]#', $_POST['new-prenom']);
 		$regexNumero = Regex("#[0-9]{10}#", $_POST['new-numero']);
@@ -38,8 +39,10 @@ if ($continue == true && $suite == true){
 		$regexMailPv = Regex("/^[^;]*$/", $_POST['new-mail']);
 
 
+			//Pour la session de la personne connecté:
 			if ($_SESSION['id'] == $tableau[0]){
 
+				//Remplace les éléments si les formulaires ne sont pas vides.
 				if (!empty($_POST['new-mail']) && $regexMail == true && $regexMailPv == true) {
 					$mail = $_POST['new-mail'];
 					$_SESSION['pseudo'] = $_POST['new-mail'];
@@ -114,7 +117,7 @@ if ($continue == true && $suite == true){
 	//Etape 2: Ecriture dans le fichier du nouveau comptes.csv
 
 	$donnes = fopen('fichiers/comptes.csv', 'w');
-
+		//Réécris tout le fichier avec la nouvelle ligne.
 		for ($i=0;$i<sizeof($informations);$i++){
 			fputs($donnes, $informations[$i] . "\n");
 		}

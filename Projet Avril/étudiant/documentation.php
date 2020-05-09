@@ -47,6 +47,7 @@ include 'include/fonctionApi.inc.php';
 
 <div class="message-cle">
 	<?php
+	//Message selon le type d'erreur lors de la demande de la clé d'API.
 	errorConnexionCle();
 	?>
 </div>
@@ -118,7 +119,7 @@ footeer();
 
 <script>
 	function changement(){
-
+		//Pour varier les formulaires selon le choix entre l'inscription et la visualisation de la clé.
 		$choix1 = document.getElementById("choix1");
 		$choix2 = document.getElementById("choix2");
 		

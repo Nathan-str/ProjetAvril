@@ -1,6 +1,6 @@
 <?php
 
-
+//Fonction créant un caractère aléatoire pour l'ajouter  au mot de passe.
 function alea() {
 	    $chn = '';
 	    for ($i=1;$i<=6;$i++){
@@ -8,6 +8,8 @@ function alea() {
 	        return $chn;
 	    }
     }
+
+    //Fonction permettant d'afficher un formulaire d'inscription (non-utilisé ici)
 
     function formulaireInscription(){
 		echo("<form action=\"inscription.php\" method=\"post\">");
@@ -20,6 +22,9 @@ function alea() {
 			echo("<input class=\"submit\" type=\"submit\" value=\"Valider\" />");
 		echo("</form>");
 	}
+
+	//Fonction permettant de vérifier toutes les informations lors de l'inscription
+	//Si tout est valide, alors écriture dans le fichier des comptes (non-utilisé ici). 
 
 	function inscription1($nom, $prenom, $mail, $numero, $mdp , $mdp1, $fichier, $fichierID,$pageRenvoie, $pageErreur){
 
@@ -76,7 +81,7 @@ function alea() {
 	}
 
 
-	//Fonction qui renvoie les différentes erreurs en cas de problèmes d'inscription sur la page "redirection.php"
+	//Fonction qui renvoie les différentes erreurs en cas de problèmes d'inscription sur la page "index.php"
 	function errorInscription(){
 
 		

@@ -1,5 +1,7 @@
 <?php
 	
+	//Fonction permettant de récupérer les infos du fichier comptes
+	//Affiche tous les éléments du fichier pour le compte connecté.	
 	function comptes(){
 		$donnes = fopen('fichiers/comptes.csv', 'r+');
 
@@ -51,7 +53,6 @@
 			}
 			
 
-			//$donnes = fopen('fichiers/images.csv', 'a+');
 
 			$donnes = fopen('fichiers/comptes.csv', 'r+');
 			$informations = array();
@@ -99,6 +100,7 @@
 	}
 
 	//Fonction permettant d'afficher un message d'erreur si le nouveau email indiqué ou le nouveau numéro indiqué existe déjà
+	//Fonction permettant d'afficher si la photo est trop lourde
 	//Fonction utilisé sur la page "informations.php"
 	function erreur(){
 		error("1", "L'image est trop lourde (+300ko) !");

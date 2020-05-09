@@ -43,15 +43,16 @@ function compteurCleAffichage(){
 	}
 
 if ($_GET['choose'] == "inscription"){
+	//Si on choisit l'inscription, fais les étapes pour la demande de la clé.
 	inserCle();
 }elseif ($_GET['choose'] == "connexion") {
+	//Si on demande de voir sa clé, vérifie le compteur et le réinitialise si besoin
+	//Renvoie un message d'erreur selon la situation.
 	compteurCleAffichage();
 	verifCle();
 }else{
 	echo"error";
 }
-//inserCle();
-//verifCle();
 
 
 

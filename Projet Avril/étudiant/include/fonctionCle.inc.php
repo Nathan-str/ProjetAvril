@@ -1,10 +1,10 @@
 <?php
 	
-
+	//Fonction renvoyant les différents messages en fonctions des erreurs.
 	function errorConnexionCle(){
 
 		if(isset($_GET['error'])){
-			if($_GET['error'] == 0){ //2: GET définie dans la page vérifiant les identifiants 
+			if($_GET['error'] == 0){ //0: GET définie dans la page vérifiant les identifiants 
 			?>
 			<script type="text/javascript">
 				alert("Mauvais identifiants!")
@@ -17,7 +17,7 @@
 	 				$ligne = fgets($donnes);
 					$tableau = explode(";", $ligne);
 		
-
+					//Renvoie un message contenant la clé.
 					if ($_SESSION['mail'] == $tableau[0]){
 						echo("<p>Votre clé API: " . $tableau[1] ."</p>");
 						echo("<p>Utilisation: ". $tableau[4] . "/200<br />");
@@ -72,6 +72,9 @@
 		 return $chaineAleatoire;
 	}
 
+
+	//Fonction permettant de vérifier si la mail existe et est lié à une clé
+	//Si oui, alors fais une redirection pour afficher la clé.
 	function verifCle(){
 
 		$mdp = $_GET['key-pwd'];
@@ -124,6 +127,9 @@
 
 	}
 
+
+	//Fonction permettant de vérifier si le mail n'est pas en double
+	//Si tout est valide, alors écrit une chaine de caractère pour la clé.
 	function inserCle(){
 		
 		$fin = double($_GET['mail'], "0", 'fichiers/cle.csv');
@@ -171,6 +177,8 @@
 		}
 	}
 
+	//Regarde les conditions dans le fichier CSV des clé
+	//Reprend le compteur à 0, si c'est une nouvelle heure.
 	function compteurCle(){
 		$donnes = fopen('fichiers/cle.csv', 'r+');
 		$informations = array();
@@ -183,8 +191,8 @@
 				$temps = date('h',$temps_actuel);
 
 				if ($_GET['cle'] == $tableau[1]){
-					if ($temps == $tableau[3]) {
-						$cpt = $tableau[4] + 1;
+					if ($temps == $tableau[3]) {//Compare l'heure actuelle avec l'heure dans le fichier
+						$cpt = $tableau[4] + 1;//Ajoute plus 1 au compteur si les heures sont identiques.
 						$time = $tableau[3];
 					}else{
 						$time = $temps;

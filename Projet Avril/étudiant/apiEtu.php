@@ -6,6 +6,7 @@ include 'include/fonctionCle.inc.php';
 include 'include/fonctionApi.inc.php';
 
 
+//Vérifie si la clé existe dans le fichier des clés et regarde si le compteur ne dépasse pas 200 utilisations.
 function verifCleApi(){
 	$donne = fopen('fichiers/cle.csv', 'r+');
 
@@ -37,19 +38,19 @@ if ($validation == false){
 	if ($inferieur == true){
 		FichierLog("API distribué",$_GET['cle']);
 		if ($_GET["choix"] == "filiere"){
-			$json = filiere();
+			$json = filiere();//API pour les filières.
 			$json = json_encode($json);
 			header('Content-type: application/json');
 			echo($json);
 		}elseif($_GET["choix"] == "groupe"){
-			$json = groupe($_GET["filiere"], $_GET["groupe"]);
+			$json = groupe($_GET["filiere"], $_GET["groupe"]);//API pour les groupes.
 			$json = json_encode($json);
 			header('Content-type: application/json');
 			echo($json);
 		}
 	}else{
 		FichierLog("Echec API (clé épuisé)",$_GET['cle']);
-		$jsonError["Error"] = "La clé est épuisé";
+		$jsonError["Error"] = "La clé est épuisé";//API si la clé à dépassé son nombre d'utilisation par heure.
 		$jsonError = json_encode($jsonError);
 		header('Content-type: application/json');
 		echo($jsonError);
@@ -57,7 +58,7 @@ if ($validation == false){
 
 }else{
 	FichierLog("Echec API (mauvaise clé)",$_GET['cle']);
-	$jsonError["Error"] = "Error API KEY";
+	$jsonError["Error"] = "Error API KEY";//API si la clé d'API n'est pas bonne.
 	$jsonError = json_encode($jsonError);
 	header('Content-type: application/json');
 	echo($jsonError);

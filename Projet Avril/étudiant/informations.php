@@ -26,14 +26,11 @@ include 'include/fonctionCompte.inc.php';
 	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
 
-		<!--<input type="file" name="input-image" id="input-image" accept=".jpg, .jpeg, .png"  multiple />
-		<div class="image-pre" id="imagePre">
-			<img src="" alt="Photo de profil" class="image-preview__image" />
-			<span class="image-preview__texte">Photo de profil</span>
-		</div>-->
 		<div class="position-info">
 			<?php
+				//Fonction qui upload l'image avec des vérifs.
 				upload();
+				//Fonction qui affiche l'image pour la personne connectée.
 				Pphoto();
 			?>
 
@@ -44,20 +41,11 @@ include 'include/fonctionCompte.inc.php';
 
 
 			<?php
+				//Fonction affichant les informations de comptes pour la personne connectée.
 				comptes();
 			?>
 		</div>
 
-			<!--<div class="checkbox-info">
-				<input id="oldnom" type="checkbox" onclick="changeNom()" name="change-nom" class="checkbox-style" />Modification du nom 
-				<input id="oldprenom" type="checkbox" onclick="changePrenom()" name="change-prenom" class="checkbox-style" />Modification du prénom 
-				<input id="oldmail" type="checkbox" onclick="changeMail()" name="change-mail" class="checkbox-style" />Modification du mail 
-				<input id="oldnumero" type="checkbox" onclick="changeNumero()" name="change-numero" class="checkbox-style" />Modification du numéro 
-				<input id="oldmdp" type="checkbox" onclick="changeMdp()" name="change-mdp" class="checkbox-style" />Modification du mot de passe
-				<input id="oldfiliere" type="checkbox" onclick="changeFiliere()" name="change-filiere" class="checkbox-style" />Modification de la filière et du groupe
-
-
-			</div>-->
 
 			<div class="formulaire-changement">
 

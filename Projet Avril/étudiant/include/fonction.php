@@ -1,7 +1,8 @@
 <?php
 	
 
-	
+	//Fonction permettant d'afficher le message souhaité pour le numéro d'erreur indiqué
+	//Fonction utilisé sur les pages de redirection.
 	function error($numero, $message){
 		if(isset($_GET['error'])){
 			if($_GET['error'] == $numero){
@@ -14,7 +15,7 @@
 		}
 	}
 
-
+	//Fonction permettant de vérifier un pattern désigner pour une chaine de caractère souhaité.
 	  function Regex($pattern, $pseudo){
     	if(preg_match($pattern, $pseudo)){
     		$continue = true;
@@ -25,7 +26,7 @@
     }
 
 
-    //Fonction écrivant dans le fichier des logs, toutes les incriptions réussi
+    //Fonction écrivant dans le fichier des logs, le message souhaité pour la personne souhaité.
     function FichierLog($message,$evenement){
 		$fichier = 'fichiers/log.csv';
 		$time = date("D, d M Y H:i:s");
@@ -35,7 +36,8 @@
 	    file_put_contents($fichier, $evenement, FILE_APPEND);
 	}
 
-
+	//Fonction permettant de vérifier la longueur d'un mot de passe
+	//Utiliser pour l'inscription et la connexion.
 	function longueur($mdp){
 		if(strlen($mdp) >= 6){
 			$continue = true;
@@ -46,10 +48,9 @@
 	}
 
 
-	//Fonction écrivant toutes les connexions par heure (pas utilisé finalement)
+	//Fonction écrivant toutes les connexions par heure (pas utilisé finalement, mais peut servir)
 	function stastitiques(){
 		$dossier = fopen("fichiers/stats.log", "r");
-		//Même processus mais pour chaque jour de la semaine
 		$statistiques = array();
 
 		while ($elements = fgets($dossier)) {
@@ -77,6 +78,7 @@
 	
 
 	//---------------------------------------------------------
+	//Fonction permettant de vérifier l'existance d'un paramètre, si il n'exsite pas, indication de la page de redirection.
 	function verifSession($session, $page){
 		if(isset($session) && !empty($session)){
 			$continue = true;
@@ -86,13 +88,7 @@
 	}
 	//-----------------------------------------------------------
 	
-
-	//Fonction permettant d'afficher des messages d'erreurs si il y a eu un problème avec l'authentification de la clé d'API
-	//Fonction utilisé sur la page "documentation.php"
-	
-
-
-
+		//Fonction permettant de vérifier si pour le fichier indiqué, l'élément existe bien.
 		function verifSolo($parametre, $numero, $fichier){
 			$donne = fopen($fichier, 'r+');
 
@@ -115,6 +111,7 @@
 			return $continue;
 		}	
 
+		//Fonction permettant de vérifier si le mot de passe dans le fichier indiqué existe bien.
 		function verifMdp($limite,$numeroLimite,$parametre, $numero, $fichier){
 
 			$donne = fopen($fichier, 'r+');
@@ -141,6 +138,9 @@
 
 		}
 
+
+	//Fonction permettant de vérifier si deux éléments ne sont pas en double
+	//On compare un paramètre (en POST par exemple) avec l'élément voulu dans le fichier.
 	function double($parametre, $numero, $fichier){
 		$donne = fopen($fichier, 'r+');
 
@@ -163,6 +163,9 @@
 		return $continue;
 	}
 
+	
+	//Fonction permettant de vérifier si un élément est inférieur à la valeur indiqué
+	//Si supérieur  renvoie TRUE sinon renvoie FALSE.
 	function inferieur($parametre, $comparateur,$numero, $limite, $fichier){
 		$donne = fopen($fichier, 'r+');
 
@@ -188,15 +191,15 @@
 		return $continue;
 	}
 
-	//Fonction permettant d'insérer dans le fichier "cle.csv" l'adresse mail et le mot de passe taper. Si ils n'existent psa déjà, alors écrit dans le fichier l'adresse mail, le mot de passe, la clé créer, l'heure de création et un compteur
-	//Fonction utlisé sur la page "cle.php"
 	
-
+	//Fonction permettant de renvoyer le fichier JSON concernant les filières
+	//Utilisé pour les pages utilisant la liste de menu déroulante pour les filières et les groupes.
 	function jsonText(){
 		$jsonText = file_get_contents('fichiers/filiere.json');
 		return $jsonText;
 	}
 
+	//Fonction permettant d'initialiser une liste de menu déroulant pour toutes les filières du fichier JSON des filières.
 	function filiereJSON($nameFiliere, $nameGroupe){
 		$jsonText = file_get_contents('fichiers/filiere.json');
 		$jsonArray = json_decode($jsonText,True);
