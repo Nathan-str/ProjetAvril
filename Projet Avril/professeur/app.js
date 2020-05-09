@@ -1,3 +1,5 @@
+//Effectue les modifications si les éléments indiqués sont ouverts
+//Utiliser pour le menu burger.
 $('.nav-toggle').click(function(e){
 	e.preventDefault();
 	$('.droite').toggleClass('is-open');
@@ -24,10 +26,6 @@ $('.toggle-traitement').click(function(e){
 })
 //----------------------------------------------
 
-
-
-
-//-------------------------------------------------------------------------------------------
 
 	function changement(){
 
@@ -66,6 +64,8 @@ $('.toggle-traitement').click(function(e){
 		}	
 	}
 
+
+	//Fonction permettant d'afficher les infos ou non si on clique sur une image d'un étudiant.
 	function clickImage(id){
 		
 		var informations = document.getElementById(id);
@@ -78,6 +78,7 @@ $('.toggle-traitement').click(function(e){
 		
 	}
 
+	//Fonction permettant d'afficher toutes les infos ou non si on clique sur la checkbox.
 	function clickInfo(){
 		var infos = document.getElementsByClassName("info");
 
@@ -128,7 +129,7 @@ $('.toggle-traitement').click(function(e){
 		}
 	}
 
-
+	//Fonction permettant de varier la liste des groupes du JSON des filières selon la filière sélectionnée.
 	function affiche_Groupe(jsonText){
 	    let filiere = document.getElementById("select-filiere").value;
 	    let groupe =document.getElementById("select-groupe");

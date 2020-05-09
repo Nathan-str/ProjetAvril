@@ -1,5 +1,8 @@
 <?php
 
+//Page concernant le header et le footer des pages:
+
+//Fonction afin d'initialiser le header pour les pages affichables.
 function headeer(){
 	?>
 	<header>	
@@ -34,6 +37,7 @@ function headeer(){
 	<?php
 }
 
+//Fonction permettant d'afficher le footer pour toutes les pages affichables.
 function footeer(){
 	?>
 	<footer class="le_footer">

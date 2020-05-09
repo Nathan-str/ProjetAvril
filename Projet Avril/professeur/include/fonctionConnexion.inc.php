@@ -1,4 +1,5 @@
 <?php
+	//Fonction permettant d'afficher le formulaire de connexion (utilisable sur les deux sites).
 	function formulaireConnexion(){
 		echo("<form action=\"connexion.php\" method=\"post\">");
 			echo("<input class=\"input\" type=\"email\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"\" />");
@@ -7,9 +8,11 @@
 		echo("</form>");
 	}
 
+	//Fonction permettant de vérifier les informations pour la connexion
+	//Renvoie sur la page des comptes si tout est valide.
 	function connexion1($mail, $mdp, $fichier,$pageRenvoie, $pageErreur){
-		verifSession($mail,"$pageErreur?error=1");
-		verifSession($mdp, "$pageErreur?error=1");
+		verifSession($mail,"$pageErreur?error=1");//Vérifie l'existance du premier paramètre, si = false, redirection.
+		verifSession($mdp, "$pageErreur?error=1");//Vérifie l'existance du premier paramètre, si = false, redirection.
 
 		$donnes = fopen($fichier, 'r+');
 			
@@ -47,6 +50,7 @@
 		}
 	}
 
+	//Message d'erreur pour les redirections indiquées
 	function errorConnexion(){
 
 		error("2", "Mauvais identifiants!");

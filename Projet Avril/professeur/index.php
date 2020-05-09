@@ -28,7 +28,9 @@ include 'include/fonctionConnexion.inc.php';
 <div class="div-inscription">
 <p class="p-inscription">Inscription</p>
 <?php
+//Fonction affichant le formulaire d'inscription
 formulaireInscription();
+//Fonction permettant d'afficher les erreur lors de l'inscription.
 echo(errorInscription());
 ?>
 </div>
@@ -36,7 +38,9 @@ echo(errorInscription());
 <div class="div-connexion">
 <p class="p-connexion">Connexion</p>
 <?php
+//Fonction affichant le formulaire de la connexion.
 formulaireConnexion();
+//Fonction permettant d'afficher les erreur lors de la connexion.
 echo(errorConnexion());
 ?>
 </div>
