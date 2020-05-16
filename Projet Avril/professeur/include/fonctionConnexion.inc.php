@@ -1,11 +1,22 @@
 <?php
 	//Fonction permettant d'afficher le formulaire de connexion (utilisable sur les deux sites).
 	function formulaireConnexion(){
-		echo("<form action=\"connexion.php\" method=\"post\">");
-			echo("<input class=\"input\" type=\"email\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"\" />");
-			echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"\" />");
-			echo("<input class=\"connexion-submit\" type=\"submit\" value=\"Valider\" />");
-		echo("</form>");
+		echo("<p class=\"p-connexion\">Connexion</p>");
+		echo("<div class=\"wrappers\">");
+			echo("<div class=\"contact-form\">");
+				echo("<form action=\"connexion.php\" method=\"post\">");
+					echo("<div class=\"input-fields\">");
+						echo("<input class=\"input\" type=\"email\" name=\"login\" minlength=\"6\" placeholder=\"Adresse Mail\" required=\"\" />");
+						echo("<input class=\"input\" type=\"password\" name=\"pwd\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"\" />");
+
+						echo("<div class=\"boxes\">");
+							echo("<input class=\"button\" type=\"submit\" value=\"Valider\" />");
+						echo("</div>");
+
+					echo("</div>");
+				echo("</form>");
+			echo("</div>");
+		echo("</div>");
 	}
 
 	//Fonction permettant de vérifier les informations pour la connexion

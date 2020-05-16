@@ -2,15 +2,29 @@
 	
 	 //Fonction permettant d'afficher un formulaire d'inscription
 	function formulaireInscription(){
-		echo("<form action=\"inscription.php\" method=\"post\">");
-			echo("<input class=\"input\" type=\"text\" name=\"nom\" minlength=\"3\" placeholder=\"Nom\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"text\" name=\"prenom\" minlength=\"3\" placeholder=\"Prénom\" required=\"required\" />") ;
-			echo("<input class=\"input\" type=\"email\" name=\"mail\" minlength=\"6\" placeholder=\"****@****.fr\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"text\" name=\"numero\" minlength=\"10\" maxlength=\"10\" placeholder=\"Numéro de téléphone\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"password\" name=\"mdp\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"required\" />");
-			echo("<input class=\"input\" type=\"password\" name=\"mdp1\" minlength=\"6\" placeholder=\"Confirmation mot de passe\" required=\"required\" />");
-			echo("<input class=\"submit\" type=\"submit\" value=\"Valider\" />");
-		echo("</form>");
+
+		echo("<p class=\"p-inscription\">Inscription</p>");
+		echo("<div class=\"wrapper\">");
+			echo("<div class=\"contact-form\">");
+				echo("<form action=\"inscription.php\" method=\"post\">");
+					echo("<div class=\"input-fields\">");
+						echo("<input class=\"input\" type=\"text\" name=\"nom\" minlength=\"3\" placeholder=\"Nom\" required=\"required\" />");
+						echo("<input class=\"input\" type=\"text\" name=\"prenom\" minlength=\"3\" placeholder=\"Prénom\" required=\"required\" />") ;
+						echo("<input class=\"input\" type=\"email\" name=\"mail\" minlength=\"6\" placeholder=\"****@****.fr\" required=\"required\" />");
+						echo("<input class=\"input\" type=\"text\" name=\"numero\" minlength=\"10\" maxlength=\"10\" placeholder=\"Numéro de téléphone\" required=\"required\" />");
+						echo("<input class=\"input\" type=\"password\" name=\"mdp\" minlength=\"6\" placeholder=\"Mot de passe\" required=\"required\" />");
+						echo("<input class=\"input\" type=\"password\" name=\"mdp1\" minlength=\"6\" placeholder=\"Confirmation\" required=\"required\" />");
+
+						echo("<div class=\"boxe\">");
+							echo("<input class=\"button\" type=\"submit\" value=\"Valider\" />");
+						echo("</div>");
+
+					echo("</div>");
+				echo("</form>");
+
+			echo("</div>");
+		echo("</div>");
+
 	}
 
 	//Fonction créant un caractère aléatoire pour l'ajouter  au mot de passe.

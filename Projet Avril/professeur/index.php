@@ -26,7 +26,6 @@ include 'include/fonctionConnexion.inc.php';
 <h2 class="index-h2">Accès à la mosaïque des élèves du département informatique.</h2>
 
 <div class="div-inscription">
-<p class="p-inscription">Inscription</p>
 <?php
 //Fonction affichant le formulaire d'inscription
 formulaireInscription();
@@ -36,7 +35,6 @@ echo(errorInscription());
 </div>
 
 <div class="div-connexion">
-<p class="p-connexion">Connexion</p>
 <?php
 //Fonction affichant le formulaire de la connexion.
 formulaireConnexion();

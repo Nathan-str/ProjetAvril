@@ -31,32 +31,34 @@ if ($verifPseudo == false){
 	<?php
 		headeer();
 	?>
-	<div class="cube">
-		<div class="toggle-traitement">
-			<span class="traitement-icon"></span>
+
+	<div class="disposition">
+		<div class="cube">
+			<div class="toggle-traitement">
+				<span class="traitement-icon"></span>
+			</div>
+		</div>
+		<div class="cube-choix">
+			<p class="cube-choix-p">Choix</p>
+		</div>
+		
+
+		<!--<div class="traitement_info">
+			<p class="traitement_info_p">Traitement</p>
+		</div>-->
+
+		<div class="formulaire-traitement">
+			<form action="traitement.php" method="get" class="formulaire-traitement-form">
+				<?php
+					//Menu déroulant des filières et des groupes.
+					filiereJSON("filiere", "groupe");
+					$jsonText = jsonText();
+				?>
+				<input type="submit" class="select-submit" value="Valider" />
+			</form>
+			<input type="checkbox" name="all_infos" class="all_infos" onclick="clickInfo();" /><p class="all_infos-p">Tout afficher</p>
 		</div>
 	</div>
-	<div class="cube-choix">
-		<p class="cube-choix-p">Choix</p>
-	</div>
-	
-
-	<!--<div class="traitement_info">
-		<p class="traitement_info_p">Traitement</p>
-	</div>-->
-
-	<div class="formulaire-traitement">
-		<form action="traitement.php" method="get" class="formulaire-traitement-form">
-			<?php
-				//Menu déroulant des filières et des groupes.
-				filiereJSON("filiere", "groupe");
-				$jsonText = jsonText();
-			?>
-			<input type="submit" class="select-submit" value="Valider" />
-		</form>
-		<input type="checkbox" name="all_infos" class="all_infos" onclick="clickInfo();" /><p class="all_infos-p">Tout afficher</p>
-	</div>
-
 
 
 <?php
