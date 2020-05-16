@@ -23,53 +23,70 @@ include 'include/fonctionCompte.inc.php';
 		headeer();
 	?>
 
-	<div class="page-wrapper">
 		<h1 class="h1-info">Informations du compte</h1>
 
-		<div class="position-info">
 			<?php
 				//Fonction qui upload l'image avec des vérifs.
 				upload();
 				//Fonction qui affiche l'image pour la personne connectée.
-				Pphoto();
 			?>
 
-			<form method="post" enctype="multipart/form-data">
-				<p class="modification-image-title">Modifier l'image(170x170): </p> <input type="file" name="image" accept=".jpg, .jpeg, .png" class="modification-image" /><br />
-				<input type="submit" name="upload" value="Changez la photo" id="input-image" class="modification-image" />
-			</form>
+			<div class="change-photo">
+				<form method="post" enctype="multipart/form-data">
+					<p class="modification-image-title">Modifier l'image(100x100): </p> 
 
+					<div class="direction-photo">
+						<input type="file" name="image" accept=".jpg, .jpeg, .png" id="file" class="modification-image" />
+						<label for="file" class="modification-image-input">
+
+							<div class="fa-direction">
+								<i class="fa fa-upload"></i>
+							</div>
+
+							<div class="p-direction">
+								Choisir une photo
+							</div>
+
+						</label>
+						<div class="boxess">
+							<input type="submit" name="upload" value="Changez la photo" id="input-image" class="buttonne" />
+						</div>
+					</div>
+
+				</form>
+			</div>
 
 			<?php
 				//Fonction affichant les informations de comptes pour la personne connectée.
 				comptes();
 			?>
-		</div>
 
 
-			<div class="formulaire-changement">
+			<div class="wrappersss">
+				<div class="contact-form">
 
-				<h2 class="change-info">Changer ses informations:</h2>
+					<form action="changement.php" method="post">
+						<div class="input-fields">
+							<input id="chg-nom" type="text" name="new-nom" class="input" minlength="3" placeholder="Nouveau nom" />
+							<input id="chg-prenom" type="text" name="new-prenom" class="input" minlength="3" placeholder="Nouveau prénom" />
+							<input id="chg-mail" type="email" name="new-mail" class="input" placeholder="Nouvelle adresse mail" />
+							<input id="chg-numero" type="text" name="new-numero" class="input" minlength="10" maxlength="10" placeholder="Nouveau numéro" />
+							<input id="chg-mdp" type="password" name="new-mdp" class="input" minlength="6" placeholder="Nouveau mot de passe" />
+						</div>
+						<p>*Pour changer sa filiere, il faut aussi préciser le groupe</p>
 
-				<form action="changement.php" method="post">
-					<input id="chg-nom" type="text" name="new-nom" class="new-form" minlength="3" placeholder="Nouveau nom" />
-					<input id="chg-prenom" type="text" name="new-prenom" class="new-form" minlength="3" placeholder="Nouveau prénom" />
-					<input id="chg-mail" type="email" name="new-mail" class="new-form" placeholder="Nouvelle adresse mail" />
-					<input id="chg-numero" type="text" name="new-numero" class="new-form" minlength="10" maxlength="10" placeholder="Nouveau numéro" />
-					<input id="chg-mdp" type="password" name="new-mdp" class="new-form" minlength="6" placeholder="Nouveau mot de passe" />
-					<p id="chg-picture"></p>
-					<p>*Pour changer sa filiere, il faut aussi préciser le groupe</p>
-					<?php
-						filiereJSON("new-filiere", "new-groupe");
-						$jsonText = jsonText();
-					?>
-					
-					
+						
+						<?php
+							filiereJSON("new-filiere", "new-groupe");
+							$jsonText = jsonText();
+						?>
+						
+						<div class="boxes-change">
+							<input class="button" type="submit" value="Valider" />
+						</div>
 
-					<input id="chg-submit" type="submit" value="Valider" />
-
-				</form>
-
+					</form>
+				</div>
 			</div>
 
 			<?php
@@ -77,7 +94,6 @@ include 'include/fonctionCompte.inc.php';
 			?>
 
 
-	</div>
 
 	<script src="app.js"></script>
 	<script>

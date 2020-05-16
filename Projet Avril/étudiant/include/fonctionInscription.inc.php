@@ -28,12 +28,12 @@ function alea() {
 
 	function inscription1($nom, $prenom, $mail, $numero, $mdp , $mdp1, $fichier, $fichierID,$pageRenvoie, $pageErreur){
 
-		verifSession($nom,"redirection.php?error=1");
-		verifSession($prenom, "redirection.php?error=1");
-		verifSession($mail, "redirection.php?error=1");
-		verifSession($numero, "redirection.php?error=1");
-		verifSession($mdp, "redirection.php?error=1");
-		verifSession($mdp1, "redirection.php?error=1");
+		verifSession($nom,"index.php?error=1");
+		verifSession($prenom, "index.php?error=1");
+		verifSession($mail, "index.php?error=1");
+		verifSession($numero, "index.php?error=1");
+		verifSession($mdp, "index.php?error=1");
+		verifSession($mdp1, "index.php?error=1");
 
 		$continue = double($mail, "3", $fichier);
 		$suite = double($numero, "4", $fichier);

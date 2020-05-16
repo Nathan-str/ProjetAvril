@@ -24,57 +24,64 @@ include 'include/fonctionConnexion.inc.php';
 			headeer();
 		?>
 
-		
+			<p class="p-titre-inscription">Inscription :</p>
+			<div class="wrapperss">
+				<div class="contact-form">	
+					<form action="inscription.php" method="post">
+						<div class="input-fields">
+							<input class="input" type="text" name="nom" minlength="3" placeholder="Nom" required="required" />
+							<input class="input" type="text" name="prenom" minlength="3" placeholder="Prénom" required="required" />
+							<input class="input" type="email" name="mail" minlength="6" placeholder="****@****.fr" required="required" />
+							<input class="input" type="text" name="numero" minlength="10" maxlength="10" placeholder="Numéro de téléphone" required="required" />
+							<input class="input" type="password" name="mdp" minlength="6" placeholder="Mot de passe" required="required" />
+							<input class="input" type="password" name="mdp1" minlength="6" placeholder="Confirmation" required="required" />
+							
+						</div>
+						<p id="filiere-p">Filiere/groupe</p>
 
-		<div class="page-wrapper">
+						<div class="selected-fg">
+						<?php
+							//Liste déroulante pour les filières et les groupes.
+							filiereJSON("filiere", "groupe");
+							$jsonText = jsonText();
+						?>
+						</div>
 
-			<div class="titre-redirection">
-			<h1 class="h1-redirection">Vous êtes étudiants ?</h1>
-			<h2 class="h2-redirection">Inscrivez-vous pour transmettre et accèdez à vos informations</h2>
-			</div>
+						<div class="boxes">
+							<input class="button" type="submit" value="Valider" />
+						</div>
 
-			<div class="form_inscription">
-				<p class="p_inscriptions">Inscription</p>
-				<form action="inscription.php" method="post">
-					<input class="input" type="text" name="nom" minlength="3" placeholder="Nom" required="required" />
-					<input class="input" type="text" name="prenom" minlength="3" placeholder="Prénom" required="required" />
-					<input class="input" type="email" name="mail" minlength="6" placeholder="****@****.fr" required="required" />
-					<input class="input" type="text" name="numero" minlength="10" maxlength="10" placeholder="Numéro de téléphone" required="required" />
-					<input class="input" type="password" name="mdp" minlength="6" placeholder="Mot de passe" required="required" />
-					<input class="input" type="password" name="mdp1" minlength="6" placeholder="Confirmation mot de passe" required="required" />
-					<input class="submit" type="submit" value="Valider" />
-					<p id="filiere-p">Filiere/groupe</p>
-
-					<div class="selected-fg">
+					</form>
 					<?php
-						//Liste déroulante pour les filières et les groupes.
-						filiereJSON("filiere", "groupe");
-						$jsonText = jsonText();
+						//Message pour les erreurs pour l'inscription.
+						errorInscription();
 					?>
-					</div>
-
-				</form>
-				<?php
-					//Message pour les erreurs pour l'inscription.
-					errorInscription();
-				?>
+				</div>
 			</div>
 
 
-			<div class="form_connexion">
-				<p class="p_connexions">Connexion</p>
-				<form action="connexion.php" method="post">
-					<input class="input" type="email" name="login" minlength="6" placeholder="Adresse Mail" required="" />
-					<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="" /><br />
-					<input class="connexion-submit" type="submit" value="Valider" />
-				</form>
+			<p class="p-titre-connexion">Connexion :</p>
+			<div class="wrappers">
+				<div class="contact-form">
+						<form action="connexion.php" method="post">
+							<div class="input-fields">
+								<input class="input" type="email" name="login" minlength="6" placeholder="Adresse Mail" required="" />
+								<input class="input" type="password" name="pwd" minlength="6" placeholder="Password" required="" /><br />
+
+								<div class="box">
+									<input class="button" type="submit" value="Valider" />
+								</div>
+
+							</div>
+						</form>
+					
+				</div>
 				<?php
 				//Message pour les erreurs pour la connexion.
 					errorConnexion();
 				?>
 			</div>
 
-		</div>
 
 	<script src="app.js"></script>
 	<script>

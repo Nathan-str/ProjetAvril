@@ -26,22 +26,32 @@ include 'include/fonctionApi.inc.php';
 
 <h1 class="h1-key">Utilisation de l'API</h1>
 
-<div class="inscription-cle-api">
-	<form action="cle.php" method="get">
-		<label class="demande-cle-label">Demande de clé</label>
-		<input type="radio" name="choose" onclick="changement();" id="choix1" value="inscription" checked="" />
-		<label class="demande-cle-label">Voir clé</label>
-		<input type="radio" name="choose" onclick="changement();" id="choix2" value="connexion"/>
+<div class="wrapperssss">
 
-		<input type="email" name="mail" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
-		<input type="password" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" minlength="6" style='display:block;'/>
-		<input type="password" name="pwd1" placeholder="Confirmation mot de passe" id="Ipwd1" minlength="6" class="form-cle-api" style='display:block;'/>
-		<input type="submit" value="Demander clé" id="Isubmit" class="form-cle-api-submit-demande" style='display:block;'/>
+	<div class="contacts-form">
+		<form action="cle.php" method="get">
 
-		<input type="email" name="key-mail" placeholder="Adresse mail" id="Cmail" class="form-cle-api" style='display:none;'/>
-		<input type="password" name="key-pwd" placeholder="Mot de passe" id="Cpwd" minlength="6" class="form-cle-api" style='display:none;'/>
-		<input type="submit" value="Voir clé" id="Csubmit" class="form-cle-api-submit-voir" style='display:none;'/>
-	</form>
+			<div class="cle-radio-direction">
+				<input type="radio" name="choose" onclick="changement();" id="choix1" class="radio-direction" value="inscription" checked="" />
+				<p class="demande-cle-label">Demande de clé</p>
+
+				<input type="radio" name="choose" onclick="changement();" id="choix2" class="radio-direction" value="connexion"/>
+				<p class="demande-cle-label">Voir clé</p>	
+
+			</div>
+
+			<div class="input-fields">
+				<input type="email" class="input" name="mail" placeholder="Adresse mail" id="Imail" class="form-cle-api" style='display:block;'/>
+				<input type="password" class="input" name="pwd" placeholder="Mot de passe" id="Ipwd" class="form-cle-api" minlength="6" style='display:block;'/>
+				<input type="password" class="input" name="pwd1" placeholder="Confirmation" id="Ipwd1" minlength="6" class="form-cle-api" style='display:block;'/>
+				<input type="submit" value="Demander clé" id="Isubmit" class="form-cle-api-submit-demande" style='display:block;'/>
+
+				<input type="email" class="input" name="key-mail" placeholder="Adresse mail" id="Cmail" class="form-cle-api" style='display:none;'/>
+				<input type="password" class="input" name="key-pwd" placeholder="Mot de passe" id="Cpwd" minlength="6" class="form-cle-api" style='display:none;'/>
+				<input type="submit" value="Voir clé" id="Csubmit" class="form-cle-api-submit-voir" style='display:none;'/>
+			</div>
+		</form>
+	</div>
 
 </div>
 

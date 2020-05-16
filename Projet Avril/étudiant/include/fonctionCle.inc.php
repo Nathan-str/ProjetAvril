@@ -22,9 +22,9 @@
 						echo("<p>Votre clé API: " . $tableau[1] ."</p>");
 						echo("<p>Utilisation: ". $tableau[4] . "/200<br />");
 						if ($tableau[4] > 200) {
-							echo("La clé n'est plus utilisable pour cette heure</p>");
+							echo("La clé n'est plus utilisable</p>");
 						}else{
-							echo("La clé est utilisable pour cette heure</p>");
+							echo("La clé est utilisable</p>");
 						}
 						
 					}

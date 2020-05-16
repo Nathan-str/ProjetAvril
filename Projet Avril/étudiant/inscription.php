@@ -101,5 +101,5 @@
 	}
 
 
-	inscription2($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["numero"], $_POST["mdp"] , $_POST["mdp1"], 'fichiers/comptes.csv', "fichiers/id.txt","informations.php", "redirection.php");
+	inscription2($_POST["nom"], $_POST["prenom"], $_POST["mail"], $_POST["numero"], $_POST["mdp"] , $_POST["mdp1"], 'fichiers/comptes.csv', "fichiers/id.txt","informations.php", "index.php");
 ?>

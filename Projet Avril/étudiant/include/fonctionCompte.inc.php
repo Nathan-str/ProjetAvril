@@ -19,12 +19,46 @@
 			}
 			
 		}
-		echo("<p class=\"p-info-prenom\">Prénom: " . $prenom."</p>");
-		echo("<p class=\"p-info-nom\">Nom: " . $nom."</p>");
-		echo("<p class=\"p-info-mail\">Adresse mail: " . $mail."</p>");
-		echo("<p class=\"p-info-numero\">Numéro de téléphone: " . $numero . "</p>");
-		echo("<p class=\"p-info-filiere\">Filière: " . $filiere . "</p>");
-		echo("<p class=\"p-info-groupe\">Groupe: " . $groupe . "</p>");
+
+		echo("<div class=\"wrapper\">");
+			echo("<div class=\"left\">");
+				Pphoto();
+				echo("<h4>" . $prenom . " " . $nom ."</h4>");
+				echo("<p>Universitaire</p>");
+			echo("</div>");
+
+			echo("<div class=\"right\">");
+				echo("<div class=\"info\">");
+					echo("<h3>Information</h3>");
+					echo("<div class=\"info_data\">");
+						echo("<div class=\"data\">");
+							echo("<h4>Email</h4>");
+							echo("<p>".$mail."</p>");
+						echo("</div>");
+						echo("<div class=\"data\">");
+							echo("<h4>Phone</h4>");
+							echo("<p>".$numero."</p>");
+						echo("</div>");
+					echo("</div>");
+				echo("</div");
+
+				echo("<div class=\"projects\">");
+					echo("<h3>Classe</h3>");
+					echo("<div class=\"projects_data\">");
+						echo("<div class=\"data\">");
+							echo("<h4>Filière</h4>");
+							echo("<p>".$filiere."</p>");
+						echo("</div>");
+						echo("<div class=\"data\">");
+							echo("<h4>Groupe</h4>");
+							echo("<p>".$groupe."</p>");
+						echo("</div>");
+					echo("</div>");
+				echo("</div>");
+
+			echo("</div>");
+
+		echo("</div>");
 	}
 
 
@@ -95,7 +129,7 @@
 			}
 		}
 
-		echo"<img src='images/$nom_image' width='170' height='170' class=\"pp\" alt=\"error\" /><br />$description";
+		echo"<img src='images/$nom_image' width='120' alt=\"error\" />";
 		
 	}
 

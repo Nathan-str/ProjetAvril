@@ -44,16 +44,16 @@ function footeer(){
 	<footer class="le_footer">
 			<div class="contenue">
 				<div class="footer-section about">
-					<p>Date</p>
-					<ul><li><p>Projet du 20/04 au 10/05</p></li></ul>
+					<p class="p-footer-element">Date</p>
+					<ul><li><p class="p-footer-sous-element">Projet du 20/04 au 10/05</p></li></ul>
 				</div>
 				<div class="footer-section links">
-					<p>Liens</p>
-					<ul><li><a href="index.php" style="color: white;">Accueil</a></li></ul>
+					<p class="p-footer-element">Liens</p>
+					<ul><li><a class="p-footer-sous-element" href="index.php" style="color: white;">Accueil</a></li></ul>
 				</div>
-				<div class="footer-section contact-form">
-					<p><i class="fa fa-address-card-o"></i> Contacts</p>
-					<ul><li><a href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></ul>
+				<div class="footer-section contact">
+					<p class="p-footer-element"><i class="fa fa-address-card-o"></i> Contacts</p>
+					<ul><li><a class="p-footer-sous-element" href="mailto:sestre.nathan@orange.fr" style="color: white;">sestre.nathan@orange.fr</a></li></ul>
 				</div>
 			</div>
 
